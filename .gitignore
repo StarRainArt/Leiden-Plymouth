@@ -1,4 +1,4 @@
-*.pyc
+x*.pyc
 *.pyo
 *.env
 *.log
