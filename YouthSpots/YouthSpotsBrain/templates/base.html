@@ -1,24 +1,21 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% block title %}
-            Youth Spots
-        {% endblock %}
-    </title>
-    {% load static %}
-    {% load compress %}
-    {% compress css %}
-        <link rel="stylesheet" href="{%static 'scss/style.scss' %}" type="text/x-scss">
-    {% endcompress %}
-    <script src="https://kit.fontawesome.com/9ce9532b81.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Gradient Background</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        
-    </header>
-    <main>{% block content %} {% endblock %}</main>
 </body>
 </html>
