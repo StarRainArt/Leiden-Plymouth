@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from YouthSpotsBrain.models import EVCharcinglocation
+from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -33,7 +33,14 @@ def login(request):
     return render(request, "login.html")
 
 def signup(request):
+    if request.method == "POST":
+        errors = []
+        if request.POST.get("password") != request.POST.get("password_confirm"):
+            errors.append("Passwords do not match")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        password = request.POST.get("password_confirm")
+        print(username, email, password)
     return render(request, "signup.html")
 
-def create_user(request):
-    pass

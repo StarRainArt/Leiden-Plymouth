@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block signup %}
 <form method="post">
+    {% csrf_token %}
     <input type="text" name="username" id="username" placeholder="Username">
     <input type="email" name="email" id="email" placeholder="Email">
     <input type="password" name="password" id="password" placeholder="Password">
     <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password">
+    {{ message }}
     <button type="submit">Sign up</button>
 </form>
 {% endblock %}

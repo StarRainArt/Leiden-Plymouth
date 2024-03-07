@@ -7,5 +7,4 @@ urlpatterns = [
     path('get-nearest-station/', views.nearest_station),
     path("login", views.login, name="login"),
     path("signup", views.signup, name="signup"),
-    path("create-user", views.create_user, name="create_user"),
 ]
