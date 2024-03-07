@@ -31,3 +31,6 @@ def nearest_station(request):
 
 def login(request):
     return render(request, "login.html")
+
+def signup(request):
+    return render(request, "signup.html")
