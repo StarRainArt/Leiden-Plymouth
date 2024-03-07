@@ -32,17 +32,17 @@
 {% block login %}
 
 <form method="post">
-
+    {% csrf_token %}
     <button type="submit" id="login_button" placeholder="login">login</button>
     <button type="submit" id="sign_in_button" placeholder="setting">sign in</button><br>
 
-    <input type="text"placeholder="username"><br>
-    <input type="text" placeholder="password"><br>
+    <input type="text"placeholder="username" name= ><br>
+    <input type="password" placeholder="password"><br>
     remember me <input type="checkbox"><br>
     <button type="submit" id="login_button_2" placeholder="login">login</button>
     {% for error in errors %}
 
-    <p {% csrf_token %}>{{ error }}</p>
+    <p class="error">{{ error }}</p>
     {% endfor %}
 
 </form> 
