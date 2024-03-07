@@ -32,34 +32,21 @@
 {% block login %}
     <img src="../static/img/logo.png">
 
-<<<<<<< HEAD
 <a class="nav_buttons" href="/login">login<a/>
 <a class="nav_buttons" href="/signin">sign in <a/>
 
 <form method="post">
-=======
 <form method="post">
     {% csrf_token %}
-    <button type="submit" id="login_button" placeholder="login">login</button>
-    <button type="submit" id="sign_in_button" placeholder="setting">sign in</button><br>
->>>>>>> de2c21fb47229ca5b20a5b72368fd033323ae272
 
     <input type="text"placeholder="username" name="username" ><br>
     <input type="password" placeholder="password" name="password"><br>
     remember me <input type="checkbox"><br>
-<<<<<<< HEAD
-    <button type="submit" id="login_button_2" placeholder="login">login</button>
-    {% for error in errors %}
-
-    <p class="error">{{ error }}</p>
-    {% endfor %}
-=======
     <button type="submit" id="login_button_2">login</button>
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
     
->>>>>>> de2c21fb47229ca5b20a5b72368fd033323ae272
 
 </form> 
 
