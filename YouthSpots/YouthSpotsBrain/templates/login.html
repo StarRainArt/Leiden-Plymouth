@@ -3,7 +3,28 @@
 
 {% block javascript %}
 <script defer>
+    function SaveInfo() {
+        var infoSave = {
+            username:, /*username*/
+            password: /*password*/
+        };
+        localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
+    }
 
+    function loadInfo() {
+        var savedInfo = JSON.parse(localStorage.getItem("savedInfo"));
+
+        if (localStorage.getItem("savedInfo") !== null) {
+            if (typeof savedInfo.username !== "undefined") /*username*/ = savedInfo.username;
+            if (typeof savedInfo.password !== "undefined") /*password*/ = savedInfo.password;
+        }
+    }
+
+    function resetInfo() {
+        var infoSave = {};
+        localStorage.setItem("savedInfo", JSON.stringify(infoSave));
+        location.reload();
+    }
 </script>
 {% endblock %}
 
