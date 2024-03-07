@@ -38,6 +38,8 @@ def login(request):
                 user = UserAuth.objects.get(username=username)
                 if user.check_password(password):
                     return render(request, "home.html")
+                else:
+                    return render(request, "login.html", {"error": "Invalid password"})
 
         else:
             return render(request, "login.html", { "error": "Missing username or password"})
