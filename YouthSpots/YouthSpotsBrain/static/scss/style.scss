@@ -7,18 +7,18 @@ $Pure-white: #FFFFFF;
 
 body{
     background: linear-gradient(to right, #1E095A 0%);
-    background-color: #6832AA;
+    background-color: $Royal-purple;
 
 }
 
 #login_button {
     font-family: "Poppins";
-    width: 150px;
+    width: 2;
     height:30px;
    display: flex;
    padding: 5px 13px;
    border-radius: 15pt;
-   background-color:#8C43AC;
+   background-color:$Royal-purple;
 }
 
 #sign_in_button{
@@ -29,7 +29,9 @@ body{
     padding: 5px 15px;
     border-radius: 15pt;
     background-color: #21065D;
-    ;
+    position: absolute;
+    left: 180px;
+    top: 100px;
 
 
 
@@ -46,11 +48,15 @@ body{
     padding: 5px 13px;
     border-radius: 15pt;
     background-color: #21065D;
-
+    align-self: center;
 
 }
+.login_form{
+    display: flex;
+    justify-content: space-around;
+}
 
-.password{
+#password{
 
     font-family: "Poppins";
     width: 150px;
@@ -63,11 +69,11 @@ body{
 
 }
 
-.email{
+#username{
 
     font-family: "Poppins";
-    width: 150px;
-    height:30px;
+    width: 20vw;
+    height:4vh;
     display: flex;
     padding: 5px 13px;
     border-radius: 15pt;

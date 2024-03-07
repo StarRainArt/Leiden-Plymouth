@@ -32,13 +32,13 @@
 {% block login %}
     <img src="../static/img/logo.png">
 
-<form method="post">
+<form method="post" class='login_form'>
     {% csrf_token %}
     <button type="submit" id="login_button" placeholder="login">login</button>
     <button type="submit" id="sign_in_button" placeholder="setting">sign in</button><br>
 
-    <input type="text"placeholder="username" name= ><br>
-    <input type="password" placeholder="password"><br>
+    <input type="text" id="username" placeholder="username" name= ><br>
+    <input type="password" id="password" placeholder="password"><br>
     remember me <input type="checkbox"><br>
     <button type="submit" id="login_button_2" placeholder="login">login</button>
     {% for error in errors %}
