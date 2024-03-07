@@ -19,3 +19,27 @@ background-color: #6832AA ;
   margin: 0 auto;
   margin-bottom: 20px; 
 }
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 96%;
+  padding: 1vh;
+  background-color: #21065D;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; // Change to space-between
+
+  a {
+    background-color: #AAAAAA;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
