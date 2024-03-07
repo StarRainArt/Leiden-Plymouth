@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block signup %}
+    <a class="nav_buttons" href="/login">login<a/>
+    <a class="nav_buttons" href="/signup">signup<a/>
 <form method="post">
     {% csrf_token %}
     <input type="text" name="username" id="username" placeholder="Username">
