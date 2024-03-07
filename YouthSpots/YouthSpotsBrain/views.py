@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from YouthSpotsBrain.models import EVCharcinglocation
+from YouthSpotsBrain.models import meetup_data, meetup_userdata
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -28,3 +28,23 @@ def nearest_station(request):
         'coordinates': station_coords,
         'distance': min_distances
     })
+
+
+def Meetup_data(request):
+    if request.method == 'POST':
+        name_meetup = request.POST.get('name_meetup') # don't forget to fix str stander if issue with int()
+        time_start = request.POST.get('time_start')
+        time_end = request.POST.get('time_end')
+        discription = request.POST.get('discription')
+        #type_meetup = request.POST.get('type_meetup')
+        visiablitie = request.POST.get('visiablitie')
+        #if check 
+        meetup_data.time_start = time_start,
+        meetup_data.time_end = time_end,
+        meetup_data.name_meetup = name_meetup,
+        meetup_data.discription = discription,
+        #meetup_data.type_meetup = type_meetup,
+        meetup_data.visiablitie = visiablitie,
+        
+        # Process the username data as needed
+    # Render your template or return an HTTP response
