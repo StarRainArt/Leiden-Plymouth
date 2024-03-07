@@ -7,5 +7,70 @@ $Pure-white: #FFFFFF;
 
 body{
     background: linear-gradient(to right, #1E095A 0%);
-    background-color: #1E095A;
+    background-color: #6832AA;
+
+}
+
+#login_button {
+    font-family: "Poppins";
+    width: 150px;
+    height:30px;
+   display: flex;
+   padding: 5px 13px;
+   border-radius: 15pt;
+   background-color:#8C43AC;
+}
+
+#sign_in_button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px;
+    border-radius: 15pt;
+    background-color: #21065D;
+    ;
+
+
+
+
+
+
+
+}
+#login_button_2{
+    font-family: "Poppins";
+    width: 150px;
+    height:30px;
+    display: flex;
+    padding: 5px 13px;
+    border-radius: 15pt;
+    background-color: #21065D;
+
+
+}
+
+.password{
+
+    font-family: "Poppins";
+    width: 150px;
+    height:30px;
+    display: flex;
+    padding: 5px 13px;
+    border-radius: 15pt;
+    background-color: #21065D;
+
+
+}
+
+.email{
+
+    font-family: "Poppins";
+    width: 150px;
+    height:30px;
+    display: flex;
+    padding: 5px 13px;
+    border-radius: 15pt;
+    background-color: #21065D;
+
 }
