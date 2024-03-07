@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
-from django.contrib.auth import authenticate
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -36,7 +35,10 @@ def login(request):
             username = request.POST["username"]
             password = request.POST["password"]
             if UserAuth.objects.filter(username=username).exists():
-                authenticate()
+                user = UserAuth.objects.get(username=username)
+                if user.check_password(password):
+                    return render(request, "home.html")
+
         else:
             return render(request, "login.html", { "error": "Missing username or password"})
      
