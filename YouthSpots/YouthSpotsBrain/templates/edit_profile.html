@@ -1,7 +1,12 @@
 {% extends "base.html" %} {% block title %}Social Sphere - Profile{% endblock %}
 {% block content %}
 
-<img src="../static/img/logo.png" class="profile_logo">
+{% load static %}
+{% load compress %}
+{% compress css %}
+<link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
+{% endcompress %}
+<img src="../static/img/logo.png" class="profile_logo" alt="Logo">
 <div class="alter-account">
     <h1 class="alter-account-text">Alter Account</h1>
     <div class="form alter-ac-form">
