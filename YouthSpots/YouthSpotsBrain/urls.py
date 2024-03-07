@@ -6,5 +6,5 @@ urlpatterns = [
     path("map/", views.maps),
     path('get-nearest-station/', views.nearest_station),
     path("login/", views.login, name="login"),
-    path("signup", views.signup, name="signup"),
+    path("signup/", views.signup, name="signup"),
 ]
