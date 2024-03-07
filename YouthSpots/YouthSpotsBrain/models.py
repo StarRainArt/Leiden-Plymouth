@@ -10,5 +10,4 @@ class EVCharcinglocation(models.Model):
         return self.station_name
     
 class UserAuth(User):
-    def __str__(self):
-        return self.username
+    pass

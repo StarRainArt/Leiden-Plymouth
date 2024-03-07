@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
+from django.contrib.auth import authenticate
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -30,24 +31,34 @@ def nearest_station(request):
     })
 
 def login(request):
+    if request.method == "POST":
+        if request.POST["username"] != "" or request.POST["password"] != "":
+            username = request.POST["username"]
+            password = request.POST["password"]
+            if UserAuth.objects.filter(username=username).exists():
+                authenticate()
+        else:
+            return render(request, "login.html", { "error": "Missing username or password"})
+     
+
     return render(request, "login.html")
 
 def signup(request):
     if request.method == "POST":
         errors = []
-        if request.POST.get("password") != request.POST.get("password_confirm"):
+        if request.POST["password"] != request.POST["password_confirm"]:
             errors.append("Passwords do not match")
-        if UserAuth.objects.filter(username=request.POST.get("username")).exists():
+        if UserAuth.objects.filter(username=request.POST["username"]).exists():
             errors.append("Username already exists")
-        if UserAuth.objects.filter(email=request.POST.get("email")).exists():
+        if UserAuth.objects.filter(email=request.POST["email"]).exists():
             errors.append("Email already exists")
         if errors:
             return render(request, "signup.html", {"errors": errors})
         else:
             user = UserAuth.objects.create_user(
-                username=request.POST.get("username"),
-                email=request.POST.get("email"),
-                password=request.POST.get("password")
+                request.POST["username"],
+                request.POST["email"],
+                request.POST["password"]
             )
             user.save()
             return render(request, "login.html")
