@@ -1,0 +1,9 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+* {
+  margin: 0;
+  padding: 0; }
+
+/* line 5, YouthSpotsBrain/static/scss/edit_profile.scss */
+body {
+  background: linear-gradient(to right, #1E095A 0%);
+  background-color: #1E095A; }

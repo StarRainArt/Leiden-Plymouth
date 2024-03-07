@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Social Sphere - Profile{% endblock %}
+{% block content %}
+
+<img src="../static/img/logo.png" class="profile_logo">
+<div class="alter-account">
+    <h1 class="alter-account-text">Alter Account</h1>
+    <div class="form alter-ac-form">
+            <div class="container_aa">
+                <div class="left_side">
+                    <div>
+                        <label for="username">Username</label><br>
+                        <input type="text" name="username" id="username" value=""><br>
+                    </div>
+                    <div>
+                        <label for="email">Email</label><br>
+                        <input type="email" name="email" id="email" value=""><br>
+                    </div>
+                </div>
+                <div class="right_side">
+                    <label for="profile-picture">Profile picture</label><br>
+                    <img src="" alt="Profile picture">
+                    <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
+                    <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
+                    <br>
+                </div>
+            </div>
+            <label for="current-password">Current password</label><br>
+            <input type="password" name="current-password" id="current-password"><br>
+            <label for="password">New password</label><br>
+            <input type="password" name="password" id="password"><br>
+            <label for="confirm-password">Confirm new password</label>
+            <input type="password" name="confirm-password" id="confirm-password">
+            <div class="buttons-alter">
+                <button type="submit" name="alter-account">Submit</button>
+                <button type="submit" name="delete-account">Delete account</button>
+                <button type="button" onclick="window.location.href='/<?= URL_PREFIX ?>/'" class="go-back">Go back</button>
+            </div>
+    </div>
+</div>
+{% endblock %}
+
