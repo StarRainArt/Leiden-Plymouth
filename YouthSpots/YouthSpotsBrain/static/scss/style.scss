@@ -6,6 +6,28 @@ $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
 body{
-    background: linear-gradient(to right, #1E095A 0%);
-    background-color: #1E095A;
+    background-color: #6832AA;
+}
+
+nav{
+    padding: 1vh;
+    background-color:#21065D;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    a {
+        background-color: #AAAAAA;
+        border-radius: 20px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+input{
+    background-color: #21065D;
 }
