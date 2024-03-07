@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from YouthSpotsBrain.models import EVCharcinglocation
+from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -30,10 +30,39 @@ def nearest_station(request):
     })
 
 def login(request):
+    if request.method == "POST":
+        if request.POST["username"] != "" or request.POST["password"] != "":
+            username = request.POST["username"]
+            password = request.POST["password"]
+            if UserAuth.objects.filter(username=username).exists():
+                user = UserAuth.objects.get(username=username)
+                if user.check_password(password):
+                    return render(request, "home.html")
+
+        else:
+            return render(request, "login.html", { "error": "Missing username or password"})
+     
+
     return render(request, "login.html")
 
 def signup(request):
+    if request.method == "POST":
+        errors = []
+        if request.POST["password"] != request.POST["password_confirm"]:
+            errors.append("Passwords do not match")
+        if UserAuth.objects.filter(username=request.POST["username"]).exists():
+            errors.append("Username already exists")
+        if UserAuth.objects.filter(email=request.POST["email"]).exists():
+            errors.append("Email already exists")
+        if errors:
+            return render(request, "signup.html", {"errors": errors})
+        else:
+            user = UserAuth.objects.create_user(
+                request.POST["username"],
+                request.POST["email"],
+                request.POST["password"]
+            )
+            user.save()
+            return render(request, "login.html")
     return render(request, "signup.html")
 
-def create_user(request):
-    pass

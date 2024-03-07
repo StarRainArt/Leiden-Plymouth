@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class EVCharcinglocation(models.Model):
     station_name = models.CharField(max_length=250)
@@ -7,3 +8,6 @@ class EVCharcinglocation(models.Model):
 
     def __str__(self):
         return self.station_name
+    
+class UserAuth(User):
+    pass
