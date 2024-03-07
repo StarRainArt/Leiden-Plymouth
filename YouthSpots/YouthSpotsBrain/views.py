@@ -37,10 +37,19 @@ def signup(request):
         errors = []
         if request.POST.get("password") != request.POST.get("password_confirm"):
             errors.append("Passwords do not match")
-        username = request.POST.get("username")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        password = request.POST.get("password_confirm")
-        print(username, email, password)
+        if UserAuth.objects.filter(username=request.POST.get("username")).exists():
+            errors.append("Username already exists")
+        if UserAuth.objects.filter(email=request.POST.get("email")).exists():
+            errors.append("Email already exists")
+        if errors:
+            return render(request, "signup.html", {"errors": errors})
+        else:
+            user = UserAuth.objects.create_user(
+                username=request.POST.get("username"),
+                email=request.POST.get("email"),
+                password=request.POST.get("password")
+            )
+            user.save()
+            return render(request, "login.html")
     return render(request, "signup.html")
 

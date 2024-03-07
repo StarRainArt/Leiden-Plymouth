@@ -6,7 +6,10 @@
     <input type="email" name="email" id="email" placeholder="Email">
     <input type="password" name="password" id="password" placeholder="Password">
     <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password">
-    {{ message }}
+ 
     <button type="submit">Sign up</button>
 </form>
+{% for error in errors %}
+<p class="error_message">{{ error }}</p>
+{% endfor %}
 {% endblock %}
