@@ -28,5 +28,6 @@ def nearest_station(request):
         'coordinates': station_coords,
         'distance': min_distances
     })
+
 def login(request):
     return render(request, "login.html")
