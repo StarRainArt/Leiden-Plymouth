@@ -3,21 +3,18 @@
 from django.db import migrations, models
 
 
-# class Migration(migrations.Migration):
+class Migration(migrations.Migration):
 
-#     initial = True
+    initial = True
 
-#     dependencies = [
-#     ]
+    dependencies = [
+    ]
 
-#     operations = [
-#         migrations.CreateModel(
-#             name='Pins',
-#             fields=[
-#                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-#                 ('station_name', models.CharField(max_length=250)),
-#                 ('latitude', models.FloatField()),
-#                 ('longitude', models.FloatField()),
-#             ],
-#         ),
-#     ]
+    operations = [
+        migrations.CreateModel(
+            name='Pins',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ],
+        ),
+    ]
