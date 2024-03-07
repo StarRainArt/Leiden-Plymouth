@@ -4,91 +4,140 @@
 <button id="toggleUnit">Switch to Miles</button>
 <button id="saveMarker">Save the marker</button>
 
-{{ stations|json_script:"stations_json" }}
+{{ pins|json_script:"pins_json" }}
 
 <script>
-  var marker = null;
-
   var userLocation = L.latLng(50.376289, -4.143841);
-  var map = L.map("map").setView(userLocation, 13);
+  var map = L.map("map", {attributionControl: false}).setView(userLocation, 13);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxzoom: 19,
   }).addTo(map);
-  let stations = JSON.parse(
-    document.getElementById("stations_json").textContent
+
+  let pins = JSON.parse(
+    document.getElementById("pins_json").textContent
   );
-  var lastPolyline = null;
-  var unit = "km"; // default unit is miles
-  console.log(stations);
-  stations.forEach((station) => {
-  let stationLocation = L.latLng(station.latitude, station.longitude);
-    let distance = userLocation.distanceTo(stationLocation) / 1000; // distance in km
-    if (unit === "miles") {
-      distance *= 0.621371; // convert km to miles
+  console.log('pins', pins)
+
+  var pinStore = {}
+
+  pins.forEach((pin)=> {
+    pinStore[pin.id] = {
+      data: pin,
+      marker: L.marker([pin.latitude, pin.longitude])
     }
-    L.marker([station.latitude, station.longitude])
-      .addTo(map)
-      .bindPopup(
-        station.station +
-          `<br/>The distance to this station is ${distance.toFixed(2)} ${unit}.`
-      )
-      .on("click", function () {
-        if (lastPolyline) {
-          map.removeLayer(lastPolyline);
-        }
-        lastPolyline = L.polyline([userLocation, stationLocation], {
-          color: "red",
-        }).addTo(map);
-      });
-  });
+    let pinMarker = pinStore[pin.id].marker
 
-  var addMarker = false;
+    let popupString = `<b>${pin.title}</b> <br><br> ${pin.description} <br><br> LA : ${pin.latitude} <br> LO : ${pin.longitude} <br><br>`
+    let tags = pin.tags.split(", ")
+    tags.forEach((tag) => {
+      popupString = popupString + `${tag} <br>`
+    })
+    
+    pinMarker.bindPopup(popupString)
+    pinMarker.addTo(map)
+    
+  })
+  console.log('pinStore', pinStore)
 
-  document.getElementById("addMarker").addEventListener("click", function () {
-    addMarker = true;
-  });
+  var blackIcon = new L.Icon({
+	iconUrl: 'static/img/marker-icon-2x-black.png',
+	shadowUrl: 'static/img/marker-shadow.png',
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	popupAnchor: [1, -34],
+	shadowSize: [41, 41]
+});
+  // var marker = null;
+  console.log(navigator.geolocation);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var userLocation = L.latLng(position.coords.latitude, position.coords.longitude);
+      L.marker((userLocation), {icon: blackIcon}).addTo(map);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    alert('Geolocation is not supported by your browser.');
+  }
+  // var userLocation = L.latLng(50.376289, -4.143841);
+  // var map = L.map("map").setView(userLocation, 13);
+  // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //   maxzoom: 19,
+  // }).addTo(map);
+  // let pins = JSON.parse(
+  //   document.getElementById("pins_json").textContent
+  // );
+  // var lastPolyline = null;
+  // var unit = "km"; // default unit is miles
+  // console.log(pins);
+  // pins.forEach((pin) => {
+  // let pinLocation = L.latLng(pin.latitude, pin.longitude);
+  //   let distance = userLocation.distanceTo(pinLocation) / 1000; // distance in km
+  //   if (unit === "miles") {
+  //     distance *= 0.621371; // convert km to miles
+  //   }
+  //   L.marker([pin.latitude, pin.longitude])
+  //     .addTo(map)
+  //     .bindPopup(
+  //       pin.pin +
+  //         `<br/>The distance to this pin is ${distance.toFixed(2)} ${unit}.`
+  //     )
+  //     .on("click", function () {
+  //       if (lastPolyline) {
+  //         map.removeLayer(lastPolyline);
+  //       }
+  //       lastPolyline = L.polyline([userLocation, pinLocation], {
+  //         color: "red",
+  //       }).addTo(map);
+  //     });
+  // });
 
-  document.getElementById("toggleUnit").addEventListener("click", function () {
-    unit = unit === "km" ? "miles" : "km";
-    this.textContent =
-      unit === "km" ? "Switch to Miles" : "Switch to Kilometers";
-    let distance = userLocation.distanceTo(marker.getLatLng()) / 1000;
-    if (unit === "miles") {
-      distance *= 0.621371; // convert km to miles
-    }
-    marker
-      .getPopup()
-      .setContent(
-        `The distance to this point is ${distance.toFixed(2)} ${unit}.`
-      );
-    marker.getPopup().update();
-  });
+  // var addMarker = false;
 
-  map.on("click", function (e) {
-    if (addMarker) {
-      if (lastPolyline) {
-        map.removeLayer(lastPolyline);
-      }
-      let clickedLocation = e.latlng;
-      let distance = userLocation.distanceTo(clickedLocation) / 1000; // distance in km
-      if (unit === "miles") {
-        distance *= 0.621371; // convert km to miles
-      }
-      marker = L.marker(clickedLocation)
-        .addTo(map)
-        .bindPopup(
-          `The distance to this point is ${distance.toFixed(2)} ${unit}.`
-        )
-        .on("click", function () {
-          if (lastPolyline) {
-            map.removeLayer(lastPolyline);
-          }
-          lastPolyline = L.polyline([userLocation, clickedLocation], {
-            color: "red",
-          }).addTo(map);
-        });
-      addMarker = false;
-    }
-  });
+  // document.getElementById("addMarker").addEventListener("click", function () {
+  //   addMarker = true;
+  // });
+
+  // document.getElementById("toggleUnit").addEventListener("click", function () {
+  //   unit = unit === "km" ? "miles" : "km";
+  //   this.textContent =
+  //     unit === "km" ? "Switch to Miles" : "Switch to Kilometers";
+  //   let distance = userLocation.distanceTo(marker.getLatLng()) / 1000;
+  //   if (unit === "miles") {
+  //     distance *= 0.621371; // convert km to miles
+  //   }
+  //   marker
+  //     .getPopup()
+  //     .setContent(
+  //       `The distance to this point is ${distance.toFixed(2)} ${unit}.`
+  //     );
+  //   marker.getPopup().update();
+  // });
+
+  // map.on("click", function (e) {
+  //   if (addMarker) {
+  //     if (lastPolyline) {
+  //       map.removeLayer(lastPolyline);
+  //     }
+  //     let clickedLocation = e.latlng;
+  //     let distance = userLocation.distanceTo(clickedLocation) / 1000; // distance in km
+  //     if (unit === "miles") {
+  //       distance *= 0.621371; // convert km to miles
+  //     }
+  //     marker = L.marker(clickedLocation)
+  //       .addTo(map)
+  //       .bindPopup(
+  //         `The distance to this point is ${distance.toFixed(2)} ${unit}.`
+  //       )
+  //       .on("click", function () {
+  //         if (lastPolyline) {
+  //           map.removeLayer(lastPolyline);
+  //         }
+  //         lastPolyline = L.polyline([userLocation, clickedLocation], {
+  //           color: "red",
+  //         }).addTo(map);
+  //       });
+  //     addMarker = false;
+  //   }
+  // });
 </script>
 {% endblock %}

@@ -8,24 +8,24 @@ def home(request):
     return render(request, "home.html")
 
 def maps(request):
-    stations = list(Pins.objects.values('latitude', 'longitude')[:100])
-    # print(stations[:2])
-    context = {'stations':stations}
+    pins = list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100])
+    # print(pins[:2])
+    context = {'pins':pins}
     return render(request, "maps.html", context)
 
-def nearest_station(request):
+def nearest_pin(request):
     latitude = request.GET.get('latitude')
     longitude = request.GET.get('longitude')
     user_location = latitude, longitude
-    station_distances = {}
-    for station in Pins.objects.all()[:100]:
-        station_location = station.latitude, station.longitude
+    pin_distances = {}
+    for pin in Pins.objects.all()[:100]:
+        pin_location = pin.latitude, pin.longitude
         
-        distance = geodesic(user_location, station_location).km
-        station_location[distance] = station_location
-    min_distances = min(station_distances)
-    station_coords = station_distances(min_distances)
+        distance = geodesic(user_location, pin_location).km
+        pin_location[distance] = pin_location
+    min_distances = min(pin_distances)
+    pin_coords = pin_distances(min_distances)
     return JsonResponse({
-        'coordinates': station_coords,
+        'coordinates': pin_coords,
         'distance': min_distances
     })
