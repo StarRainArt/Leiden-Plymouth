@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% block map %}
+<div id="map" style="height: 56vh; width: 56vw; margin: auto auto"></div>
+<button id="addMarker">Add Marker</button>
+<button id="toggleUnit">Switch to Miles</button>
+<button id="saveMarker">Save the marker</button>
+
+{{ stations|json_script:"stations_json" }}
+
+<script>
+  let themarker = null;
+
+  var userLocation = L.latLng(50.376289, -4.143841);
+  var map = L.map("map").setView(userLocation, 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxzoom: 19,
+  }).addTo(map);
+  let stations = JSON.parse(
+    document.getElementById("stations_json").textContent
+  );
+  var lastPolyline = null;
+  var unit = "km"; // default unit is kilometers
+  console.log(stations);
+  stations.forEach((station) => {
+    console.log(station);
+    console.log(station.station_name);
+    let stationLocation = L.latLng(station.latitude, station.longitude);
+    let distance = userLocation.distanceTo(stationLocation) / 1000; // distance in km
+    if (unit === "miles") {
+      distance *= 0.621371; // convert km to miles
+    }
+    themarker = L.marker([station.latitude, station.longitude])
+      .addTo(map)
+      .bindPopup(
+        station.station_name +
+          `<br/>The distance to this station is ${distance.toFixed(2)} ${unit}.`
+      )
+      .on("click", function () {
+        if (lastPolyline) {
+          map.removeLayer(lastPolyline);
+        }
+        lastPolyline = L.polyline([userLocation, stationLocation], {
+          color: "red",
+        }).addTo(map);
+      });
+  });
+
+  var addMarker = false;
+
+  document.getElementById("addMarker").addEventListener("click", function () {
+    addMarker = true;
+  });
+
+  document.getElementById("toggleUnit").addEventListener("click", function () {
+    unit = unit === "km" ? "miles" : "km";
+    this.textContent =
+      unit === "km" ? "Switch to Miles" : "Switch to Kilometers";
+    themarker.getPopup().setContent("test");
+    themarker.getPopup().update();
+    console.log("test", themarker._popup);
+  });
+
+  map.on("click", function (e) {
+    if (addMarker) {
+      if (lastPolyline) {
+        map.removeLayer(lastPolyline);
+      }
+      let clickedLocation = e.latlng;
+      let distance = userLocation.distanceTo(clickedLocation) / 1000; // distance in km
+      if (unit === "miles") {
+        distance *= 0.621371; // convert km to miles
+      }
+      L.marker(clickedLocation)
+        .addTo(map)
+        .bindPopup(
+          `The distance to this point is ${distance.toFixed(2)} ${unit}.`
+        )
+        .on("click", function () {
+          if (lastPolyline) {
+            map.removeLayer(lastPolyline);
+          }
+          lastPolyline = L.polyline([userLocation, clickedLocation], {
+            color: "red",
+          }).addTo(map);
+        });
+      addMarker = false;
+    }
+  });
+</script>
+{% endblock %}
