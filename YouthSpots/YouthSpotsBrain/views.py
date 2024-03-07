@@ -40,6 +40,8 @@ def login(request):
                     return render(request, "home.html")
                 else:
                     return render(request, "login.html", {"error": "Invalid password"})
+            else:
+                return render(request, "login.html", {"error": "Invalid username"})
 
         else:
             return render(request, "login.html", { "error": "Missing username or password"})

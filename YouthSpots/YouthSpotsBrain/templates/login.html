@@ -37,14 +37,14 @@
     <button type="submit" id="login_button" placeholder="login">login</button>
     <button type="submit" id="sign_in_button" placeholder="setting">sign in</button><br>
 
-    <input type="text"placeholder="username" name= ><br>
-    <input type="password" placeholder="password"><br>
+    <input type="text"placeholder="username" name="username" ><br>
+    <input type="password" placeholder="password" name="password"><br>
     remember me <input type="checkbox"><br>
-    <button type="submit" id="login_button_2" placeholder="login">login</button>
-    {% for error in errors %}
-
-    <p class="error">{{ error }}</p>
-    {% endfor %}
+    <button type="submit" id="login_button_2">login</button>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    
 
 </form> 
 
