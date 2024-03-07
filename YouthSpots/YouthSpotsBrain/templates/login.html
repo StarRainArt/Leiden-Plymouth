@@ -31,10 +31,10 @@
 
 {% block login %}
 
-<form method="post">
+<a class="nav_buttons" href="/login">login<a/>
+<a class="nav_buttons" href="/signin">sign in <a/>
 
-    <button type="submit" id="login_button" placeholder="login">login</button>
-    <button type="submit" id="sign_in_button" placeholder="setting">sign in</button><br>
+<form method="post">
 
     <input type="text"placeholder="email"><br>
     <input type="text" placeholder="password"><br>
@@ -42,7 +42,7 @@
     <button type="submit" id="login_button_2" placeholder="login">login</button>
     {% for error in errors %}
 
-    <p {% csrf_token %}>{{ error }}</p>
+    <p class="error">{{ error }}</p>
     {% endfor %}
 
 </form> 
