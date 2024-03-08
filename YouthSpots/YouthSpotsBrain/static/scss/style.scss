@@ -12,6 +12,9 @@ $Pure-white: #FFFFFF;
 
 body{
     background-color: $Royal-purple;
+    background: linear-gradient(to right, #1E095A 0%);
+    background-color: $Royal-purple;
+
 }
 
 #login_button {
@@ -35,6 +38,13 @@ body{
     position: absolute;
     left: 180px;
     top: 100px;
+
+
+
+
+
+
+
 }
 #login_button_2{
     font-family: "Poppins";
