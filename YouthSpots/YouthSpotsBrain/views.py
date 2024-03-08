@@ -65,6 +65,8 @@ def signup(request):
         errors = []
         if request.POST["username"] == "":
             errors.append("Username is required")
+        if len(request.POST["username"]) > 16:
+            errors.append("Username must be less than 16 characters long")
         if request.POST["email"] == "":
             errors.append("Email is required")
         if request.POST["password"] != request.POST["password_confirm"]:
@@ -88,6 +90,32 @@ def signup(request):
             user.save()
             return redirect("login")
     return render(request, "signup.html")
+
+def change_password(request):
+    if request.method == "POST":
+        errors = []
+        if request.POST["old_password"] == "":
+            errors.append("Old password is required")
+        old_password = request.POST["old_password"]
+        user = request.user
+        if not user.check_password(old_password):
+            return render(request, "change_password.html", {"errors": ["Invalid old password"]})
+        if request.POST["new_password"] == "":
+            errors.append("New password is required")
+        if request.POST["new_password"] != request.POST["new_password_confirm"]:
+            errors.append("New passwords do not match")
+        if len(request.POST["new_password"]) < 8:
+            errors.append("New passwords must atleast be 8 characters long")
+        if re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", request.POST["new_password"]):
+            errors.append("New password must contain atleast one uppercase letter, one lowercase letter and one number")
+        if errors:
+            return render(request, "change_password.html", {"errors": errors})
+        else:
+            user = UserAuth.objects.get(username=request.user.username)
+            user.set_password(request.POST["new_password"])
+            user.save()
+            return redirect("home")
+    return render(request, "change_password.html")
 
 def logout(request):
     django_logout(request)
