@@ -1,6 +1,6 @@
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render
-from YouthSpotsBrain.models import meetup_data, meetup_userdata
+from YouthSpotsBrain.models import MeetupData, MeetupUserData
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
@@ -30,21 +30,69 @@ def nearest_station(request):
     })
 
 
-def Meetup_data(request):
+def meetup_data(request):
     if request.method == 'POST':
-        name_meetup = request.POST.get('name_meetup') # don't forget to fix str stander if issue with int()
+        name_meetup = request.POST.get('name_meetup')
         time_start = request.POST.get('time_start')
         time_end = request.POST.get('time_end')
-        discription = request.POST.get('discription')
-        #type_meetup = request.POST.get('type_meetup')
-        visiablitie = request.POST.get('visiablitie')
-        #if check 
-        meetup_data.time_start = time_start,
-        meetup_data.time_end = time_end,
-        meetup_data.name_meetup = name_meetup,
-        meetup_data.discription = discription,
-        #meetup_data.type_meetup = type_meetup,
-        meetup_data.visiablitie = visiablitie,
-        
-        # Process the username data as needed
-    # Render your template or return an HTTP response
+        description = request.POST.get('description')
+        type_meetup = request.POST.get('type_meetup')
+        location_meetup = request.POST.get('location_meetup')
+        pins = request.POST.get('pins')
+        visibility = request.POST.get('visibility')
+
+        # Create a MeetupData instance
+        meetup_data = MeetupData.objects.create(
+            name_meetup=name_meetup,
+            time_start=time_start,
+            time_end=time_end,
+            description=description,
+            type_meetup=type_meetup,
+            location_meetup=location_meetup,
+            pins=pins,
+            visibility=visibility
+        )
+
+        # For testing
+        print(meetup_data.time_end)
+
+        # Render a template or return a success message
+        return HttpResponse("Meetup data saved successfully!")
+
+    # Render a form for creating a meetup
+    return render(request, 'create_meetup_form.html')
+def meetup_data_test():
+    # Simulated test data
+    test_name_meetup = 'Test Meetup'
+    test_time_start = '2024-03-08 10:00:00'
+    test_time_end = '2024-03-08 12:00:00'
+    test_description = 'This is a test meetup'
+    test_type_meetup = 'FC'
+    test_location_meetup = 12345
+    test_pins = 10
+    test_visibility = '+'
+
+    # Create a MeetupData instance
+    meetup_data = MeetupData.objects.create(
+        name_meetup=test_name_meetup,
+        time_start=test_time_start,
+        time_end=test_time_end,
+        description=test_description,
+        type_meetup=test_type_meetup,
+        location_meetup=test_location_meetup,
+        pins=test_pins,
+        visibility=test_visibility
+    )
+
+    # For testing
+    print("name_meetup:", test_name_meetup)
+    print("time_start:", test_time_start)
+    print("time_end:", test_time_end)
+    print("description:", test_description)
+    print("type_meetup:", test_type_meetup)
+    print("location_meetup:", test_location_meetup)
+    print("pins:", test_pins)
+    print("visibility:", test_visibility)
+
+# Call the test function
+meetup_data_test()
