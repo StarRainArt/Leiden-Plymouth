@@ -1,1 +1,35 @@
-// All styling related to the use of Leaflet.js
+$Blue-green: #2596be;
+$Federal-blue: #1e095a;
+$Royal-purple: #8147a8;
+$Old-rose: #b46f77;
+$Eerie-black: #222222;
+$Pure-white: #ffffff;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    main {
+
+        #map {
+          
+        }
+        // position: absolute;
+        background-color: $Royal-purple;
+        .button {
+            // position: absolute;
+            z-index: 1000;
+            font-family: "Poppins";
+            width: 2;
+            height: 30px;
+            display: flex;
+            padding: 5px 13px;
+            border-radius: 15pt;
+            background-color: $Royal-purple;
+        }
+    }
+}
