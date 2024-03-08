@@ -1,5 +1,5 @@
 from django.http import JsonResponse,HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from YouthSpotsBrain.models import MeetupData, MeetupUserData
 from geopy.distance import geodesic
 # Create your views here.
@@ -61,38 +61,30 @@ def meetup_data(request):
 
     # Render a form for creating a meetup
     return render(request, 'create_meetup_form.html')
-def meetup_data_test():
-    # Simulated test data
-    test_name_meetup = 'Test Meetup'
-    test_time_start = '2024-03-08 10:00:00'
-    test_time_end = '2024-03-08 12:00:00'
-    test_description = 'This is a test meetup'
-    test_type_meetup = 'FC'
-    test_location_meetup = 12345
-    test_pins = 10
-    test_visibility = '+'
+#create_meetup_form.html is not const
+def select_meetup(request):
+    meetups = MeetupData.objects.all()
+    return render(request, 'select_meetup.html', {'meetups': meetups})
+#select_meetup.html is not const
+def edit_meetup(request):
+    if request.method == 'POST':
+        meetup_id = request.POST.get('meetup_id')
+        return redirect('edit_meetup', meetup_id=meetup_id)
+    
+def edit_meetup_details(request, meetup_id):
+    meetup = MeetupData.objects.get(id=meetup_id)
+    if request.method == 'POST':
+        # Handle form submission to update the meetup details
+        # This part depends on how your form is structured
+        # For simplicity, let's assume the form is POSTed to this view
+        # and we directly update the meetup instance
+        meetup.name_meetup = request.POST.get('name_meetup')
+        meetup.time_start = request.POST.get('time_start')
+        meetup.time_end = request.POST.get('time_end')
+        meetup.type_meetup = request.POST.get('type_meetup')
+        # Update other fields as needed
+        meetup.save()
+        return redirect('select_meetup')
 
-    # Create a MeetupData instance
-    meetup_data = MeetupData.objects.create(
-        name_meetup=test_name_meetup,
-        time_start=test_time_start,
-        time_end=test_time_end,
-        description=test_description,
-        type_meetup=test_type_meetup,
-        location_meetup=test_location_meetup,
-        pins=test_pins,
-        visibility=test_visibility
-    )
-
-    # For testing
-    print("name_meetup:", test_name_meetup)
-    print("time_start:", test_time_start)
-    print("time_end:", test_time_end)
-    print("description:", test_description)
-    print("type_meetup:", test_type_meetup)
-    print("location_meetup:", test_location_meetup)
-    print("pins:", test_pins)
-    print("visibility:", test_visibility)
-
-# Call the test function
-meetup_data_test()
+    return render(request, 'edit_meetup.html', {'meetup': meetup})
+#edit_meetup.html is not const
