@@ -65,6 +65,8 @@ def signup(request):
         errors = []
         if request.POST["username"] == "":
             errors.append("Username is required")
+        if len(request.POST["username"]) > 16:
+            errors.append("Username must be less than 16 characters long")
         if request.POST["email"] == "":
             errors.append("Email is required")
         if request.POST["password"] != request.POST["password_confirm"]:
