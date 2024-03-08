@@ -30,7 +30,7 @@ def nearest_station(request):
     })
 
 
-def meetup_data(request):
+def meetup_data_create(request):
     if request.method == 'POST':
         name_meetup = request.POST.get('name_meetup')
         time_start = request.POST.get('time_start')
@@ -53,8 +53,7 @@ def meetup_data(request):
             visibility=visibility
         )
 
-        # For testing
-        print(meetup_data.time_end)
+       
 
         # Render a template or return a success message
         return HttpResponse("Meetup data saved successfully!")
@@ -70,7 +69,7 @@ def edit_meetup(request):
     if request.method == 'POST':
         meetup_id = request.POST.get('meetup_id')
         return redirect('edit_meetup', meetup_id=meetup_id)
-    
+#edit_meetup.html is not const    
 def edit_meetup_details(request, meetup_id):
     meetup = MeetupData.objects.get(id=meetup_id)
     if request.method == 'POST':
@@ -82,9 +81,14 @@ def edit_meetup_details(request, meetup_id):
         meetup.time_start = request.POST.get('time_start')
         meetup.time_end = request.POST.get('time_end')
         meetup.type_meetup = request.POST.get('type_meetup')
+        meetup.location_meetup = request.POST.get('location_meetup')
+        meetup.pins = request.POST.get('pins')
+        meetup.visibility = request.POST.get('visibility')
+        meetup.description = request.POST.get('description')
         # Update other fields as needed
         meetup.save()
         return redirect('select_meetup')
-
+#select_meetup.html is not const
     return render(request, 'edit_meetup.html', {'meetup': meetup})
 #edit_meetup.html is not const
+#don't forget to add a something to remind people

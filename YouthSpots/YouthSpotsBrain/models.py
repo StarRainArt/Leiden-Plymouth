@@ -1,11 +1,16 @@
 from django.db import models
 
 type_mt = {
-    "FC": "Fan_cosplay",
-    "SO": "Sophomore",
-    "JR": "Junior",
-    "SR": "Senior",
-    "GR": "Graduate",
+    "CE": "Community Event",
+    "SG": "Social Gathering",
+    "EE": "Entertainment Event",
+    "AC": "Activity Club",
+    "WC": "Workshop/Class",
+    "FE": "Fitness Event",
+    "VO": "Volunteer Opportunity",
+    "TE": "Tech Event",
+    "ME": "Music Event",
+    "DE": "Dance Event",
 }
 
 visibility_type = {
@@ -20,8 +25,10 @@ class MeetupData(models.Model):
     time_start = models.DateTimeField()
     time_end = models.DateTimeField()
     description = models.CharField(max_length=255)
-    type_meetup = models.CharField(max_length=10, choices=type_mt, default='FC')
-    location_meetup = models.BigIntegerField()
+    type_meetup = models.CharField(max_length=10, choices=type_mt, default='CE')
+    latitude = models.BigIntegerField()
+    longitude = models.BigIntegerField()
+    meetup_location = models.BigIntegerField()
     pins = models.BigIntegerField()
     visibility = models.CharField(max_length=10, choices=visibility_type, default='-')
 
