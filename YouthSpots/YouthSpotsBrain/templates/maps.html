@@ -8,157 +8,117 @@
 {{ pins|json_script:"pins_json" }}
 
 <script>
-  let map = L.map("map", { attributionControl: false });
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxzoom: 19,
-  }).addTo(map);
+  async function run(latitude, longitude) {
+    var userLocation = L.latLng(latitude, longitude);
 
-  let control;
-  let addMarker = false;
-  let marker;
+    // Create Map 
+    var map = L.map("map", { attributionControl: false });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxzoom: 19,
+    }).addTo(map);
+    map.setView(userLocation, 13);
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let userLocation = L.latLng(
-        position.coords.latitude,
-        position.coords.longitude
-      );
-      map.setView(userLocation, 13);
+    // Create routing control
+    var control = L.Routing.control({
+    waypoints: [userLocation],
+    routeWhileDragging: false,
+    geocoder: L.Control.Geocoder.nominatim(),
+    }).addTo(map);
 
-      // create a routing control
-      control = L.Routing.control({
-        waypoints: [userLocation],
-        routeWhileDragging: false,
-        geocoder: L.Control.Geocoder.nominatim(),
-        }).addTo(map);
+    // Pins
+    var pins = {}
 
-      let pins = JSON.parse(document.getElementById("pins_json").textContent);
-      console.log("pins", pins);
+    async function updatePins() {
+      var fetchedPins = await (await fetch('/getPins')).json()
 
-      let pinStore = {};
+      fetchedPins.forEach((pin) => {
+        if(pins[pin.id]) {
+          /*
+            UPDATE
+          */
+          var marker = pins[pin.id].marker
+          pins[pin.id].info = pin
 
-      pins.forEach((pin) => {
-        pinStore[pin.id] = {
-          data: pin,
-          marker: L.marker([pin.latitude, pin.longitude]),
-        };
-        let pinMarker = pinStore[pin.id].marker;
+          var pinString = `<div class="title">${pin.title}</div>`
+          pinString += `<div class="description">${pin.description}</div>`
+          pinString += `<div class="tags">`
+          var tags = pin.tags.split(', ')
+          tags.forEach((tag) => {
+            pinString += `<div class="tag">${tag}</div>`
+          })
+          pinString += `</div>`
 
-        let popupString = `<b>${pin.title}</b> <br><br> ${pin.description} <br><br> LA : ${pin.latitude} <br> LO : ${pin.longitude} <br><br>`;
-        let tags = pin.tags.split(", ");
-        tags.forEach((tag) => {
-          popupString = popupString + `${tag} <br>`;
-        });
-
-        pinMarker.bindPopup(popupString);
-        pinMarker.addTo(map);
-
-        // Add a click event listener to the marker
-        pinMarker.on('click', function(e) {
-          // Add a waypoint to the control at the marker's location
-          control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
-        });
-      });
-      console.log("pinStore", pinStore);
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          let userLocation = L.latLng(
-            position.coords.latitude,
-            position.coords.longitude
-          );
-          L.marker(userLocation).addTo(map);
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        alert("Geolocation is not supported by your browser.");
-      }
-
-      let unit = "km"; // default unit is miles
-
-      pins.forEach((pin) => {
-        let pinLocation = L.latLng(pin.latitude, pin.longitude);
-        let distance = userLocation.distanceTo(pinLocation) / 1000; // distance in km
-        if (unit === "miles") {
-          distance *= 0.621371; // convert km to miles
-        }
-        L.marker([pin.latitude, pin.longitude])
-          .addTo(map)
-          .bindPopup(
-            pin.pin +
-              `<br/>The distance to this pin is ${distance.toFixed(2)} ${unit}.`
-          );
-      });
-
-      let addMarker = false;
-
-      document
-        .getElementById("addMarker")
-        .addEventListener("click", function () {
-          addMarker = true;
-        });
-
-      map.on("click", function (e) {
-        if (addMarker) {
-          // Remove the previous marker if it exists
-          if (marker) {
-            map.removeLayer(marker);
+          marker.getPopup().setContent(pinString)
+          marker.getPopup().update()
+        } else {
+          /*
+            CREATE
+          */
+          pins[pin.id] = {
+            marker: L.marker([pin.latitude, pin.longitude]),
+            info: pin
           }
+          var marker = pins[pin.id].marker
 
-          // Add a new marker
-          marker = L.marker(e.latlng).addTo(map);
+          var popupString = `<div class="title">${pin.title}</div>`
+          popupString += `<div class="description">${pin.description}</div>`
+          popupString += `<div class="tags">`
+          var tags = pin.tags.split(', ')
+          tags.forEach((tag) => {
+            popupString += `<div class="tag">${tag}</div>`
+          })
+          popupString += `</div>`
 
-          // Add a new waypoint to the routing control
-          control.setWaypoints([
-            control.getWaypoints()[0], // keep the user's location as the first waypoint
-            e.latlng, // add the clicked location as the second waypoint
-          ]);
-
-          addMarker = false;
+          marker.bindPopup(popupString);
+          marker.addTo(map);
         }
-      });
-      document
-        .getElementById("saveMarker")
-        .addEventListener("click", function () {
-          addMarker = true;
-          if (marker) {
-            console.log("Marker:", marker);
-            const markerData = {
-              lat: marker.getLatLng().lat,
-              lng: marker.getLatLng().lng,
-            };
+      })
 
-            fetch("http://127.0.0.1:8000/api/save-marker", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(markerData),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log("Success:", data);
-              })
-              .catch((error) => {
-                console.error("Error:", error);
-              });
-          } else {
-            console.log("No marker to save");
-          }
-        });
+      console.log('Updated Pins', pins)
+    }
+
+    // AddMarker
+    var marker = false;
+
+    document
+    .getElementById("addMarker")
+    .addEventListener("click", function () {
+      addMarker = true;
     });
-  } else {
-    // Browser doesn't support Geolocation
-    alert("Geolocation is not supported by your browser.");
+
+    map.on("click", function (e) {
+      if (addMarker) {
+        // Remove the previous marker if it exists
+        if (marker) {
+          map.removeLayer(marker);
+        }
+
+        // Add a new marker
+        marker = L.marker(e.latlng).addTo(map);
+
+        // Add a new waypoint to the routing control
+        control.setWaypoints([
+          control.getWaypoints()[0], // keep the user's location as the first waypoint
+          e.latlng, // add the clicked location as the second waypoint
+        ]);
+
+        addMarker = false;
+      }
+    });
+
+    updatePins()
+    setInterval(async () => {
+      updatePins()
+    }, 5000)
   }
 
-  // Add a click event listener to the map
-  map.on("click", function (e) {
-    // Add a new waypoint to the routing control
-    control.setWaypoints([
-      control.getWaypoints()[0], // keep the user's location as the first waypoint
-      e.latlng, // add the clicked location as the second waypoint
-    ]);
-  });
+  // Start
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      run(position.coords.latitude, position.coords.longitude)
+    })
+  } else {
+    run(50.376289, -4.143841)
+  }
 </script>
 {% endblock %}

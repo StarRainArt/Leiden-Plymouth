@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("map/", views.maps),
+    path("getPins/", views.getPins),
     path('get-nearest-pin/', views.nearest_pin),
     path('api/save-marker', views.save_marker, name='save_marker'),
     path("login/", views.login, name="login"),

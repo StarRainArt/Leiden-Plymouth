@@ -15,10 +15,10 @@ def home(request):
     return render(request, "home.html")
 
 def maps(request):
-    pins = list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100])
-    # print(pins[:2])
-    context = {'pins':pins}
-    return render(request, "maps.html", context)
+    return render(request, "maps.html")
+
+def getPins(request):
+    return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
 
 def nearest_pin(request):
     latitude = request.GET.get('latitude')
