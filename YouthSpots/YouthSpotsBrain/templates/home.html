@@ -1,8 +1,12 @@
 {% extends "base.html" %}
-{% block home %}
+{% block content %}
 {% if user.is_authenticated %}
     <h1>My Blog</h1>
-
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    
 {% else %}
     <h1>You are not logged in</h1>
 {% endif %}

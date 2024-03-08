@@ -1,10 +1,12 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
 # Create your views here.
 def home(request):
+    if request.user.is_authenticated == False:
+        return redirect("login")
     return render(request, "home.html")
 
 def maps(request):
@@ -37,6 +39,7 @@ def login(request):
             password = request.POST["password"]
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                django_login(request, user)
                 return redirect("home")
             else:
                 if UserAuth.objects.filter(username=username).exists():
@@ -73,6 +76,10 @@ def signup(request):
                 request.POST["password"]
             )
             user.save()
-            return render(request, "login.html")
+            return redirect("login")
     return render(request, "signup.html")
+
+def logout(request):
+    django_logout(request)
+    return redirect("login")
 

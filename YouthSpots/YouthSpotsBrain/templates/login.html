@@ -29,17 +29,17 @@
 {% endblock %}
 
 
-{% block login %}
+{% block content %}
     <img src="../static/img/logo.png">
 
 <a class="nav_buttons" href="/login">login<a/>
-<a class="nav_buttons" href="/signin">sign in <a/>
+<a class="nav_buttons" href="/signup">signup<a/>
 
-<form method="post">
+<form method="post" class='login_form'>
     {% csrf_token %}
 
-    <input type="text"placeholder="username" name="username" ><br>
-    <input type="password" placeholder="password" name="password"><br>
+    <input type="text" id="username" placeholder="username" name="username" ><br>
+    <input type="password" id="password" placeholder="password" name="password"><br>
     remember me <input type="checkbox"><br>
     <button type="submit" id="login_button_2">login</button>
     {% if error %}
