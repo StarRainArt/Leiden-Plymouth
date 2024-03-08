@@ -5,8 +5,8 @@
 <script defer>
     function SaveInfo() {
         var infoSave = {
-            username:, /*username*/
-            password: /*password*/
+            username: username,
+            password: password
         };
         localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
     }
@@ -15,8 +15,8 @@
         var savedInfo = JSON.parse(localStorage.getItem("savedInfo"));
 
         if (localStorage.getItem("savedInfo") !== null) {
-            if (typeof savedInfo.username !== "undefined") /*username*/ = savedInfo.username;
-            if (typeof savedInfo.password !== "undefined") /*password*/ = savedInfo.password;
+            if (typeof savedInfo.username !== "undefined") username = savedInfo.username;
+            if (typeof savedInfo.password !== "undefined") password = savedInfo.password;
         }
     }
 

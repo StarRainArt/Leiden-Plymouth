@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block content %}
 <div id="map" style="height: 70vh; width: 70vw; margin: auto auto"></div>
-<button id="addMarker" class="button">Add Marker</button>
-<button id="toggleUnit" class="button">Switch to Miles</button>
-<button id="saveMarker" class="button">Save the marker</button>
-
+<div class="button-wrapper">
+  <button id="addMarker" class="button">Add Marker</button>
+  <button id="saveMarker" class="button">Save the marker</button>
+</div>
 
 {{ pins|json_script:"pins_json" }}
 
@@ -24,14 +24,66 @@
         position.coords.longitude
       );
       map.setView(userLocation, 13);
-
       // create a routing control
       control = L.Routing.control({
         waypoints: [userLocation],
         routeWhileDragging: false,
+        fitSelectedRoutes: false,
+        reverseWaypoints: true,
         geocoder: L.Control.Geocoder.nominatim(),
-        }).addTo(map);
+        router: new L.Routing.osrmv1({
+          language: "en",
+          profile: "car",
+        }),
+        waypointNameFallback: function (latLng) {
+          function zeroPad(n) {
+            n = Math.round(n);
+            return  10 ? "0" + n : n;
+          }
+          function sexagesimal(p, pos, neg) {
+            var n = Math.abs(p),
+              degs = Math.floor(n),
+              mins = (n - degs) * 60,
+              secs = (mins - Math.floor(mins)) * 60,
+              frac = Math.round((secs - Math.floor(secs)) * 100);
+            return (
+              (n >= 0 ? pos : neg) +
+              degs +
+              "°" +
+              zeroPad(mins) +
+              "'" +
+              zeroPad(secs) +
+              "." +
+              zeroPad(frac) +
+              '"'
+            );
+          }
 
+          return (
+            sexagesimal(latLng.lat, "N", "S") +
+            " " +
+            sexagesimal(latLng.lng, "E", "W")
+          );
+        },
+      }).addTo(map);
+      let ReversablePlan = L.Routing.Plan.extend({
+        createGeocoders: function () {
+          let container = L.Routing.Plan.prototype.createGeocoders.call(this),
+            reverseButton = createButton("↑↓", container);
+
+          L.DomEvent.on(
+            reverseButton,
+            "click",
+            function () {
+              let waypoints = this.getWaypoints();
+              this.setWaypoints(waypoints.reverse());
+            },
+            this
+          );
+
+          return container;
+        },
+      });
       let pins = JSON.parse(document.getElementById("pins_json").textContent);
       console.log("pins", pins);
 
@@ -54,9 +106,13 @@
         pinMarker.addTo(map);
 
         // Add a click event listener to the marker
-        pinMarker.on('click', function(e) {
+        pinMarker.on("click", function (e) {
           // Add a waypoint to the control at the marker's location
-          control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
+          control.spliceWaypoints(
+            control.getWaypoints().length - 1,
+            1,
+            e.latlng
+          );
         });
       });
       console.log("pinStore", pinStore);
@@ -74,24 +130,6 @@
         alert("Geolocation is not supported by your browser.");
       }
 
-      let unit = "km"; // default unit is miles
-
-      pins.forEach((pin) => {
-        let pinLocation = L.latLng(pin.latitude, pin.longitude);
-        let distance = userLocation.distanceTo(pinLocation) / 1000; // distance in km
-        if (unit === "miles") {
-          distance *= 0.621371; // convert km to miles
-        }
-        L.marker([pin.latitude, pin.longitude])
-          .addTo(map)
-          .bindPopup(
-            pin.pin +
-              `<br/>The distance to this pin is ${distance.toFixed(2)} ${unit}.`
-          );
-      });
-
-      let addMarker = false;
-
       document
         .getElementById("addMarker")
         .addEventListener("click", function () {
@@ -106,7 +144,7 @@
           }
 
           // Add a new marker
-          marker = L.marker(e.latlng).addTo(map);
+          marker = L.marker(e.latlng, { icon: myIcon }).addTo(map);
 
           // Add a new waypoint to the routing control
           control.setWaypoints([
@@ -116,11 +154,31 @@
 
           addMarker = false;
         }
+
+        var container = L.DomUtil.create("div"),
+          startBtn = createButton("Start from this location", container),
+          destBtn = createButton("Go to this location", container);
+
+        L.popup().setContent(container).setLatLng(e.latlng).openOn(map);
+
+        L.DomEvent.on(startBtn, "click", function () {
+          control.spliceWaypoints(0, 1, e.latlng);
+          map.closePopup();
+        });
+
+        L.DomEvent.on(destBtn, "click", function () {
+          control.spliceWaypoints(
+            control.getWaypoints().length - 1,
+            1,
+            e.latlng
+          );
+          map.closePopup();
+        });
       });
       document
         .getElementById("saveMarker")
         .addEventListener("click", function () {
-          addMarker = true;
+          // addMarker = true;
           if (marker) {
             console.log("Marker:", marker);
             const markerData = {
@@ -152,13 +210,11 @@
     alert("Geolocation is not supported by your browser.");
   }
 
-  // Add a click event listener to the map
-  map.on("click", function (e) {
-    // Add a new waypoint to the routing control
-    control.setWaypoints([
-      control.getWaypoints()[0], // keep the user's location as the first waypoint
-      e.latlng, // add the clicked location as the second waypoint
-    ]);
-  });
+  function createButton(label, container) {
+    var btn = L.DomUtil.create("button", "", container);
+    btn.setAttribute("type", "button");
+    btn.innerHTML = label;
+    return btn;
+  }
 </script>
 {% endblock %}
