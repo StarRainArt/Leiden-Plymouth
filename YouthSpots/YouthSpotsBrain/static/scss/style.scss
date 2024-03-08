@@ -5,29 +5,40 @@ $Old-rose: #B46F77;
 $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
+.temp{
+    height: 725px;
+}
+
+
 body{
-    background-color: #6832AA;
+    background-color: $Royal-purple;
 }
 
 nav{
     padding: 1vh;
-    background-color:#21065D;
+    background-color: $Federal-blue;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
 
     a {
-        background-color: #AAAAAA;
+        background-color: $Royal-purple;
         border-radius: 20px;
         width: 60px;
         height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
+       
+        &:hover {
+            background-color: rgb(144, 90, 180);
+        }
     }
 }
 
 input{
-    background-color: #21065D;
+    background-color: $Federal-blue;
 }
