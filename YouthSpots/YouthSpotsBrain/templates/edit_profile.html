@@ -8,46 +8,52 @@
 {% endcompress %}
 <img src="../static/img/logo.png" class="profile_logo" alt="Logo">
 <div class="alter-account">
-    <h1 class="alter-account-text">Alter Account</h1>
+    <h1 class="alter-account-text">Edit Account</h1>
     <div class="form alter-ac-form">
             <div class="container_aa">
                 <div class="left_side">
                     <div>
-                        <label for="username">Username</label><br>
-                        <input type="text" name="username" id="username" value=""><br>
+                        <label for="username" class="edit_textbox_text">Username</label><br>
+                        <input type="text" name="username" id="username" class="edit_textbox"><br>
                     </div>
                     <div>
-                        <label for="email">Email</label><br>
-                        <input type="email" name="email" id="email" value=""><br>
+                        <label for="email" class="edit_textbox_text">Email</label><br>
+                        <input type="email" name="email" id="email" class="edit_textbox"><br>
                     </div>
                 </div>
+                <br>
+                {% comment %} Profile img {% endcomment %}
                 <div class="right_side">
-                    <label for="profile-picture">Profile picture</label><br>
+                    <label for="profile-picture" class="edit_textbox_text">Profile picture</label><br>
                     <img src="" alt="Profile picture">
                     <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
                     <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
                     <br>
                 </div>
             </div>
-            <label for="current-password">Current password</label><br>
-            <input type="password" name="current-password" id="current-password"><br>
-            <label for="password">New password</label><br>
-            <input type="password" name="password" id="password"><br>
-            <label for="confirm-password">Confirm new password</label>
-            <input type="password" name="confirm-password" id="confirm-password">
-            <div class="buttons-alter">
-                <button type="submit" name="alter-account">Submit</button>
-                <button type="submit" name="delete-account">Delete account</button>
+            <br>
+            {% comment %} Password {% endcomment %}
+            <label for="current-password" class="edit_textbox_text">Current password</label><br>
+            <input type="password" name="current-password" id="current-password" class="edit_textbox"><br>
+            <label for="password" class="edit_textbox_text" >New password</label><br>
+            <input type="password" name="password" id="password" class="edit_textbox"><br>
+            <label for="confirm-password" class="edit_textbox_text">Confirm new password</label><br>
+            <input type="password" name="confirm-password" id="confirm-password" class="edit_textbox">
+
+
+            <div class="buttons-alter"><br><br>
+                <button type="submit" name="alter-account">Submit</button><br>
+                <button type="submit" name="delete-account">Delete account</button><br>
                 <button type="button" onclick="window.location.href='/<?= URL_PREFIX ?>/'" class="go-back">Go back</button>
             </div>
     </div>
     <footer>
         <nav>
-          <a href=""><img src="../static/img/svg/Home_page.svg"></a>
-          <a href=""><img src="../static/img/svg/Event_history.svg"></a>
-          <a href=""><img src="../static/img/svg/Create_event.svg"></a>
-          <a href=""><img></a>
-          <a href=""><img></a>
+          <a href=""><img src="../static/img/home_page.png"></a>
+          <a href=""><img src="../static/img/Upcoming_events.png"></a>
+          <a href=""><img src="../static/img/Create_event.png"></a>
+          <a href=""><img src= "../static/img/Event_history.png"></a>
+          <a href=""><img src="../static/img/Profile_pic.png"></a>
         </nav>
       </footer>
   

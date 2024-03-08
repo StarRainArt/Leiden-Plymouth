@@ -18,6 +18,19 @@ background-color: #6832AA ;
   display: block;
   margin: 0 auto;
   margin-bottom: 20px; 
+  width: 30vh;
+}
+
+.edit_textbox_text {
+  color: white;
+}
+
+.edit_textbox {
+  border: 1px solid black; 
+  padding: 10px; 
+  border-radius: 25px; 
+  background-color: #21065D;
+  width: 300px;
 }
 
 nav {
@@ -33,7 +46,7 @@ nav {
   justify-content: space-between; // Change to space-between
 
   a {
-    background-color: #AAAAAA;
+    background-color: #8C43AC;
     border-radius: 20px;
     width: 60px;
     height: 60px;
@@ -42,4 +55,6 @@ nav {
     align-items: center;
   }
 }
-
+img{
+  width:50px ;
+}
