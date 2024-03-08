@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from YouthSpotsBrain.models import EVCharcinglocation, UserAuth
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
+import re
 # Create your views here.
 def home(request):
     if request.user.is_authenticated == False:
@@ -58,11 +59,20 @@ def login(request):
 
     return render(request, "login.html")
 
+
 def signup(request):
     if request.method == "POST":
         errors = []
+        if request.POST["username"] == "":
+            errors.append("Username is required")
+        if request.POST["email"] == "":
+            errors.append("Email is required")
         if request.POST["password"] != request.POST["password_confirm"]:
             errors.append("Passwords do not match")
+        if len(request.POST["password"]) < 8:
+            errors.append("Passwords must atleast be 8 characters long")
+        if re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", request.POST["password"]):
+            errors.append("Password must contain atleast one uppercase letter, one lowercase letter and one number")
         if UserAuth.objects.filter(username=request.POST["username"]).exists():
             errors.append("Username already exists")
         if UserAuth.objects.filter(email=request.POST["email"]).exists():
