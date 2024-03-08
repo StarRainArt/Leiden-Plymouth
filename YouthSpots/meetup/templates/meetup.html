@@ -22,16 +22,20 @@
       </h1>
     </div>
     <center>
-      <form action="action_page.php" method="POST">
+      <form action="{% url 'create_meetup' %}" method="POST">
         <div class="create-event-container">
           <div class="event-details"> 
-            <input class="eventname" type="text" id="eventname" name="eventname" placeholder="Event Name" required maxlength="40">
+            <input class="eventname" type="text" id="eventname" name="name_meetup" placeholder="Event Name" required maxlength="40">
           </div><br>
           <div class="event-details">
             <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
           </div><br>
           <div>
-            <input class="dateandtime" type="datetime-local" id="dateandtime" name="dateandtime" required>
+            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_start" required>
+          </div><br>
+          
+          <div>
+            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_end" required>
           </div><br>
           <div class="event-details">
             <input class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500">
