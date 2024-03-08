@@ -5,6 +5,11 @@ $Old-rose: #B46F77;
 $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
+.temp{
+    height: 725px;
+}
+
+
 body{
     background-color: $Royal-purple;
 }
@@ -30,13 +35,6 @@ body{
     position: absolute;
     left: 180px;
     top: 100px;
-
-
-
-
-
-
-
 }
 #login_button_2{
     font-family: "Poppins";
@@ -77,4 +75,31 @@ body{
     border-radius: 15pt;
     background-color: #21065D;
 
+nav{
+    padding: 1vh;
+    background-color: $Federal-blue;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+
+    a {
+        background-color: $Royal-purple;
+        border-radius: 20px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+        &:hover {
+            background-color: rgb(144, 90, 180);
+        }
+    }
+}
+}
+input{
+    background-color: $Federal-blue;
 }
