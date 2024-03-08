@@ -37,8 +37,6 @@ def meetup_data_create(request):
         time_end = request.POST.get('time_end')
         description = request.POST.get('description')
         type_meetup = request.POST.get('type_meetup')
-        location_meetup = request.POST.get('location_meetup')
-        pins = request.POST.get('pins')
         visibility = request.POST.get('visibility')
 
         # Create a MeetupData instance
@@ -48,8 +46,6 @@ def meetup_data_create(request):
             time_end=time_end,
             description=description,
             type_meetup=type_meetup,
-            location_meetup=location_meetup,
-            pins=pins,
             visibility=visibility
         )
 
@@ -81,8 +77,6 @@ def edit_meetup_details(request, meetup_id):
         meetup.time_start = request.POST.get('time_start')
         meetup.time_end = request.POST.get('time_end')
         meetup.type_meetup = request.POST.get('type_meetup')
-        meetup.location_meetup = request.POST.get('location_meetup')
-        meetup.pins = request.POST.get('pins')
         meetup.visibility = request.POST.get('visibility')
         meetup.description = request.POST.get('description')
         # Update other fields as needed
@@ -92,3 +86,23 @@ def edit_meetup_details(request, meetup_id):
     return render(request, 'edit_meetup.html', {'meetup': meetup})
 #edit_meetup.html is not const
 #don't forget to add a something to remind people
+from YouthSpotsBrain.models import MeetupData
+
+def delete_meetup(meetup_id):
+    try:
+        # Retrieve the meetup object from the database based on the meetup_id
+        meetup = MeetupData.objects.get(id=meetup_id)
+        
+        # Delete the meetup object from the database
+        meetup.delete()
+
+        # Optionally, you can return a success message or perform other actions
+        return "Meetup deleted successfully."
+    
+    except MeetupData.DoesNotExist:
+        return "Meetup with specified ID does not exist."
+    
+    except Exception as e:
+        # Handle any other exceptions that may occur
+        return f"An error occurred: {str(e)}"
+
