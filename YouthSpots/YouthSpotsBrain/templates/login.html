@@ -30,23 +30,27 @@
 
 
 {% block content %}
-    <img src="../static/img/logo.png">
+<div id="logo_con">
+    <img src="../static/img/logo.png" class="logoimg">
+</div>
+<div class="container">
+    <div class="btn-group">
+        <button class="btn">Login</button>
+        <button class="btn">Sign Up</button>
+    </div>
+    <div class="input-group">
+        <input type="text" class="input-box" placeholder="Email">
+    </div>
+    <div class="input-group">
+        <input type="password" class="input-box" placeholder="Password">
+    </div>
+    <div class="input-group remember-me">
+        <input type="checkbox"> Remember me
+    </div>
+    <div class="input-group">
+        <button class="btn">Login</button>
+    </div>
+</div>
 
-<a class="nav_buttons" href="/login">login<a/>
-<a class="nav_buttons" href="/signup">signup<a/>
-
-<form method="post" class='login_form'>
-    {% csrf_token %}
-
-    <input type="text" id="username" placeholder="username" name="username" ><br>
-    <input type="password" id="password" placeholder="password" name="password"><br>
-    remember me <input type="checkbox"><br>
-    <button type="submit" id="login_button_2">login</button>
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-    
-
-</form> 
 
 {% endblock %}
