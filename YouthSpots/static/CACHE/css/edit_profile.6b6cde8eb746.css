@@ -1,0 +1,136 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+* {
+  margin: 0;
+  padding: 0; }
+
+/* line 6, YouthSpotsBrain/static/scss/edit_profile.scss */
+body {
+  background-color: #6832AA; }
+
+/* line 10, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px; }
+
+/* line 18, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile_logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 30vh; }
+
+/* line 25, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox_text {
+  color: white; }
+
+/* line 29, YouthSpotsBrain/static/scss/edit_profile.scss */
+.left_side {
+  text-align: left; }
+
+/* line 33, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  width: 300px; }
+
+/* line 41, YouthSpotsBrain/static/scss/edit_profile.scss */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 96%;
+  padding: 1vh;
+  background-color: #21065D;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+/* line 54, YouthSpotsBrain/static/scss/edit_profile.scss */
+nav a {
+  background-color: #8C43AC;
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/* line 64, YouthSpotsBrain/static/scss/edit_profile.scss */
+img {
+  width: 50px; }
+
+/* line 68, YouthSpotsBrain/static/scss/edit_profile.scss */
+.del {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  width: 200px;
+  color: red; }
+
+/* line 77, YouthSpotsBrain/static/scss/edit_profile.scss */
+.save {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  width: 200px;
+  color: #fff; }
+
+/* Add this to your CSS file */
+/* line 88, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  position: relative;
+  margin-bottom: 20px; }
+
+/* line 93, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover; }
+
+/* line 100, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: #21065D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; }
+
+/* line 113, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container button:hover {
+  background-color: #8C43AC; }
+
+/* Add to your existing CSS file */
+/* Mobile-first approach */
+/* Styles for smaller screens */
+@media only screen and (max-width: 600px) {
+  /* line 122, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .edit_textbox {
+    width: 80%;
+    /* Adjust width for smaller screens */
+    max-width: 300px;
+    /* Set maximum width */ }
+  /* line 127, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .profile_logo {
+    width: 70%;
+    /* Adjust width for smaller screens */ } }
+
+/* Tablet and larger screens */
+@media only screen and (min-width: 601px) {
+  /* line 134, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .profile_logo {
+    width: 30vh;
+    /* Reset width for larger screens */ } }

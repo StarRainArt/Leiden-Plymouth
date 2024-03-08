@@ -1,15 +1,26 @@
-{% extends "base.html" %} {% block title %}Social Sphere - Profile{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Social Sphere - Profile{% endblock %}
 {% block content %}
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% load static %}
-{% load compress %}
-{% compress css %}
-<link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
-{% endcompress %}
-<img src="../static/img/logo.png" class="profile_logo" alt="Logo">
-<div class="alter-account">
-    <h1 class="alter-account-text">Edit Account</h1>
-    <div class="form alter-ac-form">
+    {% load compress %}
+    {% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
+    {% endcompress %}
+    <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
+    <div class="alter-account">
+        <h1 class="alter-account-text">Edit Account</h1>
+        <div class="profile-picture-container">
+            <label for="profile-picture" class="edit_textbox_text"></label><br>
+            <div class="profile-image-wrapper">
+                <img id="profile-image" src="{% static 'img/Profile_pic.png' %}" alt="Profile picture" class="profile-image">
+            </div>
+            <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
+            <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
+        </div>
+        <br>
+        <div class="form alter-ac-form">
             <div class="container_aa">
                 <div class="left_side">
                     <div>
@@ -21,42 +32,30 @@
                         <input type="email" name="email" id="email" class="edit_textbox"><br>
                     </div>
                 </div>
-                <br>
-                {% comment %} Profile img {% endcomment %}
-                <div class="right_side">
-                    <label for="profile-picture" class="edit_textbox_text">Profile picture</label><br>
-                    <img src="" alt="Profile picture">
-                    <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
-                    <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
-                    <br>
-                </div>
             </div>
             <br>
-            {% comment %} Password {% endcomment %}
+            <section class="left_side">
             <label for="current-password" class="edit_textbox_text">Current password</label><br>
             <input type="password" name="current-password" id="current-password" class="edit_textbox"><br>
-            <label for="password" class="edit_textbox_text" >New password</label><br>
+            <label for="password" class="edit_textbox_text">New password</label><br>
             <input type="password" name="password" id="password" class="edit_textbox"><br>
             <label for="confirm-password" class="edit_textbox_text">Confirm new password</label><br>
             <input type="password" name="confirm-password" id="confirm-password" class="edit_textbox">
-
-
             <div class="buttons-alter"><br><br>
-                <button type="submit" name="alter-account">Submit</button><br>
-                <button type="submit" name="delete-account">Delete account</button><br>
-                <button type="button" onclick="window.location.href='/<?= URL_PREFIX ?>/'" class="go-back">Go back</button>
+                <button type="submit" name="alter-account" class="save">Save</button>
+                <br>
+                <button type="submit" name="delete-account" class="del">Delete account</button>
+            </section>
             </div>
+        </div>
+        <footer>
+            <nav>
+                <a href=""><img src="{% static 'img/home_page.png' %}"></a>
+                <a href=""><img src="{% static 'img/Upcoming_events.png' %}"></a>
+                <a href=""><img src="{% static 'img/Create_event.png' %}"></a>
+                <a href=""><img src="{% static 'img/Event_history.png' %}"></a>
+                <a href=""><img src="{% static 'img/Profile_pic.png' %}"></a>
+            </nav>
+        </footer>
     </div>
-    <footer>
-        <nav>
-          <a href=""><img src="../static/img/home_page.png"></a>
-          <a href=""><img src="../static/img/Upcoming_events.png"></a>
-          <a href=""><img src="../static/img/Create_event.png"></a>
-          <a href=""><img src= "../static/img/Event_history.png"></a>
-          <a href=""><img src="../static/img/Profile_pic.png"></a>
-        </nav>
-      </footer>
-  
-</div>
 {% endblock %}
-
