@@ -44,8 +44,14 @@
             <div class="buttons-alter"><br><br>
                 <button type="submit" name="alter-account" class="save">Save</button>
                 <br>
-                <button type="submit" name="delete-account" class="del">Delete account</button>
+                <button type="submit" id="popupBtn" name="delete-account" class="del">Delete account</button>
             </section>
+            <div id="myPopup" class="popup">
+                <h2>Delete Account</h2>
+                <p>Are you sure you want to delete your account ?</p>
+                <button onclick="closePopup()" class="Nopopup">No</button>
+                <button onclick="" class="Nopopup">Yes</button>
+            </div>
             </div>
         </div>
         <footer>
@@ -58,4 +64,15 @@
             </nav>
         </footer>
     </div>
+    <script>
+        function showPopup() {
+            document.getElementById("myPopup").style.display = "block";
+        }
+    
+        function closePopup() {
+            document.getElementById("myPopup").style.display = "none";
+        }
+    
+        document.getElementById("popupBtn").addEventListener("click", showPopup);
+    </script>
 {% endblock %}
