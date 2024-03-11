@@ -88,17 +88,15 @@ img{
   color: #fff;
   width: 200px;
 }
-// .progile_image{
 
-  /* Add this to your CSS file */
 .profile-picture-container {
   position: relative;
   margin-bottom: 20px;
 }
 
 .profile-picture {
-  width: 150px; /* Adjust the size as needed */
-  height: 150px; /* Adjust the size as needed */
+  width: 150px; 
+  height: 150px; 
   border-radius: 50%;
   object-fit: cover;
 }
@@ -119,8 +117,6 @@ img{
 .profile-picture-container button:hover {
   background-color: #8C43AC;
 }
-/* Add to your existing CSS */
-
 .profile-picture-container {
   position: relative;
 }
@@ -131,8 +127,8 @@ img{
   overflow: hidden;
   border-radius: 50%;
   margin: 0 auto 20px;
-  border: 3px solid black; /* Add border */
-  box-sizing: border-box; /* Ensure border doesn't increase element size */
+  border: 3px solid black; 
+  box-sizing: border-box; 
 }
 
 .profile-image {
@@ -146,4 +142,27 @@ img{
   flex-direction: column;
   align-items: center;
 }
-
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 25px;
+  transform: translate(-50%, -50%);
+  background-color: #21065D;
+  padding: 20px;
+  border: 2px solid black;
+  z-index: 1000;
+}
+h2{
+  color: red;
+}
+.Nopopup{
+    border: 1px solid black; 
+    padding: 10px; 
+    margin: 10px;
+    border-radius: 25px; 
+    background-color: #21065D;
+    color: #fff;
+    width: 50px;
+}

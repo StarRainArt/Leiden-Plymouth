@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% block title %}
-            Youth Spots
-        {% endblock %}
-    </title>
-    {% load static %}
-    {% load compress %}
-    {% compress css %}
-        <link rel="stylesheet" href="{%static 'scss/style.scss' %}" type="text/x-scss">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} Youth Spots {% endblock %}</title>
+    {% load static %} {% load compress %} {% compress css %}
+      <link
+        rel="stylesheet"
+        href="{%static 'scss/style.scss' %}"
+        type="text/x-scss"
+      />
     {% endcompress %}
-    <script src="https://kit.fontawesome.com/9ce9532b81.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/9ce9532b81.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <!-- <script src="../static/js/map.js"></script> -->
+  </head>
+  <body>
     <header>
     </header>
-    <main>{% block content %} {% endblock %}</main>
-</body>
+    <main>
+      {% block content %} {% endblock %}
+    
+    </main>
+    <footer>
+      <nav>
+        <a href=""><img src="../static/img/svg/Home_page.svg"></a>
+        <a href=""><img src="../static/img/svg/Event_history.svg"></a>
+        <a href=""><img src="../static/img/svg/Create_event.svg"></a>
+        <a href=""><img src="../static/img/svg/Upcoming_events.svg"></a>
+        <a href=""><img src="../static/img/svg/Profile_pic.svg"></a>
+      </nav>
+    </footer>
+  </body>
 </html>
