@@ -29,7 +29,6 @@ class Meetups(models.Model):
 
     def __str__(self):
         return self.title
-        return self.station_name
     
 class UserAuth(User):
     pass

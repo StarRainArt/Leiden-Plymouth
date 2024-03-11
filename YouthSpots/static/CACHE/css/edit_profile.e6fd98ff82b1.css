@@ -1,0 +1,92 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+* {
+  margin: 0;
+  padding: 0; }
+
+/* line 6, YouthSpotsBrain/static/scss/edit_profile.scss */
+body {
+  background-color: #6832AA; }
+
+/* line 10, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px; }
+
+/* line 18, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile_logo {
+  display: block;
+  margin: 0 auto; }
+
+/* line 22, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; }
+
+/* line 33, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%; }
+
+/* line 39, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account-text {
+  margin-top: 20px;
+  font-size: 24px; }
+
+/* line 44, YouthSpotsBrain/static/scss/edit_profile.scss */
+.form {
+  max-width: 600px;
+  margin-top: 20px; }
+  /* line 48, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .form .container_aa {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    /* line 53, YouthSpotsBrain/static/scss/edit_profile.scss */
+    .form .container_aa .left_side, .form .container_aa .right_side {
+      flex: 0 0 calc(50% - 10px); }
+      /* line 56, YouthSpotsBrain/static/scss/edit_profile.scss */
+      .form .container_aa .left_side div, .form .container_aa .right_side div {
+        margin-bottom: 10px; }
+      /* line 60, YouthSpotsBrain/static/scss/edit_profile.scss */
+      .form .container_aa .left_side label, .form .container_aa .right_side label {
+        display: block;
+        margin-bottom: 5px; }
+      /* line 65, YouthSpotsBrain/static/scss/edit_profile.scss */
+      .form .container_aa .left_side input[type="text"],
+      .form .container_aa .left_side input[type="email"],
+      .form .container_aa .left_side input[type="password"],
+      .form .container_aa .left_side input[type="file"], .form .container_aa .right_side input[type="text"],
+      .form .container_aa .right_side input[type="email"],
+      .form .container_aa .right_side input[type="password"],
+      .form .container_aa .right_side input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; }
+      /* line 77, YouthSpotsBrain/static/scss/edit_profile.scss */
+      .form .container_aa .left_side button, .form .container_aa .right_side button {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer; }
+  /* line 89, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .form .buttons-alter {
+    margin-top: 20px; }
+    /* line 92, YouthSpotsBrain/static/scss/edit_profile.scss */
+    .form .buttons-alter button {
+      margin: 0 5px; }

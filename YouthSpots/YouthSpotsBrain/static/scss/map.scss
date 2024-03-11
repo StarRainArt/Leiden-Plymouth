@@ -6,118 +6,115 @@ $Eerie-black: #222222;
 $Pure-white: #ffffff;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    position: relative;
-    main {
-        // position: absolute;
-        background-color: $Royal-purple;
-        .button-wrapper {
-            display: flex;
-            justify-content: space-evenly;
-            .button {
-                padding: 20px 30px;
-                margin: 10px;
-                z-index: 1000;
-                display: flex;
-                font-family: "Poppins";
-                border-radius: 15px;
-                background-color: $Blue-green;
-            }
-        }
-        .leaflet-routing-container {
-            box-shadow: 2px;
-
-            .leaflet-routing-add-waypoint {
-                width: 10%;
-                height: 100%;
-                border-radius: 100px;
-            }
-            .leaflet-routing-reverse-waypoints {
-                width: 10%;
-                height: 100%;
-                border-radius: 100px;
-            }
-        }
-        .leaflet-routing-geocoder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            input {
-                width: 100%;
-                height: 40px;
-                display: flex;
-                padding: 5px 13px;
-                border-radius: 15pt;
-                background-color: white;
-                font-size:0.9rem;
-            }
-            .leaflet-routing-remove-waypoint {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: $Eerie-black;
-                transform: scale(1.5);
-                &::after {
-                  
-                    color:$Old-rose;
-                }
-            }
-        }
+  position: relative;
+  main {
+    // position: absolute;
+    background-color: $Royal-purple;
+    .button-wrapper {
+      display: flex;
+      justify-content: space-evenly;
+      .button {
+        padding: 20px 30px;
+        margin: 10px;
+        z-index: 1000;
+        display: flex;
+        font-family: "Poppins";
+        border-radius: 15px;
+        background-color: $Blue-green;
+      }
     }
+    .leaflet-routing-container {
+      box-shadow: 2px;
+
+      .leaflet-routing-add-waypoint {
+        width: 10%;
+        height: 100%;
+        border-radius: 100px;
+      }
+      .leaflet-routing-reverse-waypoints {
+        width: 10%;
+        height: 100%;
+        border-radius: 100px;
+      }
+    }
+    .leaflet-routing-geocoder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      input {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        padding: 5px 13px;
+        border-radius: 15pt;
+        background-color: white;
+        font-size: 0.9rem;
+      }
+      .leaflet-routing-remove-waypoint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $Eerie-black;
+        transform: scale(1.5);
+        &::after {
+          color: $Old-rose;
+        }
+      }
+    }
+  }
 }
 .reverse-button {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
 }
 .reverse-button button {
-    background-color: #4caf50;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
-
 .title {
-    font-family: "Inter", sans-serif;
-    color: black;
-    font-weight: bold;
-  }
+  font-family: "Inter", sans-serif;
+  color: black;
+  font-weight: bold;
+}
 
-  .description {
-    margin-top: 5px;
-  }
+.description {
+  margin-top: 5px;
+}
 
-  .tags {
-    margin-top: 5px;
-  }
+.tags {
+  margin-top: 5px;
+}
 
-  .tag {
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: orange;
-    color: white;
-    display:inline-block;
-    margin-right: 5px;
-  }
+.tag {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: orange;
+  color: white;
+  display: inline-block;
+  margin-right: 5px;
+}
 
-  .tag:last-child {
-    margin-right: 0px;
+.tag:last-child {
+  margin-right: 0px;
+}
+.leaflet-pane {
+  input {
+    background-color: white;
   }
-  .leaflet-routing-geocoder{
-
-    input{
-      background-color: white;
-    }
-  }
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");

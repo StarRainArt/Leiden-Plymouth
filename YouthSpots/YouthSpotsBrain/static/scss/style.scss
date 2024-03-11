@@ -113,3 +113,49 @@ nav{
 input{
     background-color: $Federal-blue;
 }
+
+.temp{
+    height: 420px;
+    width: 420px;
+    background-color: #1E095A;
+    padding: 30px;
+    border-radius: 50px;
+    margin: 10px;
+    color:#FFFFFF;
+    font-family: 'poppins-bold', sans-serif !important;
+    justify-content: space-around;
+}
+
+
+body{
+    background-color: $Royal-purple;
+}
+
+nav{
+    padding: 1vh;
+    background-color: $Federal-blue;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+
+    a {
+        background-color: $Royal-purple;
+        border-radius: 20px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+        &:hover {
+            background-color: rgb(144, 90, 180);
+        }
+    }
+}
+
+input{
+    background-color: $Federal-blue;
+}

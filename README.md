@@ -15,3 +15,5 @@ pip install mysql
 pip install django
 pip install django-compressor
 pip install django-libsass
+
+#hi

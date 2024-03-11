@@ -1,0 +1,38 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+.temp {
+  height: 505px;
+  width: 220px;
+  background-color: #1E095A;
+  padding: 12px;
+  border-radius: 50px; }
+
+/* line 17, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background-color: #8147A8; }
+
+/* line 21, YouthSpotsBrain/static/scss/style.scss */
+nav {
+  padding: 1vh;
+  background-color: #1E095A;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto; }
+  /* line 31, YouthSpotsBrain/static/scss/style.scss */
+  nav a {
+    background-color: #8147A8;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    /* line 40, YouthSpotsBrain/static/scss/style.scss */
+    nav a:hover {
+      background-color: #905ab4; }
+
+/* line 46, YouthSpotsBrain/static/scss/style.scss */
+input {
+  background-color: #1E095A; }

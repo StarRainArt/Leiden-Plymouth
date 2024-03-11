@@ -1,0 +1,166 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+* {
+  font-family: 'Poppins';
+  font-size: 12px;
+  margin: 0;
+  padding: 0; }
+
+/* line 8, YouthSpotsBrain/static/scss/edit_profile.scss */
+body {
+  background-color: #6832AA;
+  color: #fff; }
+
+/* line 13, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px; }
+
+/* line 20, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account-text {
+  color: #fff; }
+
+/* line 23, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile_logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 30vh; }
+
+/* line 30, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox_text {
+  color: white; }
+
+/* line 35, YouthSpotsBrain/static/scss/edit_profile.scss */
+.left_side {
+  text-align: left; }
+
+/* line 39, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  color: #fff;
+  width: 300px; }
+
+/* line 48, YouthSpotsBrain/static/scss/edit_profile.scss */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 96%;
+  padding: 1vh;
+  background-color: #21065D;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  /* line 60, YouthSpotsBrain/static/scss/edit_profile.scss */
+  nav a {
+    background-color: #8C43AC;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+
+/* line 70, YouthSpotsBrain/static/scss/edit_profile.scss */
+img {
+  width: 50px; }
+
+/* line 73, YouthSpotsBrain/static/scss/edit_profile.scss */
+.del {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  width: 300px;
+  color: red;
+  width: 200px; }
+
+/* line 82, YouthSpotsBrain/static/scss/edit_profile.scss */
+.save {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  width: 300px;
+  color: #fff;
+  width: 200px; }
+
+/* Add this to your CSS file */
+/* line 94, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  position: relative;
+  margin-bottom: 20px; }
+
+/* line 99, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture {
+  width: 150px;
+  /* Adjust the size as needed */
+  height: 150px;
+  /* Adjust the size as needed */
+  border-radius: 50%;
+  object-fit: cover; }
+
+/* line 106, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: #21065D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; }
+
+/* line 119, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container button:hover {
+  background-color: #8C43AC; }
+
+/* Add to your existing CSS */
+/* line 124, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  position: relative; }
+
+/* line 128, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-image-wrapper {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  border: 3px solid black;
+  /* Add border */
+  box-sizing: border-box;
+  /* Ensure border doesn't increase element size */ }
+
+/* line 138, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 50%; }
+
+/* line 144, YouthSpotsBrain/static/scss/edit_profile.scss */
+.buttons-alter {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+/* line 149, YouthSpotsBrain/static/scss/edit_profile.scss */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #21065D;
+  padding: 20px;
+  border: 2px solid #333;
+  z-index: 1000; }
