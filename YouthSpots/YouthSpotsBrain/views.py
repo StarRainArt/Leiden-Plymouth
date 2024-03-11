@@ -63,6 +63,8 @@ def login(request):
 def signup(request):
     if request.method == "POST":
         errors = []
+        if request.POST.get("age") != "age":
+            errors.append("You have to be 18 years or older to use this service")
         if request.POST["username"] == "":
             errors.append("Username is required")
         if len(request.POST["username"]) > 16:
