@@ -23,6 +23,7 @@
     </div>
     <center>
       <form action="{% url 'create_meetup' %}" method="POST">
+        {% csrf_token %}
         <div class="create-event-container">
           <div class="event-details"> 
             <input class="eventname" type="text" id="eventname" name="name_meetup" placeholder="Event Name" required maxlength="40">

@@ -13,8 +13,8 @@ def meetup_data_create(request):
         time_start = request.POST.get('time_start')
         time_end = request.POST.get('time_end')
         description = request.POST.get('description')
-        type_meetup = request.POST.get('type_meetup')
-        visibility = request.POST.get('visibility')
+        #type_meetup = request.POST.get('type_meetup')
+        #visibility = request.POST.get('visibility')
 
         # Create a MeetupData instance
         meetup_data = MeetupData.objects.create(
@@ -22,8 +22,8 @@ def meetup_data_create(request):
             time_start=time_start,
             time_end=time_end,
             description=description,
-            type_meetup=type_meetup,
-            visibility=visibility
+           # type_meetup=type_meetup,
+            #visibility=visibility
         )
 
        
@@ -47,10 +47,6 @@ def edit_meetup(request):
 def edit_meetup_details(request, meetup_id):
     meetup = MeetupData.objects.get(id=meetup_id)
     if request.method == 'POST':
-        # Handle form submission to update the meetup details
-        # This part depends on how your form is structured
-        # For simplicity, let's assume the form is POSTed to this view
-        # and we directly update the meetup instance
         meetup.name_meetup = request.POST.get('name_meetup')
         meetup.time_start = request.POST.get('time_start')
         meetup.time_end = request.POST.get('time_end')

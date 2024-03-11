@@ -26,10 +26,10 @@ class MeetupData(models.Model):
     time_end = models.DateTimeField()
     description = models.CharField(max_length=255)
     type_meetup = models.CharField(max_length=10, choices=type_mt, default='CE')
-    latitude = models.BigIntegerField()
-    longitude = models.BigIntegerField()
-    meetup_location = models.BigIntegerField()
-    pins = models.BigIntegerField()
+    #latitude = models.BigIntegerField()
+    #longitude = models.BigIntegerField()
+    #meetup_location = models.BigIntegerField()
+    #pins = models.BigIntegerField()
     visibility = models.CharField(max_length=10, choices=visibility_type, default='-')
 
 class MeetupUserData(models.Model):
