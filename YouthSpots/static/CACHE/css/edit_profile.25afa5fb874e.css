@@ -1,0 +1,126 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile_logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 30vh; }
+
+/* line 8, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px; }
+  /* line 15, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .alter-account .alter-account-text {
+    color: #fff; }
+
+/* line 21, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox_text {
+  color: white; }
+
+/* line 26, YouthSpotsBrain/static/scss/edit_profile.scss */
+.left_side {
+  text-align: left; }
+
+/* line 30, YouthSpotsBrain/static/scss/edit_profile.scss */
+.edit_textbox {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #21065D;
+  color: #fff;
+  width: 300px; }
+
+/* line 42, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  position: relative;
+  margin-bottom: 20px; }
+
+/* line 47, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover; }
+
+/* line 56, YouthSpotsBrain/static/scss/edit_profile.scss */
+.profile-picture-container {
+  position: relative; }
+  /* line 59, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .profile-picture-container .profile-picture-container button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #21065D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; }
+  /* line 71, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .profile-picture-container .profile-image-wrapper {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 3px solid black;
+    box-sizing: border-box; }
+    /* line 80, YouthSpotsBrain/static/scss/edit_profile.scss */
+    .profile-picture-container .profile-image-wrapper .profile-image {
+      width: 100%;
+      height: auto;
+      border-radius: 50%; }
+
+/* line 88, YouthSpotsBrain/static/scss/edit_profile.scss */
+.buttons-alter {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  /* line 93, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .buttons-alter .save {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #21065D;
+    width: 300px;
+    color: #fff;
+    width: 200px; }
+    /* line 102, YouthSpotsBrain/static/scss/edit_profile.scss */
+    .buttons-alter .save .del {
+      border: 1px solid black;
+      padding: 10px;
+      border-radius: 25px;
+      background-color: #21065D;
+      width: 300px;
+      color: red;
+      width: 200px; }
+
+/* line 114, YouthSpotsBrain/static/scss/edit_profile.scss */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 25px;
+  transform: translate(-50%, -50%);
+  background-color: #21065D;
+  padding: 20px;
+  border: 2px solid black;
+  z-index: 1000; }
+  /* line 125, YouthSpotsBrain/static/scss/edit_profile.scss */
+  .popup .Nopopup {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+    background-color: #21065D;
+    color: #fff;
+    width: 50px; }
+
+/* line 135, YouthSpotsBrain/static/scss/edit_profile.scss */
+h2 {
+  color: red; }
