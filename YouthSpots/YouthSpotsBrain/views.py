@@ -25,11 +25,12 @@ def savePin(request):
         lat = data.get('lat')
         lng = data.get('lng')
 
-        # Save the marker to the database
-        pin = Pins(title="New Pin", description="New Description", latitude=lat, longitude=lng, tags="New")
-        pin.save()
-
-        return JsonResponse({'status': 'success'})
+        if Pins.objects.filter(latitude=lat, longitude=lng):
+            return JsonResponse({'status': 'Already exists'})
+        else:
+            pin = Pins(title="New Pin", description="New Description", latitude=lat, longitude=lng, tags="New")
+            pin.save()
+            return JsonResponse({'status': 'success'})
 
 def nearest_pin(request):
     latitude = request.GET.get('latitude')
