@@ -1,0 +1,18 @@
+/* line 1, YouthSpotsBrain/static/scss/edit_profile.scss */
+* {
+  margin: auto;
+  padding: auto; }
+
+/* line 7, YouthSpotsBrain/static/scss/edit_profile.scss */
+body {
+  background-color: #6832AA; }
+
+/* line 10, YouthSpotsBrain/static/scss/edit_profile.scss */
+.alter_account {
+  display: flex;
+  align-items: center; }
+
+/* line 15, YouthSpotsBrain/static/scss/edit_profile.scss */
+.pr.profile_logo {
+  display: flex;
+  align-items: center; }

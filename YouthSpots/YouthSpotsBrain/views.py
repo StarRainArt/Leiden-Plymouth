@@ -3,10 +3,12 @@ from django.shortcuts import render
 
 
 from geopy.distance import geodesic
+
 # Create your views here.
 def home(request):
     return render(request, "home.html")
-
+def profile(request):
+    return render(request, "edit_profile.html")
 def maps(request):
     stations = list(EVCharcinglocation.objects.values('latitude', 'longitude')[:100])
     # print(stations[:2])
@@ -29,5 +31,3 @@ def nearest_station(request):
         'coordinates': station_coords,
         'distance': min_distances
     })
-
-
