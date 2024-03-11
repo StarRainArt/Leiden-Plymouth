@@ -29,26 +29,17 @@
     <!-- <script src="../static/js/map.js"></script> -->
   </head>
   <body>
-    <header>
-    </header>
     <main>
       {% block content %} {% endblock %}
-    
     </main>
-    <div class="temp">
-      <img src="../static/img/svg/Home_page.svg">
-      Temp bs</div>
-
-
-
     <footer>
       <nav>
-        <a href=""><img src="../static/img/svg/Home_page.svg"></a>
-        <a href=""><img src="../static/img/svg/Event_history.svg"></a>
-        <a href=""><img src="../static/img/svg/Create_event.svg"></a>
-        <a href=""><img src="../static/img/svg/Upcoming_events.svg"></a>
-        <a href=""><img src="../static/img/svg/Profile_pic.svg"></a>
+          <a href=""><img src="{% static 'img/home_page.png' %}"></a>
+          <a href=""><img src="{% static 'img/Upcoming_events.png' %}"></a>
+          <a href=""><img src="{% static 'img/Create_event.png' %}"></a>
+          <a href=""><img src="{% static 'img/Event_history.png' %}"></a>
+          <a href=""><img src="{% static 'img/Profile_pic.png' %}"></a>
       </nav>
-    </footer>
+  </footer>
   </body>
 </html>

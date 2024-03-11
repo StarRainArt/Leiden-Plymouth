@@ -1,13 +1,10 @@
 {% extends "base.html" %} 
 {% block title %}Social Sphere - Profile{% endblock %}
 {% block content %}
-    {% load static %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {% load compress %}
-    {% compress css %}
+    {% load static %}{% load compress %}{% compress css %}
     <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
     {% endcompress %}
+    
     <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
     <div class="alter-account">
         <h1 class="alter-account-text">Edit Account</h1>
@@ -54,15 +51,6 @@
             </div>
             </div>
         </div>
-        <footer>
-            <nav>
-                <a href=""><img src="{% static 'img/home_page.png' %}"></a>
-                <a href=""><img src="{% static 'img/Upcoming_events.png' %}"></a>
-                <a href=""><img src="{% static 'img/Create_event.png' %}"></a>
-                <a href=""><img src="{% static 'img/Event_history.png' %}"></a>
-                <a href=""><img src="{% static 'img/Profile_pic.png' %}"></a>
-            </nav>
-        </footer>
     </div>
     <script>
         function showPopup() {
