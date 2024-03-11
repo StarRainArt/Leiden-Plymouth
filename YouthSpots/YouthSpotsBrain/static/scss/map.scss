@@ -60,5 +60,10 @@ body {
   .tag:last-child {
     margin-right: 0px;
   }
+  .leaflet-routing-geocoder{
 
+    input{
+      background-color: white;
+    }
+  }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');

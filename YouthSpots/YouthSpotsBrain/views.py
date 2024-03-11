@@ -20,6 +20,17 @@ def maps(request):
 def getPins(request):
     return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
 
+def savePin(request):
+        data = json.loads(request.body)
+        lat = data.get('lat')
+        lng = data.get('lng')
+
+        # Save the marker to the database
+        pin = Pins(title="New Pin", description="New Description", latitude=lat, longitude=lng, tags="New")
+        pin.save()
+
+        return JsonResponse({'status': 'success'})
+
 def nearest_pin(request):
     latitude = request.GET.get('latitude')
     longitude = request.GET.get('longitude')
