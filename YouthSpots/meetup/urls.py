@@ -5,5 +5,6 @@ urlpatterns = [
     path("meetup/", views.meetup, name="meetup"),
 ]
 
-def create_meetup():
+def create_meetup(request):
     views.meetup_data_create
+    
