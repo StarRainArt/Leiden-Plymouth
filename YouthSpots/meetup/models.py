@@ -1,5 +1,5 @@
 from django.db import models
-
+#type need to be changed or extended
 type_mt = {
     "CE": "Community Event",
     "SG": "Social Gathering",
@@ -25,7 +25,7 @@ class MeetupData(models.Model):
     time_start = models.DateTimeField()
     time_end = models.DateTimeField()
     description = models.CharField(max_length=255)
-    type_meetup = models.CharField(max_length=10, choices=type_mt, default='CE')
+    type_meetup = models.CharField(max_length=35, choices=type_mt, default='CE')
     #latitude = models.BigIntegerField()
     #longitude = models.BigIntegerField()
     #meetup_location = models.BigIntegerField()

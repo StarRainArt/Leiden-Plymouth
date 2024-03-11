@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from meetup.models import MeetupData, MeetupUserData
+import time
+from django.urls import reverse
+
+
 
 
 # Create your views here.
@@ -15,8 +19,11 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         #visibility = request.POST.get('visibility')
-
-        # Create a MeetupData instance
+        if time_start >= time_end:
+                  return HttpResponseBadRequest("Invalid time range: start time must be before end time ")
+                        
+                  
+              # Create a MeetupData instance
         meetup_data = MeetupData.objects.create(
             name_meetup=name_meetup,
             time_start=time_start,
@@ -28,8 +35,10 @@ def meetup_data_create(request):
 
        
 
-        # Render a template or return a success message
-        return HttpResponse("Meetup data saved successfully!")
+    
+    
+      # Assuming 'meetup' is the name of your meetup URL pattern
+        
 
     # Render a form for creating a meetup
     return render(request, 'meetup.html')
@@ -50,8 +59,8 @@ def edit_meetup_details(request, meetup_id):
         meetup.name_meetup = request.POST.get('name_meetup')
         meetup.time_start = request.POST.get('time_start')
         meetup.time_end = request.POST.get('time_end')
-        meetup.type_meetup = request.POST.get('type_meetup')
-        meetup.visibility = request.POST.get('visibility')
+        #meetup.type_meetup = request.POST.get('type_meetup')
+        #meetup.visibility = request.POST.get('visibility')
         meetup.description = request.POST.get('description')
         # Update other fields as needed
         meetup.save()
