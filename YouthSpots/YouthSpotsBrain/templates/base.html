@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} Youth Spots {% endblock %}</title>
     {% load static %} {% load compress %} {% compress css %}
-      <link
-        rel="stylesheet"
-        href="{%static 'scss/style.scss' %}"
-        type="text/x-scss"
-      />
+    <link
+      rel="stylesheet"
+      href="{%static 'scss/style.scss' %}"
+      type="text/x-scss"
+    />
+    <link
+      rel="stylesheet"
+      href="{%static 'scss/map.scss' %}"
+      type="text/x-scss"
+    />
     {% endcompress %}
     <script
       src="https://kit.fontawesome.com/9ce9532b81.js"
@@ -26,6 +31,24 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    {% block javascript %}{% endblock %}
     <!-- <script src="../static/js/map.js"></script> -->
   </head>
   <body>

@@ -1,0 +1,71 @@
+/* line 8, YouthSpotsBrain/static/scss/map.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+/* line 14, YouthSpotsBrain/static/scss/map.scss */
+body {
+  position: relative; }
+  /* line 16, YouthSpotsBrain/static/scss/map.scss */
+  body main {
+    background-color: #8147a8; }
+    /* line 19, YouthSpotsBrain/static/scss/map.scss */
+    body main .button-wrapper {
+      display: flex;
+      justify-content: space-evenly; }
+      /* line 22, YouthSpotsBrain/static/scss/map.scss */
+      body main .button-wrapper .button {
+        padding: 20px 30px;
+        margin: 10px;
+        z-index: 1000;
+        display: flex;
+        font-family: "Poppins";
+        border-radius: 15px;
+        background-color: #2596be; }
+    /* line 32, YouthSpotsBrain/static/scss/map.scss */
+    body main .leaflet-routing-container {
+      background-color: #b46f77; }
+    /* line 35, YouthSpotsBrain/static/scss/map.scss */
+    body main .leaflet-routing-geocoder {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      /* line 39, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-geocoder input {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        padding: 5px 13px;
+        border-radius: 15pt;
+        background-color: white; }
+      /* line 47, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-geocoder .leaflet-routing-remove-waypoint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(1.5); }
+        /* line 51, YouthSpotsBrain/static/scss/map.scss */
+        body main .leaflet-routing-geocoder .leaflet-routing-remove-waypoint :hover {
+          background-color: #2596be; }
+        /* line 54, YouthSpotsBrain/static/scss/map.scss */
+        body main .leaflet-routing-geocoder .leaflet-routing-remove-waypoint::after {
+          border-radius: 1000px; }
+
+/* line 61, YouthSpotsBrain/static/scss/map.scss */
+.reverse-button {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px; }
+
+/* line 66, YouthSpotsBrain/static/scss/map.scss */
+.reverse-button button {
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer; }

@@ -12,12 +12,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='EVCharcinglocation',
+            name='Pins',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('station_name', models.CharField(max_length=250)),
-                ('latitude', models.FloatField()),
-                ('longitude', models.FloatField()),
             ],
         ),
     ]
