@@ -1,0 +1,38 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background-color: #6832AA; }
+
+/* line 11, YouthSpotsBrain/static/scss/style.scss */
+.alter-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+  /* line 17, YouthSpotsBrain/static/scss/style.scss */
+  .alter-account .alter-account-text {
+    margin-top: 20px; }
+  /* line 21, YouthSpotsBrain/static/scss/style.scss */
+  .alter-account .form {
+    margin-top: 20px; }
+    /* line 24, YouthSpotsBrain/static/scss/style.scss */
+    .alter-account .form .container_aa {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 600px; }
+      /* line 30, YouthSpotsBrain/static/scss/style.scss */
+      .alter-account .form .container_aa .left_side, .alter-account .form .container_aa .right_side {
+        flex: 0 0 calc(50% - 10px); }
+        /* line 33, YouthSpotsBrain/static/scss/style.scss */
+        .alter-account .form .container_aa .left_side img, .alter-account .form .container_aa .right_side img {
+          max-width: 100%;
+          height: auto; }
+        /* line 38, YouthSpotsBrain/static/scss/style.scss */
+        .alter-account .form .container_aa .left_side button, .alter-account .form .container_aa .right_side button {
+          margin-top: 10px; }
+    /* line 44, YouthSpotsBrain/static/scss/style.scss */
+    .alter-account .form .buttons-alter {
+      margin-top: 20px; }
+      /* line 47, YouthSpotsBrain/static/scss/style.scss */
+      .alter-account .form .buttons-alter button {
+        margin: 0 5px; }
