@@ -1,0 +1,155 @@
+/* -- Social Sphere | Project 04.03.2024 - 15.03.2024 -- */
+
+// Google Font Import - Poppins
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: #6832AA;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =============================== Create Event Page =============================== */
+h1 {
+  padding: 10px;
+  color: #ffffff;
+  text-shadow: 2px 3px 4px #000;
+}
+
+.create-event-label {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  text-shadow: 2px 3px 4px #000;
+}
+
+.eventname,
+.location,
+.dateandtime,
+.description {
+  font-size: 22px;
+  color: #ffffff;
+  background-color: #21065D;
+  box-shadow: 1px 2px 3px #000;
+  border-radius: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  &::placeholder {
+    color: #ffffff;
+  }
+}
+
+.eventname {
+  width: 300px;
+  border: #ac3333;
+}
+
+.location {
+  width: 300px;
+  border: #f00505;
+}
+
+.dateandtime {
+  height: 45px;
+  width: 300px;
+  font-size: large;
+  padding: 15px;
+  border: 0;
+  box-shadow: 1px 1px 4px #000;
+}
+
+.description {
+  height: 200px;
+  font-size: 15px;
+  border: #ac3333;
+}
+
+/* ================ Upload Image ================ */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  min-height: 400px;
+  max-width: 900px;
+  padding: 10px;
+  margin: 80px;
+  border-radius: 20px;
+  background-color: #21065D;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.card img {
+  padding: 2px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: #000;
+  border-radius: 20px;
+  box-shadow: 2px 3px 4px #000;
+}
+
+.uploadimg {
+  font-size: 15px;
+  display: block;
+  width: 150px;
+  background: #21065D;
+  box-shadow: 2px 3px 4px #000;
+  color: #fff;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: #8c43ac;
+    box-shadow: 2px 3px 4px inset #000;
+    transition: ease-in-out 0.2s;
+  }
+}
+
+.inputimg {
+  display: none;
+}
+
+.line {
+  width: 100%;
+  color: #000;
+  height: 10px;
+}
+
+.save-button {
+  bottom: 10px;
+  right: 10px;
+  font-size: 15px;
+  display: block;
+  width: 150px;
+  background: #21065D;
+  box-shadow: 2px 3px 4px #000;
+  color: #fff;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 15px;
+  cursor: pointer;
+  border: 0;
+  &:hover {
+    background-color: #8c43ac;
+    box-shadow: 2px 3px 4px inset #000;
+    transition: ease-in-out 0.2s;
+  }
+}

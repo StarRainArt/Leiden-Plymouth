@@ -1,0 +1,63 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background: linear-gradient(to right, #1E095A 0%);
+  background-color: #8147A8; }
+
+/* line 14, YouthSpotsBrain/static/scss/style.scss */
+#login_button {
+  font-family: "Poppins";
+  width: 2;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #8147A8; }
+
+/* line 24, YouthSpotsBrain/static/scss/style.scss */
+#sign_in_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  border-radius: 15pt;
+  background-color: #21065D;
+  position: absolute;
+  left: 180px;
+  top: 100px; }
+
+/* line 43, YouthSpotsBrain/static/scss/style.scss */
+#login_button_2 {
+  font-family: "Poppins";
+  width: 150px;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065D;
+  align-self: center; }
+
+/* line 54, YouthSpotsBrain/static/scss/style.scss */
+.login_form {
+  display: flex;
+  justify-content: space-around; }
+
+/* line 59, YouthSpotsBrain/static/scss/style.scss */
+#password {
+  font-family: "Poppins";
+  width: 150px;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065D; }
+
+/* line 72, YouthSpotsBrain/static/scss/style.scss */
+#username {
+  font-family: "Poppins";
+  width: 20vw;
+  height: 4vh;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065D; }

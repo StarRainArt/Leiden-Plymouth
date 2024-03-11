@@ -1,0 +1,154 @@
+/* -- Social Sphere | Project 04.03.2024 - 15.03.2024 -- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+/* line 6, meetup/static/scss/create-event-styles.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif; }
+
+/* line 13, meetup/static/scss/create-event-styles.scss */
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: #6832AA;
+  justify-content: center;
+  align-items: center; }
+
+/* =============================== Create Event Page =============================== */
+/* line 22, meetup/static/scss/create-event-styles.scss */
+h1 {
+  padding: 10px;
+  color: #ffffff;
+  text-shadow: 2px 3px 4px #000; }
+
+/* line 28, meetup/static/scss/create-event-styles.scss */
+.create-event-label {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  text-shadow: 2px 3px 4px #000; }
+
+/* line 35, meetup/static/scss/create-event-styles.scss */
+.eventname,
+.location,
+.dateandtime,
+.description {
+  font-size: 22px;
+  color: #ffffff;
+  background-color: #21065D;
+  box-shadow: 1px 2px 3px #000;
+  border-radius: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px; }
+  /* line 47, meetup/static/scss/create-event-styles.scss */
+  .eventname::placeholder,
+  .location::placeholder,
+  .dateandtime::placeholder,
+  .description::placeholder {
+    color: #ffffff; }
+
+/* line 52, meetup/static/scss/create-event-styles.scss */
+.eventname {
+  width: 300px;
+  border: #ac3333; }
+
+/* line 57, meetup/static/scss/create-event-styles.scss */
+.location {
+  width: 300px;
+  border: #f00505; }
+
+/* line 62, meetup/static/scss/create-event-styles.scss */
+.dateandtime {
+  height: 45px;
+  width: 300px;
+  font-size: large;
+  padding: 15px;
+  border: 0;
+  box-shadow: 1px 1px 4px #000; }
+
+/* line 71, meetup/static/scss/create-event-styles.scss */
+.description {
+  height: 200px;
+  font-size: 15px;
+  border: #ac3333; }
+
+/* ================ Upload Image ================ */
+/* line 79, meetup/static/scss/create-event-styles.scss */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+/* line 85, meetup/static/scss/create-event-styles.scss */
+.card {
+  min-height: 400px;
+  max-width: 900px;
+  padding: 10px;
+  margin: 80px;
+  border-radius: 20px;
+  background-color: #21065D;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px; }
+
+/* line 97, meetup/static/scss/create-event-styles.scss */
+.card img {
+  padding: 2px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: #000;
+  border-radius: 20px;
+  box-shadow: 2px 3px 4px #000; }
+
+/* line 108, meetup/static/scss/create-event-styles.scss */
+.uploadimg {
+  font-size: 15px;
+  display: block;
+  width: 150px;
+  background: #21065D;
+  box-shadow: 2px 3px 4px #000;
+  color: #fff;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 15px;
+  cursor: pointer; }
+  /* line 119, meetup/static/scss/create-event-styles.scss */
+  .uploadimg:hover {
+    background-color: #8c43ac;
+    box-shadow: 2px 3px 4px inset #000;
+    transition: ease-in-out 0.2s; }
+
+/* line 126, meetup/static/scss/create-event-styles.scss */
+.inputimg {
+  display: none; }
+
+/* line 130, meetup/static/scss/create-event-styles.scss */
+.line {
+  width: 100%;
+  color: #000;
+  height: 10px; }
+
+/* line 136, meetup/static/scss/create-event-styles.scss */
+.save-button {
+  bottom: 10px;
+  right: 10px;
+  font-size: 15px;
+  display: block;
+  width: 150px;
+  background: #21065D;
+  box-shadow: 2px 3px 4px #000;
+  color: #fff;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 15px;
+  cursor: pointer;
+  border: 0; }
+  /* line 150, meetup/static/scss/create-event-styles.scss */
+  .save-button:hover {
+    background-color: #8c43ac;
+    box-shadow: 2px 3px 4px inset #000;
+    transition: ease-in-out 0.2s; }

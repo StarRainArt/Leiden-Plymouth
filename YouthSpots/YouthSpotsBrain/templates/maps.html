@@ -1,93 +1,322 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block title%}Social Sphere - Home{% endblock %}
 
 {% block content %}
-<div id="map" style="height: 56vh; width: 56vw; margin: auto auto"></div>
-<button id="addMarker">Add Marker</button>
-<button id="toggleUnit">Switch to Miles</button>
-<button id="saveMarker">Save the marker</button>
+<div id="map" style="height: 70vh; width: 70vw; margin: auto auto"></div>
+<div class="button-wrapper">
+  <button id="addMarker" class="button">Add Marker</button>
+  <button id="saveMarker" class="button">Save the marker</button>
+</div>
 
-{{ stations|json_script:"stations_json" }}
+{{ pins|json_script:"pins_json" }}
 
 <script>
-  let themarker = null;
+  async function run(latitude, longitude) {
+    let userLocation = L.latLng(latitude, longitude);
 
-  var userLocation = L.latLng(50.376289, -4.143841);
-  var map = L.map("map").setView(userLocation, 13);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxzoom: 19,
-  }).addTo(map);
-  let stations = JSON.parse(
-    document.getElementById("stations_json").textContent
-  );
-  var lastPolyline = null;
-  var unit = "km"; // default unit is kilometers
-  console.log(stations);
-  stations.forEach((station) => {
-    console.log(station);
-    console.log(station.station_name);
-    let stationLocation = L.latLng(station.latitude, station.longitude);
-    let distance = userLocation.distanceTo(stationLocation) / 1000; // distance in km
-    if (unit === "miles") {
-      distance *= 0.621371; // convert km to miles
-    }
-    themarker = L.marker([station.latitude, station.longitude])
-      .addTo(map)
-      .bindPopup(
-        station.station_name +
-          `<br/>The distance to this station is ${distance.toFixed(2)} ${unit}.`
-      )
-      .on("click", function () {
-        if (lastPolyline) {
-          map.removeLayer(lastPolyline);
+    // Create Map
+    let map = L.map("map", { attributionControl: false });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxzoom: 19,
+    }).addTo(map);
+    map.setView(userLocation, 13);
+
+    // Create routing control
+    let control = L.Routing.control({
+      waypoints: [userLocation],
+      routeWhileDragging: false,
+      fitSelectedRoutes: false,
+      reverseWaypoints: true,
+      geocoder: L.Control.Geocoder.nominatim(),
+      waypointNameFallback: function (latLng) {
+        function zeroPad(n) {
+          n = Math.round(n);
+          return 10 ? "0" + n : n;
         }
-        lastPolyline = L.polyline([userLocation, stationLocation], {
-          color: "red",
-        }).addTo(map);
+        function sexagesimal(p, pos, neg) {
+          let n = Math.abs(p),
+            degs = Math.floor(n),
+            mins = (n - degs) * 60,
+            secs = (mins - Math.floor(mins)) * 60,
+            frac = Math.round((secs - Math.floor(secs)) * 100);
+          return (
+            (n >= 0 ? pos : neg) +
+            degs +
+            "°" +
+            zeroPad(mins) +
+            "'" +
+            zeroPad(secs) +
+            "." +
+            zeroPad(frac) +
+            '"'
+          );
+        }
+
+        return (
+          sexagesimal(latLng.lat, "N", "S") +
+          " " +
+          sexagesimal(latLng.lng, "E", "W")
+        );
+      },
+    }).addTo(map);
+
+    // Pins
+    let pins = {};
+
+    async function updatePins() {
+      let fetchedPins = await (await fetch("/getPins")).json();
+
+      fetchedPins.forEach((pin) => {
+        if (pins[pin.id]) {
+          /*
+            UPDATE
+          */
+          let marker = pins[pin.id].marker;
+          pins[pin.id].info = pin;
+
+          let pinString = `<div class="title">${pin.title}</div>`;
+          pinString += `<div class="description">${pin.description}</div>`;
+          pinString += `<div class="tags">`;
+          let tags = pin.tags.split(", ");
+          tags.forEach((tag) => {
+            pinString += `<div class="tag">${tag}</div>`;
+          });
+          pinString += `</div>`;
+          pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
+          pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+
+          marker.getPopup().setContent(pinString);
+          marker.getPopup().update();
+        } else {
+          /*
+            CREATE
+          */
+          pins[pin.id] = {
+            marker: L.marker([pin.latitude, pin.longitude]),
+            info: pin,
+          };
+          let marker = pins[pin.id].marker;
+
+          let popupString = `<div class="title">${pin.title}</div>`;
+          popupString += `<div class="description">${pin.description}</div>`;
+          popupString += `<div class="tags">`;
+          let tags = pin.tags.split(", ");
+          tags.forEach((tag) => {
+            popupString += `<div class="tag">${tag}</div>`;
+          });
+          popupString += `</div>`;
+          popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
+          popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+
+          marker.bindPopup(popupString);
+          marker.addTo(map);
+        }
       });
-  });
 
-  var addMarker = false;
-
-  document.getElementById("addMarker").addEventListener("click", function () {
-    addMarker = true;
-  });
-
-  document.getElementById("toggleUnit").addEventListener("click", function () {
-    unit = unit === "km" ? "miles" : "km";
-    this.textContent =
-      unit === "km" ? "Switch to Miles" : "Switch to Kilometers";
-    themarker.getPopup().setContent("test");
-    themarker.getPopup().update();
-    console.log("test", themarker._popup);
-  });
-
-  map.on("click", function (e) {
-    if (addMarker) {
-      if (lastPolyline) {
-        map.removeLayer(lastPolyline);
-      }
-      let clickedLocation = e.latlng;
-      let distance = userLocation.distanceTo(clickedLocation) / 1000; // distance in km
-      if (unit === "miles") {
-        distance *= 0.621371; // convert km to miles
-      }
-      L.marker(clickedLocation)
-        .addTo(map)
-        .bindPopup(
-          `The distance to this point is ${distance.toFixed(2)} ${unit}.`
-        )
-        .on("click", function () {
-          if (lastPolyline) {
-            map.removeLayer(lastPolyline);
-          }
-          lastPolyline = L.polyline([userLocation, clickedLocation], {
-            color: "red",
-          }).addTo(map);
-        });
-      addMarker = false;
+      console.log("Updated Pins", pins);
     }
+
+    // Function to get the value of a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+    // Function to handle the form submission for editing a pin
+    function handleEditFormSubmission(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Get form data
+      let formData = new FormData(this);
+
+      // Add a parameter to indicate that it's an edit operation
+      formData.append("edit", true);
+
+      // Send form data to Django backend
+      fetch("/savePin/", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"), // Get CSRF token from cookie
+        },
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data); // Handle response from server as needed
+          // Close the popup
+          map.closePopup();
+          // Update pins
+          updatePins();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+
+    // Event listener for edit button
+    map.on("popupopen", function (e) {
+      let deleteButtons = e.popup._contentNode.querySelectorAll(".deletePin");
+      let editButtons = e.popup._contentNode.querySelectorAll(".editPin");
+      editButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          // Get pin ID from the data attribute
+          let pinId = this.dataset.id;
+          let pin = pins[pinId].info;
+
+          // Create the form
+          let container = L.DomUtil.create("div");
+          let popupContent = `
+              <form id="popupForm">
+                <label for="title">Title:</label><br />
+                <input type="text" id="title" name="title" value="${pin.title}" /><br />
+                <label for="description">Description:</label><br />
+                <textarea id="description" name="description">${pin.description}</textarea><br />
+                <label for="tags">Tags:</label><br />
+                <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
+                <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
+                <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
+                <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
+                <input type="submit" value="Save" />
+              </form>
+            `;
+          container.innerHTML = popupContent;
+          e.popup.setContent(container);
+
+          // Add event listener for form submission
+          let popupForm = container.querySelector("#popupForm");
+          popupForm.addEventListener("submit", handleEditFormSubmission);
+        });
+      });
+      deleteButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          // Get pin ID from the data attribute
+          let pinId = this.dataset.id;
+
+          // Send delete request to Django backend
+          fetch(`/savePin/${pinId}/`, {
+            method: "DELETE",
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken"), // Get CSRF token from cookie
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Handle response from server as needed
+              // Update pins
+              updatePins();
+              // Force refresh
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+      });
+    });
+
+    // AddMarker
+    let addMarker = false;
+    let marker = false;
+
+    // Event listener for adding marker
+    document.getElementById("addMarker").addEventListener("click", function () {
+      addMarker = true;
+    });
+
+    map.on("click", function (e) {
+      if (addMarker) {
+        // Remove the previous marker if it exists
+        if (marker) {
+          map.removeLayer(marker);
+        }
+
+        // Add a new marker
+        marker = L.marker(e.latlng).addTo(map);
+
+        // Add a new waypoint to the routing control
+        control.setWaypoints([
+          control.getWaypoints()[0], // keep the user's location as the first waypoint
+          e.latlng, // add the clicked location as the second waypoint
+        ]);
+
+        addMarker = false;
+      }
+    });
+
+    // Function to handle the form submission for saving a marker
+    document
+      .getElementById("saveMarker")
+      .addEventListener("click", async function () {
+        if (marker) {
+          let markerData = {
+            lat: marker.getLatLng().lat,
+            lng: marker.getLatLng().lng,
+            title: "No Title",
+            description: "No Description",
+            tags: "",
+          };
+          let csrftoken = Cookies.get("csrftoken");
+          let formData = new FormData();
+          formData.append("lat", markerData.lat);
+          formData.append("lng", markerData.lng);
+          formData.append("title", markerData.title);
+          formData.append("description", markerData.description);
+          formData.append("tags", markerData.tags);
+          fetch("/savePin/", {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": csrftoken,
+            },
+            body: formData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Handle response from server as needed
+              // Close the popup
+              map.closePopup();
+              // Update pins
+              updatePins();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
+      });
+
+    updatePins();
+    // setInterval(async () => {
+    //   updatePins();
+    // }, 15000);
+  }
+  let greenIcon = L.icon({
+    iconUrl: "leaf-green.png",
+    shadowUrl: "leaf-shadow.png",
+
+    iconSize: [38, 95],
+    shadowSize: [50, 64],
+    iconAnchor: [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor: [-3, -76],
   });
+
+  // Start
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      run(position.coords.latitude, position.coords.longitude);
+    });
+  } else {
+    run(50.376289, -4.143841);
+  }
 </script>
 {% endblock %}
