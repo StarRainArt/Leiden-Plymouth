@@ -52,26 +52,17 @@
     <!-- <script src="../static/js/map.js"></script> -->
   </head>
   <body>
-    <header>
-    </header>
     <main>
       {% block content %} {% endblock %}
-    
     </main>
-    <div class="temp">
-      <img src="../static/img/svg/Home_page.svg">
-      Temp bs</div>
-
-
-
     <footer>
       <nav>
-        <a href=""><img src="../static/img/svg/Home_page.svg"></a>
-        <a href=""><img src="../static/img/svg/Event_history.svg"></a>
-        <a href=""><img src="../static/img/svg/Create_event.svg"></a>
-        <a href=""><img src="../static/img/svg/Upcoming_events.svg"></a>
-        <a href=""><img src="../static/img/svg/Profile_pic.svg"></a>
+          <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}"></a>
+          <a href=""><img src="{% static 'img/Pins.png' %}"></a>
+          <a href=""><img src="{% static 'img/MeetUp.png' %}"></a>
+          <a href="{% url "profile-edit" %}"><img src="{% static 'img/Profile_img.png' %}"></a>
+          <a href=""><img src="{% static 'img/Settings.png' %}"></a>
       </nav>
-    </footer>
+  </footer>
   </body>
 </html>

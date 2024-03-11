@@ -5,18 +5,67 @@ $Old-rose: #B46F77;
 $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
-.temp{
-    height: 725px;
+* {
+    font-family: 'Poppins';
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
 }
 
-
-body{
+body {
     background-color: $Royal-purple;
-    background: linear-gradient(to right, #1E095A 0%);
-    background-color: $Royal-purple;
-
+    color: $Pure-white;
 }
 
+footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    nav {
+        padding: 1vh 1vw;
+        background-color: $Federal-blue;
+        border-radius: 20px;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    
+        a {
+            background-color: $Royal-purple;
+            border-radius: 20px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            &:hover {
+                background-color: rgb(144, 90, 180);
+            }
+
+            img {
+                width: 45px ;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 470px) {
+    nav {
+        width: 97%;
+    }
+}
+
+@media screen and (min-width: 470px) {
+    nav {
+        width: 470px;
+    }
+}
+
+//login
 #login_button {
     font-family: "Poppins";
     width: 2;
@@ -38,14 +87,8 @@ body{
     position: absolute;
     left: 180px;
     top: 100px;
-
-
-
-
-
-
-
 }
+
 #login_button_2{
     font-family: "Poppins";
     width: 150px;
@@ -55,15 +98,14 @@ body{
     border-radius: 15pt;
     background-color: #21065D;
     align-self: center;
-
 }
+
 .login_form{
     display: flex;
     justify-content: space-around;
 }
 
 #password{
-
     font-family: "Poppins";
     width: 150px;
     height:30px;
@@ -71,12 +113,9 @@ body{
     padding: 5px 13px;
     border-radius: 15pt;
     background-color: #21065D;
-
-
 }
 
 #username{
-
     font-family: "Poppins";
     width: 20vw;
     height:4vh;
@@ -84,78 +123,6 @@ body{
     padding: 5px 13px;
     border-radius: 15pt;
     background-color: #21065D;
-
-nav{
-    padding: 1vh;
-    background-color: $Federal-blue;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-left: auto;
-    margin-right: auto;
-
-    a {
-        background-color: $Royal-purple;
-        border-radius: 20px;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-        &:hover {
-            background-color: rgb(144, 90, 180);
-        }
-    }
-}
-}
-input{
-    background-color: $Federal-blue;
-}
-
-.temp{
-    height: 420px;
-    width: 420px;
-    background-color: #1E095A;
-    padding: 30px;
-    border-radius: 50px;
-    margin: 10px;
-    color:#FFFFFF;
-    font-family: 'poppins-bold', sans-serif !important;
-    justify-content: space-around;
 }
 
 
-body{
-    background-color: $Royal-purple;
-}
-
-nav{
-    padding: 1vh;
-    background-color: $Federal-blue;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-left: auto;
-    margin-right: auto;
-
-    a {
-        background-color: $Royal-purple;
-        border-radius: 20px;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-        &:hover {
-            background-color: rgb(144, 90, 180);
-        }
-    }
-}
-
-input{
-    background-color: $Federal-blue;
-}
