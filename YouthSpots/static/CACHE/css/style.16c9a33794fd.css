@@ -1,0 +1,36 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+* {
+  font-family: 'Poppins';
+  font-size: 12px;
+  margin: 0;
+  padding: 0; }
+
+/* line 15, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background-color: #8147A8;
+  color: #FFFFFF; }
+
+/* line 20, YouthSpotsBrain/static/scss/style.scss */
+nav {
+  padding: 1vh;
+  background-color: #1E095A;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+  /* line 28, YouthSpotsBrain/static/scss/style.scss */
+  nav a {
+    background-color: #8147A8;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    /* line 37, YouthSpotsBrain/static/scss/style.scss */
+    nav a:hover {
+      background-color: #905ab4; }
+
+/* line 43, YouthSpotsBrain/static/scss/style.scss */
+input {
+  background-color: #1E095A; }
