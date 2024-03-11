@@ -20,6 +20,17 @@ def maps(request):
 def getPins(request):
     return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
 
+def savePin(request):
+        data = json.loads(request.body)
+        lat = data.get('lat')
+        lng = data.get('lng')
+
+        if Pins.objects.filter(latitude=lat, longitude=lng):
+            return JsonResponse({'status': 'Already exists'})
+        else:
+            pin = Pins(title="New Pin", description="New Description", latitude=lat, longitude=lng, tags="New")
+            pin.save()
+            return JsonResponse({'status': 'success'})
 
 def save_marker(request):
     if request.method == 'POST':
