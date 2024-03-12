@@ -10,6 +10,10 @@ from django.urls import reverse
 # Create your views here.
 def meetup(request):
     return render(request, "meetup.html")
+def my_meetup(request):
+    return render(request, "meetup_created.html")
+def meetup_edit(request):
+    return render(request, "meetup_edit.html")
 
 def meetup_data_create(request):
     if request.method == 'POST':
@@ -71,7 +75,7 @@ def edit_meetup_details(request, meetup_id):
 #don't forget to add a something to remind people
 
 
-def delete_meetup(meetup_id):
+def delete_meetup(meetup_id, request):
     try:
         # Retrieve the meetup object from the database based on the meetup_id
         meetup = MeetupData.objects.get(id=meetup_id)
@@ -80,7 +84,7 @@ def delete_meetup(meetup_id):
         meetup.delete()
 
         # Optionally, you can return a success message or perform other actions
-        return "Meetup deleted successfully."
+        return render(request, 'meetup.html')
     
     except MeetupData.DoesNotExist:
         return "Meetup with specified ID does not exist."
