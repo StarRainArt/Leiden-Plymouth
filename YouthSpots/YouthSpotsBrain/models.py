@@ -37,5 +37,7 @@ class Meetups(models.Model):
         return self.title
     
 class UserAuth(User):
+    def __str___(self):
+        return self.username
     pass
 
