@@ -24,6 +24,7 @@
       </h1>
     </div>
     <center>
+      
       <form action="{% url 'create_meetup' %}" method="POST">
         {% csrf_token %}
         <div class="create-event-container">
@@ -39,11 +40,6 @@
                      <option value="private">private</option>
                      <option value="protected">protected</option>
                      <option value="Public">Public</option>
-                   
-                    
-                
-
-                
             </select> 
         </div><br>
           <div> <h3>Start time</h3>
@@ -55,13 +51,17 @@
           </div><br>
           <div class="event-details">
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
-          </div><br>
+          </div><br>                
           <div>
             <input type="button" value="Save" class="save-button" id="button" onclick="window.location.href='/'"><br>
           </div>
           </div>
         </div>
       </form>
+      <form action="{% url 'create_meetup' %}" method="Get">
+        <input type="hidden" id="lat" name="lat" value="${{lat}}" />
+        <input type="hidden" id="lng" name="lng" value="${{lng}}" />
+        </form>
 
       <div class="hero">
         <div class="card">

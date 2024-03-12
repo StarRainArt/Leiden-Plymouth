@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 #from meetup.models import MeetupData
 from YouthSpotsBrain.models import Profile, Meetups, Pins
-import time
+import time, datetime
 from django.urls import reverse
 
 
@@ -16,9 +16,10 @@ def public_meetups(request):
     return render(request, 'meetup_public.html', {'meetups': meetups})
 def my_meetups(request):
     # Filter meetups based on the owner_id field
-    #meetups = Meetups.objects.filter(owner_id=request.user.profile)
+    #meetups = Meetups.objects.filter(owner_id=request.user.profile) #filter it to owner
     meetups =Meetups.objects.all()
     return render(request, 'My_meetup.html', {'meetups': meetups})
+    
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
@@ -30,14 +31,20 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
-        longitude = Pins.longitude
-        latitude =  Pins.latitude
+        if request.method == 'GET':
+           latitude = request.GET.get('lat')
+           longitude = request.GET.get('lng')
+           #title = request.GET.get('title')
+           print( longitude)
+           print(latitude)
+
+        
         try:
             profile = Profile.objects.get(user=request.user)
         except Profile.DoesNotExist:
             return redirect('create_profile')
-        if time_start >= time_end:
-                  return HttpResponseBadRequest(render(request, 'meetup.html'))
+        if time_start >= time_end or time_start < time.localtime:
+            return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
                   
               # Create a MeetupData instance
