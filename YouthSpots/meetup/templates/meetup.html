@@ -32,26 +32,31 @@
           </div><br>
           <div class="event-details"><!-- probaly should be replaced with map thing-->
             <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
-          </div><!--<br>
+          </div><br>
            <div class="event-details">
-            <label for="type_meetup">Type of Meetup:</label>
-            <select id="type_meetup" name="type_meetup" multiple>
-                {% for code, label in type_mt %}
-                    <option value="{{ code }}">{{ label }}</option>
-                {% endfor %}
+            <label for="visibility">Meetup visibility:</label>
+            <select id="visibility" name="visibility" required default:"-">
+                     <option value="private">private</option>
+                     <option value="protected">protected</option>
+                     <option value="Public">Public</option>
+                   
+                    
                 
-            </select> -->
+
+                
+            </select> 
         </div><br>
           <div> <h3>Start time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_start" required>
+            <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start" required>
           </div><br>
           
           <div><h3>Closing time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_end" required>
+            <input class="dateandtime" type="datetime-local" id="dateandtime2" name="time_end" required>
           </div><br>
           <div class="event-details">
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
           </div><br>
+<<<<<<< HEAD
         <!-- we don't have a userstory of it so it not a priority
       <div class="hero">
             <div class="card">
@@ -63,6 +68,8 @@
               <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
             </div>
           </div>-->
+=======
+>>>>>>> f5edc2840e45a8661a94520a23783799c3c64268
           <div>
             <input type="button" value="Save" class="save-button" id="button" onclick="window.location.href='/'"><br>
           </div>
@@ -119,7 +126,8 @@
         var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
 
         // Set the minimum value for the input field
-        document.getElementById('dateandtime').min = currentDateTime;
+        document.getElementsById('dateandtime1').min = currentDateTime;
+        document.getElementsById('dateandtime2').min = currentDateTime;
 
         // Image Upload
         let inputFile = document.getElementById("input-file");

@@ -30,7 +30,7 @@ class MeetupData(models.Model):
     #longitude = models.BigIntegerField()
     #meetup_location = models.BigIntegerField()
     #pins = models.BigIntegerField()
-    visibility = models.CharField(max_length=10, choices=visibility_type, default='-')
+    visibility = models.CharField(max_length=10, choices=visibility_type, default='Private')
 
 class MeetupUserData(models.Model):
     id = models.BigAutoField(primary_key=True)

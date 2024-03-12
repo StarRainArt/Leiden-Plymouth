@@ -16,26 +16,21 @@
   {% comment %} ================= Page Content =================  {% endcomment %}
 <body>
   <main>
-    <div class="title">
-      <h1>
-        My events
-      </h1>
-    </div>
-    <center>
-        <!--<h1>Meetups List</h1>
+  
+    <center><br>
+        <h1> My Meetups</h1>
         <ul>
             {% for meetup in meetups %}
                 <li>
                     <strong>{{ meetup.name_meetup }}</strong><br>
                     <span>Start Time: {{ meetup.time_start }}</span><br>
                     <span>End Time: {{ meetup.time_end }}</span><br>
-                    <span>Type: {{ meetup.get_type_meetup_display }}</span><br>
                     
                 </li>
             {% empty %}
                 <li>No meetups available.</li>
             {% endfor %}
-        </ul> -->
+        </ul> 
 
    
     </center>
