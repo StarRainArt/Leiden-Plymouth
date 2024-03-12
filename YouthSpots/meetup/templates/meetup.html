@@ -4,139 +4,175 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    
+
     {% load static %} {% load compress %} {% compress css %}
-    <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
-    type="text/x-scss"/>
-    <link rel="stylesheet" href="{%static 'scss/style.scss' %}"
-    type="text/x-scss"/>
-    
-    
-  
+    <link
+      rel="stylesheet"
+      href="{%static 'scss/create-event-styles.scss' %}"
+      type="text/x-scss"
+    />
+    <link
+      rel="stylesheet"
+      href="{%static 'scss/style.scss' %}"
+      type="text/x-scss"
+    />
+
     {% endcompress %}
   </head>
-  {% comment %} ================= Page Content =================  {% endcomment %}
-<body>
-  <main>
-    <div class="title">
-      <h1>
-        Create Event
-      </h1>
-    </div>
-    <section class="center">
-      <form action="{% url 'create_meetup' %}" method="POST">
-        {% csrf_token %}
-        <div class="create-event-container">
-          <div class="event-details"> 
-            <input class="eventname" type="text" id="eventname" name="name_meetup" placeholder="Event Name" required maxlength="40">
-          </div><br>
-          <div class="event-details"><!-- probaly should be replaced with map thing-->
-            <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
-          </div><br>
-           <div class="event-details">
-            <label for="visibility">Meetup visibility:</label>
-            <select id="visibility" name="visibility" required default:"-">
-                     <option value="private">private</option>
-                     <option value="protected">protected</option>
-                     <option value="Public">Public</option>
-                   
-                    
-                
-
-                
-            </select> 
-        </div><br>
-          <div> <h3>Start time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start" required>
-          </div><br>
-          
-          <div><h3>Closing time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime2" name="time_end" required>
-          </div><br>
-          <div class="event-details">
-            <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
-          </div><br>
-<<<<<<< HEAD
-        <!-- we don't have a userstory of it so it not a priority
-      <div class="hero">
-            <div class="card">
-              <h2>Selected Images</h2>
-              <div id="image-preview-container">
-                <!- Image previews will be added here dynamically ->
-              </div>
-              <label class="uploadimg" for="input-file">Upload Image</label>
-              <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
+  <body>
+    <main>
+      <div class="title">
+        <h1>Create Event</h1>
+      </div>
+      <section class="center">
+        <form action="{% url 'create_meetup' %}" method="POST">
+          {% csrf_token %}
+          <div class="create-event-container">
+            <div class="event-details">
+              <input
+                class="eventname"
+                type="text"
+                id="eventname"
+                name="name_meetup"
+                placeholder="Event Name"
+                required
+                maxlength="40"
+              />
             </div>
-          </div>-->
-=======
->>>>>>> f5edc2840e45a8661a94520a23783799c3c64268
-          <div>
-            <input type="button" value="Save" class="save-button" id="button" onclick="window.location.href='/'"><br>
+            <br />
+            <div class="event-details">
+              <input
+                class="location"
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Event Location"
+                required
+                maxlength="50"
+              />
+            </div>
+            <br />
+            <div class="event-details">
+              <label for="visibility">Meetup visibility:</label>
+              <select id="visibility" name="visibility" required>
+                <option value="private">private</option>
+                <option value="protected">protected</option>
+                <option value="Public">Public</option>
+              </select>
+            </div>
+            <br />
+            <div>
+              <h3>Start time</h3>
+              <input
+                class="dateandtime"
+                type="datetime-local"
+                id="dateandtime1"
+                name="time_start"
+                required
+              />
+            </div>
+            <br />
+            <div>
+              <h3>Closing time</h3>
+              <input
+                class="dateandtime"
+                type="datetime-local"
+                id="dateandtime2"
+                name="time_end"
+                required
+              />
+            </div>
+            <br />
+            <div class="event-details">
+              <textarea
+                class="description"
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Event Description"
+                required
+                maxlength="500"
+              ></textarea>
+            </div>
+            <br />
+            <div>
+              <input
+                type="submit"
+                value="Save"
+                class="save-button"
+                id="button"
+              /><br />
+            </div>
+            <input type="file" id="your-input-file-id" multiple />
+            <div id="your-container-id"></div>
           </div>
-          </div>
-        </div>
-      </form>
-
-        
-    </section>
-    <footer>
-      <nav>
-          <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}"></a>
-          <a href="{% url 'pins' %}"><img src="{% static 'img/Pins.png' %}"></a>
-          <a href=""><img src="{% static 'img/MeetUp.png' %}"></a>
-          <a href=""><img src="{% static 'img/Profile_img.png' %}"></a>
-          <a href=""><img src="{% static 'img/Settings.png' %}"></a>
-      </nav>
-  </footer>
-
-
+        </form>
+      </section>
+      <footer>
+        <nav>
+          <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}" /></a>
+          <a href="{% url 'pins' %}"
+            ><img src="{% static 'img/Pins.png' %}"
+          /></a>
+          <a href=""><img src="{% static 'img/MeetUp.png' %}" /></a>
+          <a href=""><img src="{% static 'img/Profile_img.png' %}" /></a>
+          <a href=""><img src="{% static 'img/Settings.png' %}" /></a>
+        </nav>
+      </footer>
 
       <script>
+        if (window.location.search) {
+          window.onload = function () {
+            // Get the latitude and longitude from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lat = urlParams.get("lat");
+            const lng = urlParams.get("lng");
+            const title = urlParams.get("title");
 
-        window.onload = function() {
-          // Get the latitude and longitude from the URL
-          const urlParams = new URLSearchParams(window.location.search);
-          const lat = urlParams.get('lat');
-          const lng = urlParams.get('lng');
-          const title = urlParams.get('title');
+            // Define the API endpoint
+            const geocodingApi = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
 
-          // Define the API endpoint
-          const geocodingApi = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+            // Fetch the location name
+            fetch(geocodingApi)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.address) {
+                  // Set the location input value to the location name
+                  document.getElementById("location").value = data.display_name;
+                }
+              })
+              .catch((error) => console.error(error));
 
-          // Fetch the location name
-          fetch(geocodingApi)
-          .then(response => response.json())
-          .then(data => {
-            if (data.address) {
-              // Set the location input value to the location name
-              document.getElementById('location').value = data.display_name;
+            // Set the event name input value to the title
+            if (title) {
+              document.getElementById("eventname").value =
+                "Event: " + decodeURIComponent(title);
             }
-          })
-          .catch(error => console.error(error));
-
-          // Set the event name input value to the title
-          if (title) {
-            document.getElementById('eventname').value = "Event: " + decodeURIComponent(title);
-          }
+          };
         }
 
-          
         // Get the current date and time
         var currentDate = new Date();
-        var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
-
+        var currentDateTime = currentDate.toISOString().slice(0, 16); // Remove seconds and milliseconds
         // Set the minimum value for the input field
-        document.getElementsById('dateandtime1').min = currentDateTime;
-        document.getElementsById('dateandtime2').min = currentDateTime;
+        document.getElementById("dateandtime1").min = currentDateTime;
+        document.getElementById("dateandtime2").min = currentDateTime;
 
         // Image Upload
         let inputFile = document.getElementById("input-file");
-        let imagePreviewContainer = document.getElementById("image-preview-container");
+        let imagePreviewContainer = document.getElementById(
+          "image-preview-container"
+        );
 
-        inputFile.addEventListener("change", function() {
-          imagePreviewContainer.innerHTML = ""; // Clear previous previews
-          const files = inputFile.files;
-          const maxFiles = 6; // Maximum number of files allowed
+        document.addEventListener("DOMContentLoaded", function () {
+          var inputFile = document.getElementById("your-input-file-id"); // replace "your-input-file-id" with the actual id of your input file element
+          var imagePreviewContainer =
+            document.getElementById("your-container-id"); // replace "your-container-id" with the actual id of your container element
+
+          inputFile.addEventListener("change", function () {
+            imagePreviewContainer.innerHTML = ""; // Clear previous previews
+            const files = inputFile.files;
+            const maxFiles = 6; // Maximum number of files allowed
             for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
               const file = files[i];
               const img = document.createElement("img");
@@ -146,7 +182,8 @@
               imagePreviewContainer.appendChild(img);
             }
           });
-    </script>
-  </main>
-</body>
+        });
+      </script>
+    </main>
+  </body>
 </html>

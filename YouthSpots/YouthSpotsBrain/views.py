@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponse
-from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth, Tags
+from YouthSpotsBrain.models import Profile, Pins, UserAuth, Tags
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
@@ -142,9 +142,6 @@ def login(request):
 
         else:
             return render(request, "login.html", { "error": "Missing username or password"})
-            
-     
-
     return render(request, "login.html")
 
 def signup(request):

@@ -1,8 +1,5 @@
-{% extends "base.html" %}
-
-{% block title%}Social Sphere - Home{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title%}Social Sphere - Home{% endblock %}
+{%block content %}
 <div id="map" style="height: 100%; width: 100%; margin: 0 0"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
@@ -116,9 +113,9 @@
           marker.bindPopup(popupString);
           marker.addTo(map);
 
-          if(pinSelected == pin.id) {
+          if (pinSelected == pin.id) {
             map.setView(L.latLng(pin.latitude, pin.longitude), 13);
-            marker.openPopup
+            marker.openPopup;
           }
         }
       });
@@ -329,5 +326,23 @@
   } else {
     run(50.376289, -4.143841);
   }
+  // let geocodersContainer = document.querySelector(".leaflet-routing-geocoders");
+  // geocodersContainer.appendChild(button);
+
+  // let button = document.createElement("button");
+  // button.id = "toggleButton";
+  // button.innerHTML = "Toggle Alternatives";
+
+  // let routingContainer = document.querySelector(
+  //   ".leaflet-routing-alternatives-container"
+  // );
+
+  // button.addEventListener("click", function () {
+  //   if (routingContainer.style.display === "none") {
+  //     routingContainer.style.display = "block";
+  //   } else {
+  //     routingContainer.style.display = "none";
+  //   }
+  // });
 </script>
 {% endblock %}
