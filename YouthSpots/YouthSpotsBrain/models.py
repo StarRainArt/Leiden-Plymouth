@@ -13,12 +13,23 @@ class Pins(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
+
+class Tags(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name
+    def create_tag(self, name):
+        self.name = name
+        self.save()
+        return self
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     id = models.AutoField(primary_key=True)
-    
+    biography = models.TextField(default='There is no biografy', max_length=2000)
+    favorite_tags = models.ManyToManyField(Tags, related_name='favorite_tags')
+
 class Meetups(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='There is no title', max_length=255)
@@ -31,7 +42,7 @@ class Meetups(models.Model):
     invited = models.ManyToManyField(Profile, related_name='invited')
     tags = models.CharField(default='none', max_length=255)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    pin = models.OneToOneField(Pins, blank=True, null=True, on_delete=models.CASCADE)
+    pin = models.ForeignKey(Pins, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
