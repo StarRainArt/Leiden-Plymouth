@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponse
-from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth
+from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth, Tags
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
@@ -11,7 +11,22 @@ def home(request):
     return render(request, "home.html")
 
 def view_profile(request):
-    return render(request, "view_profile.html")
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    if request.method == "POST":
+        if request.POST.get("name") != None:
+            profile = Profile.objects.get(user=request.user)
+            if Tags.objects.filter(name=request.POST.get("name")).exists():
+                tag = Tags.objects.get(name=request.POST.get("name"))
+                profile.favorite_tags.add(tag)
+                profile.save()
+            else:
+                tag = Tags(name=request.POST.get("name"))
+                tag.save()
+                profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
+                profile.save()
+    profile = Profile.objects.get(user=request.user)
+    return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
 
 def edit_profile(request):
     return render(request, "edit_profile.html")
@@ -79,7 +94,7 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 django_login(request, user)
-                return redirect("")
+                return redirect("/")
             else:
                 if UserAuth.objects.filter(username=username).exists():
                     user = UserAuth.objects.get(username=username)
@@ -100,6 +115,14 @@ def login(request):
 def signup(request):
     if request.method == "POST":
         errors = []
+        if request.POST.get("age") != "age":
+            errors.append("You have to be 18 years or older to use this service")
+        if request.POST["username"] == "":
+            errors.append("Username is required")
+        if len(request.POST["username"]) > 16:
+            errors.append("Username must be less than 16 characters long")
+        if request.POST["email"] == "":
+            errors.append("Email is required")
         if request.POST["password"] != request.POST["password_confirm"]:
             errors.append("Passwords do not match")
         if UserAuth.objects.filter(username=request.POST["username"]).exists():
@@ -119,6 +142,32 @@ def signup(request):
             profile.save()
             return redirect("login")
     return render(request, "signup.html")
+
+def change_password(request):
+    if request.method == "POST":
+        errors = []
+        if request.POST["old_password"] == "":
+            errors.append("Old password is required")
+        old_password = request.POST["old_password"]
+        user = request.user
+        if not user.check_password(old_password):
+            return render(request, "change_password.html", {"errors": ["Invalid old password"]})
+        if request.POST["new_password"] == "":
+            errors.append("New password is required")
+        if request.POST["new_password"] != request.POST["new_password_confirm"]:
+            errors.append("New passwords do not match")
+        if len(request.POST["new_password"]) < 8:
+            errors.append("New passwords must atleast be 8 characters long")
+        if re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", request.POST["new_password"]):
+            errors.append("New password must contain atleast one uppercase letter, one lowercase letter and one number")
+        if errors:
+            return render(request, "change_password.html", {"errors": errors})
+        else:
+            user = UserAuth.objects.get(username=request.user.username)
+            user.set_password(request.POST["new_password"])
+            user.save()
+            return redirect("home")
+    return render(request, "change_password.html")
 
 def logout(request):
     django_logout(request)
