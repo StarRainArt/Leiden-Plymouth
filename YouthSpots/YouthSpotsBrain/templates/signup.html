@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+
+
     <a class="nav_buttons" href="/login">login<a/>
     <a class="nav_buttons" href="/signup">signup<a/>
     <form method="post">
@@ -11,6 +15,8 @@
         <div id="age_checkbox"><p>I am 18 years or older</p><input type="checkbox" name="age" id="age" value="age"></div>
         <button type="submit">Sign up</button>
     </form>
+
+
     {% for error in errors %}
         <p class="error">{{ error }}</p>
     {% endfor %}
