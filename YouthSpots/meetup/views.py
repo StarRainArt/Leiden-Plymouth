@@ -20,7 +20,7 @@ def meetup_data_create(request):
         #type_meetup = request.POST.get('type_meetup')
         #visibility = request.POST.get('visibility')
         if time_start >= time_end:
-                  return HttpResponseBadRequest("Invalid time range: start time must be before end time ")
+                  return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
                   
               # Create a MeetupData instance
@@ -89,3 +89,6 @@ def delete_meetup(meetup_id):
         # Handle any other exceptions that may occur
         return f"An error occurred: {str(e)}"
 
+#def meetup(request):
+ #   type_mt = MeetupData.type_mt  # Retrieve type_mt from the MeetupData model
+ #   return render(request, "meetup.html", {'type_mt': type_mt})
