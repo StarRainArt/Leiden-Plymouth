@@ -1,5 +1,3 @@
-// Scss code for account styling for both login and signup//
-
 $Blue-green: #2596be;
 $Federal-blue: #1E095A;
 $Royal-purple: #8147A8;
@@ -21,13 +19,31 @@ $Pure-white: #FFFFFF;
     text-align: center;
     justify-content: center;
     margin-top: 20px;
-    background-color: #6832AA 
-}
-.container {
-    text-align: center;
+    background-color: #6832AA;
 }
 
-.signup_button{
+.display_buttons{
+    .nav_login_button{
+        background-color: #1E095A;
+        color: #fff;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 25px;
+        margin: 5px;
+    }
+    
+    .nav_signup_button{
+        background-color: #8C43AC;
+        color: #fff;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 25px;
+        margin: 5px;
+
+    }
+}
+
+.nav_login_button{
     background-color: #1E095A;
     color: #fff;
     padding: 10px;
@@ -35,7 +51,8 @@ $Pure-white: #FFFFFF;
     border-radius: 25px;
     width: 30%;
 }
-.login_button{
+
+.nav_signup_button{
     background-color: #8C43AC;
     color: #fff;
     padding: 10px;
@@ -43,20 +60,8 @@ $Pure-white: #FFFFFF;
     border-radius: 25px;
     width: 30%;
 }
-.btn{
-    background-color: #1E095A;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    width: 100px;
-}
-.input-group {
-    margin-top: 20px;
-    color: #fff;
-}
-
-.input-box {
+.box_text{
+    margin-bottom: 20px; 
     border: 1px solid black;
     padding: 10px;
     border-radius: 25px;
@@ -64,18 +69,15 @@ $Pure-white: #FFFFFF;
     color: #fff;
     width: 95%;
 }
-.logoimg{
-    display: block;
-    margin: 0% auto ;
-    margin-bottom: 20px ;
-    padding-top: 0px;
-    width: 30vh;
-}
-.btn-group button:hover {
-    cursor: pointer; 
-}
 
-.btn-group button:hover {
-    opacity: 0.6; 
+.signup_enter{
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
 }
-
+p{
+    color: #fff;
+}

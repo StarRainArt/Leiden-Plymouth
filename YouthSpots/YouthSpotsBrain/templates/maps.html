@@ -1,5 +1,8 @@
-{% extends "base.html" %} {% block title%}Social Sphere - Home{% endblock %}
-{%block content %}
+{% extends "base.html" %}
+
+{% block title%}Social Sphere - Home{% endblock %}
+
+{% block content %}
 <div id="map" style="height: 70vh; width: 70vw; margin: auto auto"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
@@ -189,6 +192,7 @@
           // Add event listener for form submission
           let popupForm = container.querySelector("#popupForm");
           popupForm.addEventListener("submit", handleEditFormSubmission);
+          
         });
       });
       deleteButtons.forEach(function (button) {

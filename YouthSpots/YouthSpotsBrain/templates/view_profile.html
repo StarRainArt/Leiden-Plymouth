@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}Social Sphere - Profile{% endblock %}
+
 {% block content %}
+
 {% load static %}
 {% load compress %}
 {% compress css %}
@@ -7,15 +11,4 @@
 {% endcompress %}
 
 
-    <div id="container">
-        <footer>
-            <nav>
-                <a href="./">Home</a>  
-                <a href="#">Upcoming Events</a>
-                <a href="#">Create Event</a>
-                <a href="/edit_profile">Event History</a>
-                <a href="/view_profile">Profile</a> 
-            </nav>
-        </footer>
-    </div>
 {% endblock %}
