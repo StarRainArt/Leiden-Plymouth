@@ -13,32 +13,8 @@ title = None
 
 # Create your views here.
 def meetup(request):
-    global lat, lng, title
-
-    url = request.build_absolute_uri()
-  
-    # Split the URL into its components
-    split_url = url.split('?')
-
-    if len(split_url) > 1:
-        query_string = split_url[1]
-
-        # Parse the query string into a QueryDict
-        query_dict = QueryDict(query_string)
-#
-        # Get specific query parameters
-        lat = float(query_dict.get('lat'))
-        lng = float(query_dict.get('lng'))
-        title = query_dict.get('title')
-        print("lat:", lat)
-        print("lng:", lng)
-        print("title:", title)
-        
-        return render(request, "meetup.html",{'lat': lat, 'lng': lng, 'title': title})
-    else:
-        # Handle the case where there are no query parameters
-        return render(request, "meetup.html")
-
+     return render(request, "meetup.html")
+    
 def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
@@ -53,11 +29,23 @@ def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
 def meetup_data_create(request):
-    url = request.build_absolute_uri().split('?')[0]
     global lat, lng, title
+    
+    url = request.build_absolute_uri()
+  
     # Split the URL into its components
-    split_url = url.split('?')
-    url == request.build_absolute_uri()
+    split_url = url.split('&')
+
+    if len(split_url) > 1:
+        query_string = split_url[1]
+
+        # Parse the query string into a QueryDict
+        query_dict = QueryDict(query_string)
+#
+        # Get specific query parameters
+        lat = float(query_dict.get('lat'))
+        lng = float(query_dict.get('lng'))
+        
 
 
 
