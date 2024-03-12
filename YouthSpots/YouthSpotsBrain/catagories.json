@@ -1,0 +1,37 @@
+{
+    "categories": [
+    {
+        "name": "Music",
+        "tags": ["#music", "#concerts", "#musicians", "#genres"]
+    },
+    {
+        "name": "Sports",
+        "tags": ["#sports", "#fitness", "#teamgames", "#outdoorsports"]
+    },
+    {
+        "name": "Films",
+        "tags": ["#movies", "#cinema", "#filmreviews", "#directors", "#actors"]
+    },
+    {
+        "name": "Hobbies",
+        "tags": ["#hobbies", "#crafting", "#painting", "#knitting", "#photography"]
+    },
+    {
+        "name": "Pets",
+        "tags": ["#pets", "#doglovers", "#catowners", "#animalcare", "#petadoption"]
+    },
+    {
+        "name": "Games",
+        "tags": ["#gaming", "#videogames", "#boardgames", "#puzzles", "#gamers"]
+    },
+    {
+        "name": "Outdoor Activities",
+        "tags": ["#outdoors", "#hiking", "#camping", "#natureexploration", "#picnics"]
+    },
+    {
+        "name": "Introvert/Ambivert",
+        "tags": ["#introverts", "#ambiverts", "#solitude", "#quietmoments", "#selfreflection"]
+    }
+    
+    ]
+}

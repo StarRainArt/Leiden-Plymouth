@@ -1,0 +1,24 @@
+/* line 8, YouthSpotsBrain/static/scss/map.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+/* line 14, YouthSpotsBrain/static/scss/map.scss */
+body {
+  position: relative; }
+  /* line 16, YouthSpotsBrain/static/scss/map.scss */
+  body main {
+    position: absolute;
+    background-color: #8147a8; }
+    /* line 19, YouthSpotsBrain/static/scss/map.scss */
+    body main .button {
+      position: absolute;
+      z-index: 1000;
+      font-family: "Poppins";
+      width: 2;
+      height: 30px;
+      display: flex;
+      padding: 5px 13px;
+      border-radius: 15pt;
+      background-color: #8147a8; }

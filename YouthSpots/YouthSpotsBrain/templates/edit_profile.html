@@ -1,20 +1,20 @@
 {% extends "base.html" %} 
-{% block title %}Social Sphere - Profile{% endblock %}
-{% block content %}
-    {% load static %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% load compress %}
-    {% compress css %}
+{% block title %}Social Sphere - Profile{% endblock %}
+
+{% block content %}
+
+    {% load static %}{% load compress %}{% compress css %}
     <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
     {% endcompress %}
+
     <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
     <div class="alter-account">
         <h1 class="alter-account-text">Edit Account</h1>
         <div class="profile-picture-container">
             <label for="profile-picture" class="edit_textbox_text"></label><br>
             <div class="profile-image-wrapper">
-                <img id="profile-image" src="{% static 'img/Profile_pic.png' %}" alt="Profile picture" class="profile-image">
+                <img id="profile-image" src="{% static 'img/Blank Pfp.png' %}" alt="Profile picture" class="profile-image">
             </div>
             <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
             <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
@@ -35,7 +35,7 @@
             </div>
         </div>
             <br>
-            <section class="left_side">
+            <section>
             <label for="current-password" class="edit_textbox_text">Current password</label><br>
             <input type="password" name="current-password" id="current-password" class="edit_textbox"><br>
             <label for="password" class="edit_textbox_text">New password</label><br>
@@ -55,16 +55,9 @@
             </div>
             </div>
         </div>
-        <footer>
-            <nav>
-                <a href=""><img src="{% static 'img/home_page.png' %}"></a>
-                <a href=""><img src="{% static 'img/Upcoming_events.png' %}"></a>
-                <a href=""><img src="{% static 'img/Create_event.png' %}"></a>
-                <a href=""><img src="{% static 'img/Event_history.png' %}"></a>
-                <a href=""><img src="{% static 'img/Profile_pic.png' %}"></a>
-            </nav>
-        </footer>
     </div>
+</div>
+
     <script>
         function showPopup() {
             document.getElementById("myPopup").style.display = "block";
