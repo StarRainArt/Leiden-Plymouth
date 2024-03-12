@@ -44,7 +44,8 @@ class Meetups(models.Model):
     end_timestamp = models.DateTimeField()
     longitude = models.FloatField(null = True)
     latitude = models.FloatField(null = True)
-    owner_id = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    #owner_id = models.OneToOneField(Profile, on_delete=models.CASCADE) non edited version
+    owner_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     invited = models.ManyToManyField(Profile, related_name='invited')
     tags = models.CharField(default='none', max_length=255)
     created_timestamp = models.DateTimeField(default=timezone.now)

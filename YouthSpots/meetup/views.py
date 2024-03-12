@@ -1,16 +1,44 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, QueryDict
 #from meetup.models import MeetupData
 from YouthSpotsBrain.models import Profile, Meetups, Pins
 import time, datetime
 from django.urls import reverse
 
 
+lat = None
+lng = None
+title = None
 
 
 # Create your views here.
 def meetup(request):
-    return render(request, "meetup.html")
+    global lat, lng, title
+
+    url = request.build_absolute_uri()
+  
+    # Split the URL into its components
+    split_url = url.split('?')
+
+    if len(split_url) > 1:
+        query_string = split_url[1]
+
+        # Parse the query string into a QueryDict
+        query_dict = QueryDict(query_string)
+#
+        # Get specific query parameters
+        lat = float(query_dict.get('lat'))
+        lng = float(query_dict.get('lng'))
+        title = query_dict.get('title')
+        print("lat:", lat)
+        print("lng:", lng)
+        print("title:", title)
+        
+        return render(request, "meetup.html",{'lat': lat, 'lng': lng, 'title': title})
+    else:
+        # Handle the case where there are no query parameters
+        return render(request, "meetup.html")
+
 def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
@@ -25,29 +53,39 @@ def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
 def meetup_data_create(request):
-    if request.method == 'POST':
-        name_meetup = request.POST.get('name_meetup')
-        time_start = request.POST.get('time_start')
-        time_end = request.POST.get('time_end')
-        description = request.POST.get('description')
-        #type_meetup = request.POST.get('type_meetup')
-        visibility = request.POST.get('visibility')
-        if request.method == 'GET':
-           lat = request.GET.get('lat')
-           lng = request.GET.get('lng')
-           title = request.GET.get('title')
+    url = request.build_absolute_uri().split('?')[0]
+    global lat, lng, title
+    # Split the URL into its components
+    split_url = url.split('?')
+    url == request.build_absolute_uri()
+
+
+
+    # if request.method == 'POST' and len(split_url) > 1 :
+    if request.method == 'POST' :
+        
+          
+          name_meetup = request.POST.get('name_meetup')
+          time_start = request.POST.get('time_start')
+          time_end = request.POST.get('time_end')
+          description = request.POST.get('description')
+         #type_meetup = request.POST.get('type_meetup')
+          visibility = request.POST.get('visibility')
+          #latitude = lat
+          #longitude = lng
+
          
-        user_id = Profile.objects.values_list('id', flat=True).first()
-        #profile = Profile.objects.get()
-        profile = Profile.objects.get(id=user_id)
+          user_id = Profile.objects.values_list('id', flat=True).first()
+          #profile = Profile.objects.get()
+          profile = Profile.objects.get(id=user_id)
         
         #or time_start <= time.localtime
-        if time_start >= time_end :
+          if time_start >= time_end:
             return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
-                  
+                 
               # Create a MeetupData instance
-        Meetup = Meetups.objects.create(
+          Meetup = Meetups.objects.create(
             title=name_meetup,
             start_timestamp=time_start,
             end_timestamp=time_end,

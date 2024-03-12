@@ -51,7 +51,7 @@
           </div><br>
           <div class="event-details">
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
-          </div><br>                
+          </div><br>                                
           <div>
             <input type="submit" value="Submit" class="save-button" id="button">
            <!-- <input type="button" value="Save" class="save-button" id="button"><br>-->
@@ -86,14 +86,15 @@
 
 
       <script>
+        
         //let fetchedPins = await (await fetch("/getPins")).json();
         // Get the current date and time
-        var currentDate = new Date();
-        var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
+        let currentDate = new Date();
+        let currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
 
         // Set the minimum value for the input field
-        document.getElementsById('dateandtime1').min = currentDateTime;
-        document.getElementsById('dateandtime2').min = currentDateTime;
+        document.getElementById('dateandtime1').min = currentDateTime;
+        document.getElementById('dateandtime2').min = currentDateTime;
 
         // Image Upload
         let inputFile = document.getElementById("input-file");
