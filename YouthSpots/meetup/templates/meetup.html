@@ -41,11 +41,11 @@
             </select> -->
         </div><br>
           <div> <h3>Start time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_start" required>
+            <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start" required>
           </div><br>
           
           <div><h3>Closing time</h3>
-            <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_end" required>
+            <input class="dateandtime" type="datetime-local" id="dateandtime2" name="time_end" required>
           </div><br>
           <div class="event-details">
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
@@ -87,7 +87,8 @@
         var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
 
         // Set the minimum value for the input field
-        document.getElementById('dateandtime').min = currentDateTime;
+        document.getElementsById('dateandtime1').min = currentDateTime;
+        document.getElementsById('dateandtime2').min = currentDateTime;
 
         // Image Upload
         let inputFile = document.getElementById("input-file");

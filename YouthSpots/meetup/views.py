@@ -11,7 +11,7 @@ from django.urls import reverse
 def meetup(request):
     return render(request, "meetup.html")
 def my_meetup(request):
-    return render(request, "meetup_created.html")
+    return render(request, "My_meetup.html")
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
