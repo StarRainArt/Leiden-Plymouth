@@ -68,5 +68,17 @@
         }
     
         document.getElementById("popupBtn").addEventListener("click", showPopup);
+        
+        document.getElementById('profile-picture').addEventListener('change', function () {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var profileImage = document.getElementById('profile-image');
+                    profileImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 {% endblock %}

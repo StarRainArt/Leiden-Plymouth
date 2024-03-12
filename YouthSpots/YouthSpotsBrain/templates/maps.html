@@ -3,7 +3,7 @@
 {% block title%}Social Sphere - Home{% endblock %}
 
 {% block content %}
-<div id="map" style="height: 70vh; width: 70vw; margin: auto auto"></div>
+<div id="map" style="height: 100%; width: 100%; margin: 0 0"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
   <button id="saveMarker" class="button">Save the marker</button>
@@ -12,6 +12,9 @@
 {{ pins|json_script:"pins_json" }}
 
 <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const pinSelected = urlParams.get("pinSelected");
+
   async function run(latitude, longitude) {
     let userLocation = L.latLng(latitude, longitude);
 
@@ -85,6 +88,7 @@
           pinString += `</div>`;
           pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+          pinString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
 
           marker.getPopup().setContent(pinString);
           marker.getPopup().update();
@@ -108,7 +112,7 @@
           popupString += `</div>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
-
+          popupString += `<button class="showMeetup" data-id="${pin.id}" onclick="document.getElementById('pin-' + ${pin.id}).scrollIntoView();">Show meetup</button>`;
           marker.bindPopup(popupString);
           marker.addTo(map);
         }
@@ -177,6 +181,8 @@
                 <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
                 <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
                 <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
+                <label for="addMeetup">Add Meetup:</label><br />
+                <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
                 <input type="submit" value="Save" />
               </form>
             `;
