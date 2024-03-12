@@ -121,6 +121,10 @@ body {
   td {
     font-family: "Poppins";
   }
+
+  tr:hover {
+    background-color: #3e2181 !important;
+  }
 }
 
 .leaflet-control-zoom.leaflet-bar.leaflet-control {
