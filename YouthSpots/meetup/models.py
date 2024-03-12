@@ -1,22 +1,22 @@
 from django.db import models
 #type need to be changed or extended
 type_mt = {
-    "CE": "Community Event",
-    "SG": "Social Gathering",
-    "EE": "Entertainment Event",
-    "AC": "Activity Club",
-    "WC": "Workshop/Class",
-    "FE": "Fitness Event",
-    "VO": "Volunteer Opportunity",
-    "TE": "Tech Event",
-    "ME": "Music Event",
-    "DE": "Dance Event",
+    ("CE", "Community Event"),
+    ("SG", "Social Gathering"),
+    ("EE", "Entertainment Event"),
+    ("AC", "Activity Club"),
+    ("WC", "Workshop/Class"),
+    ("FE", "Fitness Event"),
+    ("VO", "Volunteer Opportunity"),
+    ("TE", "Tech Event"),
+    ("ME", "Music Event"),
+    ("DE", "Dance Event"),
 }
 
 visibility_type = {
-    "+": "Public",
-    "#": "Protected",
-    "-": "Private",
+    ("+", "Public"),
+    ("#", "Protected"),
+    ("-", "Private"),
 }
 
 class MeetupData(models.Model):
