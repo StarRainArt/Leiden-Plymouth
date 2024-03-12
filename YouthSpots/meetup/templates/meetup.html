@@ -21,7 +21,7 @@
         Create Event
       </h1>
     </div>
-    <center>
+    <section class="center">
       <form action="{% url 'create_meetup' %}" method="POST">
         {% csrf_token %}
         <div class="create-event-container">
@@ -41,23 +41,24 @@
           <div class="event-details">
             <input class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500">
           </div><br>
+          <div class="hero">
+            <div class="card">
+              <h2>Selected Images</h2>
+              <div id="image-preview-container">
+                <!-- Image previews will be added here dynamically -->
+              </div>
+              <label class="uploadimg" for="input-file">Upload Image</label>
+              <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
+            </div>
+          </div>
           <div>
             <button class="save-button" id="button">Save</button><br>
           </div>
         </div>
       </form>
 
-      <div class="hero">
-        <div class="card">
-          <h2>Selected Images</h2>
-          <div id="image-preview-container">
-            <!-- Image previews will be added here dynamically -->
-          </div>
-          <label class="uploadimg" for="input-file">Upload Image</label>
-          <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
-        </div>
-      </div>
         
+    </section>
       <footer>
         <nav>
           <a href=""><img src="../static/img/home_page.png"></a>
@@ -67,11 +68,39 @@
           <a href=""><img src="../static/img/Profile_pic.png"></a>
         </nav>
       </footer>
-    </center>
 
 
 
       <script>
+
+        window.onload = function() {
+          // Get the latitude and longitude from the URL
+          const urlParams = new URLSearchParams(window.location.search);
+          const lat = urlParams.get('lat');
+          const lng = urlParams.get('lng');
+          const title = urlParams.get('title');
+
+          // Define the API endpoint
+          const geocodingApi = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+          // Fetch the location name
+          fetch(geocodingApi)
+          .then(response => response.json())
+          .then(data => {
+            if (data.address) {
+              // Set the location input value to the location name
+              document.getElementById('location').value = data.display_name;
+            }
+          })
+          .catch(error => console.error(error));
+
+          // Set the event name input value to the title
+          if (title) {
+            document.getElementById('eventname').value = "Event: " + decodeURIComponent(title);
+          }
+        }
+
+          
         // Get the current date and time
         var currentDate = new Date();
         var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
