@@ -9,6 +9,7 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("signup/", views.signup, name="signup"),
     path("logout/", views.logout, name="logout"),
+    path("pins", views.pins, name="pins"),
     # path("meetups/", views.meetups, name="meetups"),
     # path("pins/", views.pins, name="pins"),
     # path("profile/", views.profile, name="profile"),

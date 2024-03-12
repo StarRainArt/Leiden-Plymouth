@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from YouthSpotsBrain.models import UserAuth
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
+import json
 
 def home(request):
     if request.user.is_authenticated == False:
@@ -120,3 +121,5 @@ def logout(request):
     django_logout(request)
     return redirect("login")
 
+def pins(request):
+    return render(request, "pins.html")
