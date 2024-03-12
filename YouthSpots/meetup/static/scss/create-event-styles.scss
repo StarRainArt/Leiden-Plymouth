@@ -2,7 +2,12 @@
 
 // Google Font Import - Poppins
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
+$Blue-green: #2596be;
+$Federal-blue: #1E095A;
+$Royal-purple: #8147A8;
+$Old-rose: #B46F77;
+$Eerie-black: #222222;
+$Pure-white: #FFFFFF;
 * {
   margin: 0;
   padding: 0;
@@ -153,5 +158,29 @@ h1 {
     background-color: #8c43ac;
     box-shadow: 2px 3px 4px inset #000;
     transition: ease-in-out 0.2s;
+  }
+}
+nav{
+  padding: 1vh;
+  background-color: $Federal-blue;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+
+  a {
+      background-color: $Royal-purple;
+      border-radius: 20px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     
+      &:hover {
+          background-color: rgb(144, 90, 180);
+      }
   }
 }

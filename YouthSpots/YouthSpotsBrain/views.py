@@ -1,10 +1,6 @@
-from django.http import JsonResponse
-from django.http import HttpResponse
-from django.shortcuts import render
-from YouthSpotsBrain.models import Meetups
-from YouthSpotsBrain.models import Pins
+from django.http import JsonResponse, HttpResponse
+from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth
 from django.shortcuts import render, redirect
-from YouthSpotsBrain.models import UserAuth
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
 import json
@@ -13,8 +9,13 @@ def home(request):
     if request.user.is_authenticated == False:
         return redirect("login")
     return render(request, "home.html")
-def profile(request):
+
+def view_profile(request):
+    return render(request, "view_profile.html")
+
+def edit_profile(request):
     return render(request, "edit_profile.html")
+
 def maps(request):
     return render(request, "maps.html")
 
@@ -56,7 +57,42 @@ def savePin(request, pin_id=None):
             return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
     else:
         return JsonResponse({'status': 'Method Not Allowed'}, status=405)
-    
+
+def showMeetup(request, pin_id=None):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        tags = request.POST.get('tags')
+        lat = request.POST.get('lat')
+        lng = request.POST.get('lng')
+
+        # Check if a pin with the same latitude and longitude already exists
+        existing_pin = Pins.objects.filter(latitude=lat, longitude=lng).first()
+        if existing_pin:
+            # Update the existing pin
+            existing_pin.title = title
+            existing_pin.description = description
+            existing_pin.tags = tags
+            existing_pin.save()
+            return JsonResponse({'status': 'Updated'})
+        else:
+            # Create a new pin
+            pin = Pins(title=title, description=description, latitude=lat, longitude=lng, tags=tags)
+            pin.save()
+            return JsonResponse({'status': 'Created'})
+    elif request.method == 'DELETE':
+        if pin_id is not None:
+            try:
+                pin = Pins.objects.get(pk=pin_id)
+            except Pins.DoesNotExist:
+                return JsonResponse({'status': 'Not Found'}, status=404)
+            pin.delete()
+            return JsonResponse({'status': 'Deleted'})
+        else:
+            return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
+    else:
+        return JsonResponse({'status': 'Method Not Allowed'}, status=405)
+
 def retrieve_marker(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -113,7 +149,9 @@ def signup(request):
                 request.POST["email"],
                 request.POST["password"]
             )
+            profile = Profile(user=user)
             user.save()
+            profile.save()
             return redirect("login")
     return render(request, "signup.html")
 
@@ -123,3 +161,4 @@ def logout(request):
 
 def pins(request):
     return render(request, "pins.html")
+  
