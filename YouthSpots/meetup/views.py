@@ -10,8 +10,12 @@ from django.urls import reverse
 # Create your views here.
 def meetup(request):
     return render(request, "meetup.html")
-def my_meetup(request):
-    return render(request, "My_meetup.html")
+def public_meetups(request):
+    meetups = MeetupData.objects.filter(visibility="Public"  ) # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    return render(request, 'meetup_public.html', {'meetups': meetups})
+def my_meetups(request):
+    meetups = MeetupData.objects.all() # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    return render(request, 'My_meetup.html', {'meetups': meetups})
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
@@ -22,7 +26,7 @@ def meetup_data_create(request):
         time_end = request.POST.get('time_end')
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
-        #visibility = request.POST.get('visibility')
+        visibility = request.POST.get('visibility')
         if time_start >= time_end:
                   return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
@@ -34,7 +38,7 @@ def meetup_data_create(request):
             time_end=time_end,
             description=description,
            # type_meetup=type_meetup,
-            #visibility=visibility
+            visibility=visibility
         )
 
        

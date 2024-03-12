@@ -30,15 +30,20 @@
           </div><br>
           <div class="event-details"><!-- probaly should be replaced with map thing-->
             <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
-          </div><!--<br>
+          </div><br>
            <div class="event-details">
-            <label for="type_meetup">Type of Meetup:</label>
-            <select id="type_meetup" name="type_meetup" multiple>
-                {% for code, label in type_mt %}
-                    <option value="{{ code }}">{{ label }}</option>
-                {% endfor %}
+            <label for="visibility">Meetup visibility:</label>
+            <select id="visibility" name="visibility" required default:"-">
+
+                     <option value="private">private</option>
+                     <option value="protected">protected</option>
+                     <option value="Public">Public</option>
+                   
+                    
                 
-            </select> -->
+
+                
+            </select> 
         </div><br>
           <div> <h3>Start time</h3>
             <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start" required>
