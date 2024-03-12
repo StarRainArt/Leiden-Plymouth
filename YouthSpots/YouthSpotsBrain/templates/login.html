@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %}{% endblock %}
+{% extends "base.html" %} 
 
+{% block title %}{% endblock %}
 
 {% block javascript %}
 <script defer>
@@ -30,10 +31,15 @@
 
 
 {% block content %}
-    <img src="../static/img/logo.png">
+
+{% load static %}{% load compress %}{% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/login.scss' %}" type="text/x-scss">
+{% endcompress %}
+
+<img src="../static/img/logo.png">
 
 <a class="nav_buttons" href="/login">login<a/>
-<a class="nav_buttons" href="/signup">signup<a/>
+<a class="nav_buttons" href="/signup">signup<a/> 
 
 <form method="post" class='login_form'>
     {% csrf_token %}
@@ -45,8 +51,6 @@
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
-    
-
 </form> 
 
 {% endblock %}

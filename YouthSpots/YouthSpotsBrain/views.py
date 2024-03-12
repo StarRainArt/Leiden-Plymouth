@@ -1,10 +1,6 @@
-from django.http import JsonResponse
-from django.http import HttpResponse
-from django.shortcuts import render
-from YouthSpotsBrain.models import Meetups
-from YouthSpotsBrain.models import Pins
+from django.http import JsonResponse, HttpResponse
+from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth
 from django.shortcuts import render, redirect
-from YouthSpotsBrain.models import UserAuth
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
 import json
@@ -118,7 +114,9 @@ def signup(request):
                 request.POST["email"],
                 request.POST["password"]
             )
+            profile = Profile(user=user)
             user.save()
+            profile.save()
             return redirect("login")
     return render(request, "signup.html")
 
