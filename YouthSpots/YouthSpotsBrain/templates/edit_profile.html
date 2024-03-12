@@ -8,7 +8,7 @@
     {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
     {% endcompress %}
-    <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo" id="profile-pic">
+    <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
     <div class="alter-account">
         <h1 class="alter-account-text">Edit Account</h1>
         <div class="profile-picture-container">
@@ -19,15 +19,6 @@
             <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
             <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
         </div>
-        <script>
-          let profilePic = document.getElementById("profile-pic");
-          let inputFile = document.getElementById("input-file");
-
-          inputFile.onchange = funtion(){
-            profilePic.src = URL.createObjectiveURL(inputFle.files[0]);
-          } 
-        </script>
-
         <br>
         <div class="form alter-ac-form">
             <div class="container_aa">
@@ -42,6 +33,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <br>
             <section class="left_side">
             <label for="current-password" class="edit_textbox_text">Current password</label><br>
