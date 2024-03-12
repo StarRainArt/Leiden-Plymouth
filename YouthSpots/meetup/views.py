@@ -17,7 +17,8 @@ def public_meetups(request):
 def my_meetups(request):
     # Filter meetups based on the owner_id field
     #meetups = Meetups.objects.filter(owner_id=request.user.profile) #filter it to owner
-    meetups =Meetups.objects.all()
+    user_id = 1#request.user.id
+    meetups =Meetups.objects.filter(owner_id=user_id)
     return render(request, 'My_meetup.html', {'meetups': meetups})
     
 def meetup_edit(request):
@@ -31,16 +32,18 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
-        #if request.method == 'GET':
-          # latitude = request.GET.get('lat')
-           #longitude = request.GET.get('lng')
-           #title = request.GET.get('title')
+        if request.method == 'GET':
+           latitude = request.GET.get('lat')
+           longitude = request.GET.get('lng')
+           title = request.GET.get('title')
          
-        user_id = 1#request.user.id
+        user_id = Profile.objects.values_list('id', flat=True).first()
+        #profile = Profile.objects.get()
         profile = Profile.objects.get(id=user_id)
+        
         #or time_start <= time.localtime
         if time_start >= time_end :
-            return HttpResponseBadRequest(render(request, 'meetup.html'))#,{'lat': lat, 'lng': lng, 'title': title}
+            return HttpResponseBadRequest(render(request, 'meetup.html',{'lat': lat, 'lng': lng, 'title': title}))
                         
                   
               # Create a MeetupData instance
