@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{% block title%}Profile - Social Sphere{% endblock %}{% endblock %}
+{% block title %}Profile - Social Sphere{% endblock %}
 
 {% block content %}
 
@@ -33,18 +33,20 @@
         <input type="submit" value="add">
     </form>
 </section>
-
+{% csrf_token %}
 <script type="text/javascript">
+    var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     var tag = document.getElementsByClassName('tag_li');
     for (let i = 0; i < tag.length; i++) {
+        let formData = new FormData();
+        formData.append('tag', tag[i].innerHTML);
+        formData.append('task', 'remove');
         tag[i].addEventListener('click', function() {
-            fetch("view_profile",{method: "POST", headers: {
-                'Content-Type': 'application/json'
+            fetch("/view_profile/",{method: "POST", headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf_token
             },
-        body: JSON.stringify({
-            action: "remove_tag",
-            name: tag[i].innerText
-        })
+        body: formData
         })
     })
     }

@@ -26,10 +26,15 @@ def view_profile(request):
                     tag.save()
                     profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
                     profile.save()
-        else:
-            if request.POST.get("action") == "bio":
+            elif request.POST.get("action") == "bio":
                 profile = Profile.objects.get(user=request.user)
                 profile.biography = request.POST.get("biography")
+                profile.save()
+            elif request.POST.get("task") == "remove":
+                print("test")
+                profile = Profile.objects.get(user=request.user)
+                tag = Tags.objects.get(name=request.POST.get("name"))
+                profile.favorite_tags.remove(tag)
                 profile.save()
     profile = Profile.objects.get(user=request.user)
     return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
