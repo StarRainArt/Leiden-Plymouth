@@ -1,56 +1,71 @@
-{% extends "base.html" %} {% block title %}Social Sphere - Profile{% endblock %}
+{% extends "base.html" %} 
+
+{% block title %}Social Sphere - Profile{% endblock %}
+
 {% block content %}
 
-{% load static %}
-{% load compress %}
-{% compress css %}
-<link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
-{% endcompress %}
-<img src="../static/img/logo.png" class="profile_logo" alt="Logo">
-<div class="alter-account">
-    <h1 class="alter-account-text">Alter Account</h1>
-    <div class="form alter-ac-form">
+    {% load static %}{% load compress %}{% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
+    {% endcompress %}
+
+    <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
+    <div class="alter-account">
+        <h1 class="alter-account-text">Edit Account</h1>
+        <div class="profile-picture-container">
+            <label for="profile-picture" class="edit_textbox_text"></label><br>
+            <div class="profile-image-wrapper">
+                <img id="profile-image" src="{% static 'img/Blank Pfp.png' %}" alt="Profile picture" class="profile-image">
+            </div>
+            <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
+            <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
+        </div>
+        <br>
+        <div class="form alter-ac-form">
             <div class="container_aa">
                 <div class="left_side">
                     <div>
-                        <label for="username">Username</label><br>
-                        <input type="text" name="username" id="username" value=""><br>
+                        <label for="username" class="edit_textbox_text">Username</label><br>
+                        <input type="text" name="username" id="username" class="edit_textbox"><br>
                     </div>
                     <div>
-                        <label for="email">Email</label><br>
-                        <input type="email" name="email" id="email" value=""><br>
+                        <label for="email" class="edit_textbox_text">Email</label><br>
+                        <input type="email" name="email" id="email" class="edit_textbox"><br>
                     </div>
                 </div>
-                <div class="right_side">
-                    <label for="profile-picture">Profile picture</label><br>
-                    <img src="" alt="Profile picture">
-                    <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
-                    <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
-                    <br>
-                </div>
             </div>
-            <label for="current-password">Current password</label><br>
-            <input type="password" name="current-password" id="current-password"><br>
-            <label for="password">New password</label><br>
-            <input type="password" name="password" id="password"><br>
-            <label for="confirm-password">Confirm new password</label>
-            <input type="password" name="confirm-password" id="confirm-password">
-            <div class="buttons-alter">
-                <button type="submit" name="alter-account">Submit</button>
-                <button type="submit" name="delete-account">Delete account</button>
-                <button type="button" onclick="window.location.href='/<?= URL_PREFIX ?>/'" class="go-back">Go back</button>
+            <br>
+            <section class="left_side">
+            <label for="current-password" class="edit_textbox_text">Current password</label><br>
+            <input type="password" name="current-password" id="current-password" class="edit_textbox"><br>
+            <label for="password" class="edit_textbox_text">New password</label><br>
+            <input type="password" name="password" id="password" class="edit_textbox"><br>
+            <label for="confirm-password" class="edit_textbox_text">Confirm new password</label><br>
+            <input type="password" name="confirm-password" id="confirm-password" class="edit_textbox">
+            <div class="buttons-alter"><br><br>
+                <button type="submit" name="alter-account" class="save">Save</button>
+                <br>
+                <button type="submit" id="popupBtn" name="delete-account" class="del">Delete account</button>
+            </section>
+            <div id="myPopup" class="popup">
+                <h2>Delete Account</h2>
+                <p>Are you sure you want to delete your account ?</p>
+                <button onclick="closePopup()" class="Nopopup">No</button>
+                <button onclick="" class="Nopopup">Yes</button>
             </div>
+            </div>
+        </div>
     </div>
-    <footer>
-        <nav>
-          <a href=""><img src="../static/img/svg/Home_page.svg"></a>
-          <a href=""><img src="../static/img/svg/Event_history.svg"></a>
-          <a href=""><img src="../static/img/svg/Create_event.svg"></a>
-          <a href="/edit_profile"><img></a>
-          <a href="/view_profile"><img></a>
-        </nav>
-      </footer>
-  
 </div>
-{% endblock %}
 
+    <script>
+        function showPopup() {
+            document.getElementById("myPopup").style.display = "block";
+        }
+    
+        function closePopup() {
+            document.getElementById("myPopup").style.display = "none";
+        }
+    
+        document.getElementById("popupBtn").addEventListener("click", showPopup);
+    </script>
+{% endblock %}

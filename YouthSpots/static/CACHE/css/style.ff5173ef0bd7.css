@@ -1,0 +1,25 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background-color: #6832AA; }
+
+/* line 12, YouthSpotsBrain/static/scss/style.scss */
+nav {
+  padding: 1vh;
+  background-color: #21065D;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+  /* line 20, YouthSpotsBrain/static/scss/style.scss */
+  nav a {
+    background-color: #AAAAAA;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+
+/* line 31, YouthSpotsBrain/static/scss/style.scss */
+input {
+  background-color: #21065D; }

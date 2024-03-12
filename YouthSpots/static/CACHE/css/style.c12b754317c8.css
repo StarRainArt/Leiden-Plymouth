@@ -1,0 +1,103 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+.temp {
+  height: 725px; }
+
+/* line 12, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background-color: #8147a8;
+  background: linear-gradient(to right, #1e095a 0%);
+  background-color: #8147a8; }
+
+/* line 18, YouthSpotsBrain/static/scss/style.scss */
+#login_button {
+  font-family: "Poppins";
+  width: 2;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #8147a8; }
+
+/* line 28, YouthSpotsBrain/static/scss/style.scss */
+#sign_in_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  border-radius: 15pt;
+  background-color: #21065d;
+  position: absolute;
+  left: 180px;
+  top: 100px; }
+
+/* line 40, YouthSpotsBrain/static/scss/style.scss */
+#login_button_2 {
+  font-family: "Poppins";
+  width: 150px;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065d;
+  align-self: center; }
+
+/* line 50, YouthSpotsBrain/static/scss/style.scss */
+.login_form {
+  display: flex;
+  justify-content: space-around; }
+
+/* line 55, YouthSpotsBrain/static/scss/style.scss */
+#password {
+  font-family: "Poppins";
+  width: 150px;
+  height: 30px;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065d; }
+
+/* line 65, YouthSpotsBrain/static/scss/style.scss */
+#username {
+  font-family: "Poppins";
+  width: 20vw;
+  height: 4vh;
+  display: flex;
+  padding: 5px 13px;
+  border-radius: 15pt;
+  background-color: #21065d; }
+  /* line 74, YouthSpotsBrain/static/scss/style.scss */
+  #username nav {
+    padding: 1vh;
+    background-color: #1e095a;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto; }
+    /* line 84, YouthSpotsBrain/static/scss/style.scss */
+    #username nav a {
+      background-color: #8147a8;
+      border-radius: 20px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      /* line 93, YouthSpotsBrain/static/scss/style.scss */
+      #username nav a:hover {
+        background-color: #905ab4; }
+
+/* line 99, YouthSpotsBrain/static/scss/style.scss */
+input {
+  background-color: #1e095a; }
+
+/* line 102, YouthSpotsBrain/static/scss/style.scss */
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 400px);
+  /* Adjusted height to leave 400px at the bottom */ }

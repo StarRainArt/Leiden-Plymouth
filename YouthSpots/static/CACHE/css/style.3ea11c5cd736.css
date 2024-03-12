@@ -1,0 +1,16 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background: linear-gradient(to right, #1E095A 0%);
+  background-color: #6832AA; }
+
+/* line 13, YouthSpotsBrain/static/scss/style.scss */
+.footer-button {
+  color: white;
+  text-decoration: none; }
+
+/* line 18, YouthSpotsBrain/static/scss/style.scss */
+nav {
+  padding: 1vh;
+  padding-bottom: -305px;
+  background-color: #21065D;
+  border-radius: 20px; }

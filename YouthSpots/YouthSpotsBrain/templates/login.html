@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block title %}{% endblock %}
+
+
+{% block javascript %}
+<script defer>
+    function SaveInfo() {
+        var infoSave = {
+            username: username,
+            password: password
+        };
+        localStorage.setItem("savedInfo", JSON.stringify(savedInfo));
+    }
+
+    function loadInfo() {
+        var savedInfo = JSON.parse(localStorage.getItem("savedInfo"));
+
+        if (localStorage.getItem("savedInfo") !== null) {
+            if (typeof savedInfo.username !== "undefined") username = savedInfo.username;
+            if (typeof savedInfo.password !== "undefined") password = savedInfo.password;
+        }
+    }
+
+    function resetInfo() {
+        var infoSave = {};
+        localStorage.setItem("savedInfo", JSON.stringify(infoSave));
+        location.reload();
+    }
+</script>
+{% endblock %}
+
+
+{% block content %}
+    <img src="../static/img/logo.png">
+
+<a class="nav_buttons" href="/login">login<a/>
+<a class="nav_buttons" href="/signup">signup<a/>
+
+<form method="post" class='login_form'>
+    {% csrf_token %}
+
+    <input type="text" id="username" placeholder="username" name="username" ><br>
+    <input type="password" id="password" placeholder="password" name="password"><br>
+    remember me <input type="checkbox"><br>
+    <button type="submit" id="login_button_2">login</button>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    
+
+</form> 
+
+{% endblock %}

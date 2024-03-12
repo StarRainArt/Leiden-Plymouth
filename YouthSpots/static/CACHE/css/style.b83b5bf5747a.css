@@ -1,0 +1,15 @@
+/* line 8, YouthSpotsBrain/static/scss/style.scss */
+body {
+  background: linear-gradient(to right, #1E095A 0%);
+  background-color: #1E095A; }
+
+/* line 13, YouthSpotsBrain/static/scss/style.scss */
+.footer-button {
+  color: white;
+  text-decoration: none; }
+
+/* line 18, YouthSpotsBrain/static/scss/style.scss */
+nav {
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 20px; }

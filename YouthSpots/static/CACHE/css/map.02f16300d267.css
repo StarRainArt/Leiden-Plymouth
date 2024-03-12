@@ -1,0 +1,188 @@
+/* line 8, YouthSpotsBrain/static/scss/map.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+/* line 14, YouthSpotsBrain/static/scss/map.scss */
+body {
+  position: relative; }
+  /* line 16, YouthSpotsBrain/static/scss/map.scss */
+  body main {
+    background-color: #8147a8; }
+    /* line 19, YouthSpotsBrain/static/scss/map.scss */
+    body main .button-wrapper {
+      display: flex;
+      justify-content: space-evenly; }
+      /* line 22, YouthSpotsBrain/static/scss/map.scss */
+      body main .button-wrapper .button {
+        padding: 20px 30px;
+        margin: 10px;
+        z-index: 1000;
+        display: flex;
+        font-family: "Poppins";
+        border-radius: 15px;
+        background-color: #2596be; }
+    /* line 32, YouthSpotsBrain/static/scss/map.scss */
+    body main .leaflet-routing-container {
+      box-shadow: 2px; }
+      /* line 36, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-container .leaflet-routing-add-waypoint {
+        width: 10%;
+        height: 100%;
+        border-radius: 100px; }
+      /* line 41, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-container .leaflet-routing-reverse-waypoints {
+        width: 10%;
+        height: 100%;
+        border-radius: 100px; }
+    /* line 47, YouthSpotsBrain/static/scss/map.scss */
+    body main .leaflet-routing-geocoder {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      /* line 51, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-geocoder input {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        padding: 5px 13px;
+        border-radius: 15pt;
+        background-color: white; }
+      /* line 59, YouthSpotsBrain/static/scss/map.scss */
+      body main .leaflet-routing-geocoder .leaflet-routing-remove-waypoint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #222222;
+        transform: scale(1.5); }
+        /* line 65, YouthSpotsBrain/static/scss/map.scss */
+        body main .leaflet-routing-geocoder .leaflet-routing-remove-waypoint::after {
+          border-radius: 1000px;
+          margin-right: 5px;
+          color: #b46f77; }
+
+/* line 74, YouthSpotsBrain/static/scss/map.scss */
+.reverse-button {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px; }
+
+/* line 79, YouthSpotsBrain/static/scss/map.scss */
+.reverse-button button {
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer; }
+
+/* line 92, YouthSpotsBrain/static/scss/map.scss */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0; }
+
+/* line 98, YouthSpotsBrain/static/scss/map.scss */
+body {
+  font-family: 'Nunito Sans', sans-serif; }
+
+/* line 101, YouthSpotsBrain/static/scss/map.scss */
+main {
+  display: flex; }
+
+/* line 104, YouthSpotsBrain/static/scss/map.scss */
+.store-list {
+  width: 25%;
+  height: 100vh;
+  overflow: auto;
+  background: whitesmoke; }
+
+/* line 110, YouthSpotsBrain/static/scss/map.scss */
+#map {
+  height: 100vh;
+  width: 75%; }
+
+/* line 114, YouthSpotsBrain/static/scss/map.scss */
+.store-list .heading {
+  background: #ff6900;
+  color: #fff; }
+
+/* line 118, YouthSpotsBrain/static/scss/map.scss */
+.store-list .heading h2 {
+  padding: 1rem; }
+
+/* line 121, YouthSpotsBrain/static/scss/map.scss */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1); }
+
+/* line 127, YouthSpotsBrain/static/scss/map.scss */
+::-webkit-scrollbar-thumb {
+  background: #ff6900;
+  border-radius: 0; }
+
+/* line 131, YouthSpotsBrain/static/scss/map.scss */
+.store-list ul.list {
+  padding: 0 1rem;
+  list-style-type: none; }
+
+/* line 135, YouthSpotsBrain/static/scss/map.scss */
+.store-list .shop-item {
+  margin: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1rem; }
+
+/* line 140, YouthSpotsBrain/static/scss/map.scss */
+.store-list li:last-child .shop-item {
+  border: none; }
+
+/* line 143, YouthSpotsBrain/static/scss/map.scss */
+.store-list .shop-item a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #ff6900;
+  font-weight: 700; }
+
+/* line 149, YouthSpotsBrain/static/scss/map.scss */
+.store-list .shop-item p {
+  font-size: 14px;
+  color: #404040; }
+
+/* line 153, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  overflow: hidden; }
+
+/* line 157, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  margin: 0; }
+
+/* line 160, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper h4 {
+  padding: 16px;
+  background: #ff6804;
+  color: #fff;
+  font-size: 16px; }
+
+/* line 166, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper p {
+  padding: 0 16px;
+  font-size: 14px;
+  margin-bottom: 14px; }
+
+/* line 171, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper .leaflet-popup-content .phone-number {
+  padding: 16px;
+  padding-top: 0; }
+
+/* line 175, YouthSpotsBrain/static/scss/map.scss */
+.leaflet-popup-content-wrapper .leaflet-popup-content .phone-number a {
+  color: #ff6808;
+  font-size: 14px; }
