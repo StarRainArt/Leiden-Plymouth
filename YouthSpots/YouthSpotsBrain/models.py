@@ -33,7 +33,7 @@ class Tags(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     id = models.AutoField(primary_key=True)
-    biography = models.TextField(default='There is no biografy', max_length=2000)
+    biography = models.TextField(default='There is no biography', max_length=2000)
     favorite_tags = models.ManyToManyField(Tags, related_name='favorite_tags')
 
 class Meetups(models.Model):
