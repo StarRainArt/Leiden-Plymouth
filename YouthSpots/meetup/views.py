@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 #from meetup.models import MeetupData
-from YouthSpotsBrain.models import Profile, Meetups
+from YouthSpotsBrain.models import Profile, Meetups, Pins
 import time
 from django.urls import reverse
 
@@ -30,6 +30,8 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
+        longitude = Pins.longitude
+        latitude =  Pins.latitude
         try:
             profile = Profile.objects.get(user=request.user)
         except Profile.DoesNotExist:
@@ -45,6 +47,9 @@ def meetup_data_create(request):
             end_timestamp=time_end,
             description=description,
             owner_id=profile,
+            longitude=longitude,
+            latitude=latitude,
+            
            # type_meetup=type_meetup,
             visibility=visibility
         )
