@@ -15,9 +15,9 @@ def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
 def my_meetups(request):
-    profile = Profile.objects.get(user=request.user)
-    User_id = Meetups.objects.get(owner_id=request.owner_id)
-    meetups = Meetups.objects.filter(profile.id ==  User_id ) # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    # Filter meetups based on the owner_id field
+    #meetups = Meetups.objects.filter(owner_id=request.user.profile)
+    meetups =Meetups.objects.all()
     return render(request, 'My_meetup.html', {'meetups': meetups})
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
@@ -30,6 +30,10 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            return redirect('create_profile')
         if time_start >= time_end:
                   return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
@@ -40,6 +44,7 @@ def meetup_data_create(request):
             start_timestamp=time_start,
             end_timestamp=time_end,
             description=description,
+            owner_id=profile,
            # type_meetup=type_meetup,
             visibility=visibility
         )

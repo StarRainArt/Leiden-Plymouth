@@ -22,9 +22,9 @@
         <ul>
             {% for meetup in meetups %}
                 <li>
-                    <strong>{{ meetup.name_meetup }}</strong><br>
-                    <span>Start Time: {{ meetup.time_start }}</span><br>
-                    <span>End Time: {{ meetup.time_end }}</span><br>
+                  <strong>{{ meetup.title }}</strong><br>
+                  <span>Start Time: {{ meetup.start_timestamp }}</span><br>
+                  <span>End Time: {{ meetup.end_timestamp }}</span><br>
                     
                 </li>
             {% empty %}
