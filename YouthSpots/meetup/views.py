@@ -33,8 +33,8 @@ def meetup_data_create(request):
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
         if request.method == 'GET':
-           latitude = request.GET.get('lat')
-           longitude = request.GET.get('lng')
+           lat = request.GET.get('lat')
+           lng = request.GET.get('lng')
            title = request.GET.get('title')
          
         user_id = Profile.objects.values_list('id', flat=True).first()
@@ -43,7 +43,7 @@ def meetup_data_create(request):
         
         #or time_start <= time.localtime
         if time_start >= time_end :
-            return HttpResponseBadRequest(render(request, 'meetup.html',{'lat': lat, 'lng': lng, 'title': title}))
+            return HttpResponseBadRequest(render(request, 'meetup.html'))
                         
                   
               # Create a MeetupData instance
@@ -53,8 +53,8 @@ def meetup_data_create(request):
             end_timestamp=time_end,
             description=description,
             owner_id=profile,
-            #longitude=longitude,
-            #latitude=latitude,
+            longitude=lng,
+            latitude=lat,
             
            # type_meetup=type_meetup,
             visibility=visibility

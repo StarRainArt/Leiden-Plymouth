@@ -112,6 +112,18 @@
               imagePreviewContainer.appendChild(img);
             }
           });
+          const url = window.location.href;
+
+// Create a new URLSearchParams object with the query string of the URL
+const searchParams = new URLSearchParams(url.split('?')[1]);
+
+// Get the values of the 'lat', 'lng', and 'title' parameters
+const lat = searchParams.get('lat');
+const lng = searchParams.get('lng');
+const title = searchParams.get('title');
+console.log('Latitude:', lat);
+console.log('Longitude:', lng);
+console.log('Title:', title);
     </script>
   </main>
 </body>
