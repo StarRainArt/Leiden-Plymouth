@@ -3,7 +3,7 @@
 {% block title%}Social Sphere - Home{% endblock %}
 
 {% block content %}
-<div id="map" style="height: 70vh; width: 70vw; margin: auto auto"></div>
+<div id="map" style="height: 100vh; width: 100vw; margin: auto auto"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
   <button id="saveMarker" class="button">Save the marker</button>
@@ -177,7 +177,9 @@
                 <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
                 <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
                 <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
-                <input type="submit" value="Save" />
+                <label for="addMeetup">Add Meetup:</label><br />
+                <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
+                                <input type="submit" value="Save" />
               </form>
             `;
           container.innerHTML = popupContent;
@@ -186,6 +188,7 @@
           // Add event listener for form submission
           let popupForm = container.querySelector("#popupForm");
           popupForm.addEventListener("submit", handleEditFormSubmission);
+          
         });
       });
       deleteButtons.forEach(function (button) {

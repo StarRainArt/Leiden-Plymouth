@@ -17,6 +17,7 @@ body {
     // position: absolute;
     background-color: $Royal-purple;
     .button-wrapper {
+      
       display: flex;
       justify-content: space-evenly;
       .button {
@@ -47,13 +48,15 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+      color: $Royal-purple;
+       
       input {
         width: 100%;
         height: 40px;
         display: flex;
         padding: 5px 13px;
         border-radius: 15pt;
-        background-color: $Pure-white;
+        background-color: $Royal-purple;
         font-size: 0.9rem;
       }
       .leaflet-routing-remove-waypoint {
@@ -70,7 +73,7 @@ body {
   }
 }
 .reverse-button {
-  background-color: $Pure-white;
+  background-color: $Blue-green;
   padding: 10px;
   border-radius: 5px;
 }
@@ -109,6 +112,11 @@ body {
   margin-right: 5px;
 }
 
+.leaflet-popup-content-wrapper {
+  background:  $Royal-purple !important;
+}
+
+
 .tag:last-child {
   margin-right: 0px;
 }
@@ -118,3 +126,8 @@ body {
   }
 }
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+#map {
+  position: absolute;
+  z-index: 0;
+}

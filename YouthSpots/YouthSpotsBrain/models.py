@@ -13,12 +13,12 @@ class Pins(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     id = models.AutoField(primary_key=True)
     
+
 class Meetups(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='There is no title', max_length=255)
