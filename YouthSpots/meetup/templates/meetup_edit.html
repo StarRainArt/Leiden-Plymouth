@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    
+    {% load static %} {% load compress %} {% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
+    type="text/x-scss"/>
+    
+    
+  
+    {% endcompress %}
+  </head>
+  {% comment %} ================= Page Content =================  {% endcomment %}
+<body>
+  <main>
+    <div class="title">
+      <h1>
+        Editing my event
+      </h1>
+    </div>
+    <center>
+        <form action="{% url 'create_meetup' %}" method="POST">
+            {% csrf_token %}
+            <div class="create-event-container">
+              <div class="event-details"> 
+                <input class="eventname" type="text" id="eventname" name="name_meetup" placeholder="Event Name" required maxlength="40">
+              </div><br>
+              <div class="event-details"><!-- probaly should be replaced with map thing-->
+                <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
+              </div><!--<br>
+               <div class="event-details">
+                <label for="type_meetup">Type of Meetup:</label>
+                <select id="type_meetup" name="type_meetup" multiple>
+                    {% for code, label in type_mt %}
+                        <option value="{{ code }}">{{ label }}</option>
+                    {% endfor %}
+                    
+                </select> -->
+            </div><br>
+              <div> <h3>Start time</h3>
+                <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_start" required>
+              </div><br>
+              
+              <div><h3>Closing time</h3>
+                <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_end" required>
+              </div><br>
+              <div class="event-details">
+                <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
+              </div><br>
+              <div>
+                <button class="save-button" id="button">Save</button><br>
+              </div>
+            </div>
+          </form>
+
+   
+    </center>
+
+
+
+    <script>
+        // Get the current date and time
+        var currentDate = new Date();
+        var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
+
+        // Set the minimum value for the input field
+        document.getElementById('dateandtime').min = currentDateTime;
+
+        // Image Upload
+        let inputFile = document.getElementById("input-file");
+        let imagePreviewContainer = document.getElementById("image-preview-container");
+
+        inputFile.addEventListener("change", function() {
+          imagePreviewContainer.innerHTML = ""; // Clear previous previews
+          const files = inputFile.files;
+          const maxFiles = 6; // Maximum number of files allowed
+            for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
+              const file = files[i];
+              const img = document.createElement("img");
+              img.src = URL.createObjectURL(file);
+              img.height = 100; // Adjust image height as needed
+              img.width = 100; // Adjust image width as needed
+              imagePreviewContainer.appendChild(img);
+            }
+          });
+    </script>
+  </main>
+</body>
+</html>

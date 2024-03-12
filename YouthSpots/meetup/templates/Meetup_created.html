@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    
+    {% load static %} {% load compress %} {% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
+    type="text/x-scss"/>
+    
+    
+  
+    {% endcompress %}
+  </head>
+  {% comment %} ================= Page Content =================  {% endcomment %}
+<body>
+  <main>
+    <div class="title">
+      <h1>
+        My events
+      </h1>
+    </div>
+    <center>
+        <!--<h1>Meetups List</h1>
+        <ul>
+            {% for meetup in meetups %}
+                <li>
+                    <strong>{{ meetup.name_meetup }}</strong><br>
+                    <span>Start Time: {{ meetup.time_start }}</span><br>
+                    <span>End Time: {{ meetup.time_end }}</span><br>
+                    <span>Type: {{ meetup.get_type_meetup_display }}</span><br>
+                    
+                </li>
+            {% empty %}
+                <li>No meetups available.</li>
+            {% endfor %}
+        </ul> -->
+
+   
+    </center>
+
+
+
+      <script>
+        
+    </script>
+  </main>
+</body>
+</html>

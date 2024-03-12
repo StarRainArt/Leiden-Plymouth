@@ -6,3 +6,4 @@ db.sqlite3
 env/
 venv/
 *.css
+YouthSpots/YouthSpots/settings.py
