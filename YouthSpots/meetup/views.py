@@ -31,31 +31,27 @@ def meetup_data_create(request):
         description = request.POST.get('description')
         #type_meetup = request.POST.get('type_meetup')
         visibility = request.POST.get('visibility')
-        if request.method == 'GET':
-           latitude = request.GET.get('lat')
-           longitude = request.GET.get('lng')
+        #if request.method == 'GET':
+          # latitude = request.GET.get('lat')
+           #longitude = request.GET.get('lng')
            #title = request.GET.get('title')
-           print( longitude)
-           print(latitude)
-
-        
-        try:
-            profile = Profile.objects.get(user=request.user)
-        except Profile.DoesNotExist:
-            return redirect('create_profile')
-        if time_start >= time_end or time_start < time.localtime:
-            return HttpResponseBadRequest(render(request, 'meetup.html'))
+         
+        user_id = 1#request.user.id
+        profile = Profile.objects.get(id=user_id)
+        #or time_start <= time.localtime
+        if time_start >= time_end :
+            return HttpResponseBadRequest(render(request, 'meetup.html'))#,{'lat': lat, 'lng': lng, 'title': title}
                         
                   
               # Create a MeetupData instance
-        meetup_data = Meetups.objects.create(
+        Meetup = Meetups.objects.create(
             title=name_meetup,
             start_timestamp=time_start,
             end_timestamp=time_end,
             description=description,
             owner_id=profile,
-            longitude=longitude,
-            latitude=latitude,
+            #longitude=longitude,
+            #latitude=latitude,
             
            # type_meetup=type_meetup,
             visibility=visibility
@@ -69,7 +65,7 @@ def meetup_data_create(request):
         
 
     # Render a form for creating a meetup
-    return render(request, 'meetup.html')
+    return render(request, 'maps.html')
 #create_meetup_form.html is not const
 def select_meetup(request):
     meetups = Meetups.objects.all()

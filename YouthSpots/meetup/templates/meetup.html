@@ -53,15 +53,13 @@
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
           </div><br>                
           <div>
-            <input type="button" value="Save" class="save-button" id="button" onclick="window.location.href='/'"><br>
+            <input type="submit" value="Submit" class="save-button" id="button">
+           <!-- <input type="button" value="Save" class="save-button" id="button"><br>-->
           </div>
           </div>
         </div>
       </form>
-      <form action="{% url 'create_meetup' %}" method="Get">
-        <input type="hidden" id="lat" name="lat" value="${{lat}}" />
-        <input type="hidden" id="lng" name="lng" value="${{lng}}" />
-        </form>
+      
 
       <div class="hero">
         <div class="card">
@@ -88,6 +86,7 @@
 
 
       <script>
+        //let fetchedPins = await (await fetch("/getPins")).json();
         // Get the current date and time
         var currentDate = new Date();
         var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
