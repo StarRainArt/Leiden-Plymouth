@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Social Sphere - Profile{% endblock %}
+{% block title %}{% block title%}Profile - Social Sphere{% endblock %}{% endblock %}
 
 {% block content %}
 
@@ -9,21 +9,45 @@
 {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/view_profile.scss' %}" type="text/x-scss">
 {% endcompress %}
-<section id="biography">
-    <p>{{ biography }}</p>
+<section id="biography_edit">
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="bio">
+        <textarea name="biography" id="biography" placeholder="Add a biography">
+            {{ biography }}
+        </textarea>
+        <input type="submit" value="edit">
+    </form>
 </section>
 <section id="favorite_tags">
     <h2>Favorite Tags</h2>
     <ul>
         {% for tag in favorite_tags %}
-            <li>{{ tag }}</li>
+            <li class="tag_li">{{ tag }}</li>
         {% endfor %}
     </ul>
     <form method="post">
         {% csrf_token %}
+        <input type="hidden" name="action" value="tags">
         <input type="text" name="name" id="tag" placeholder="Add a favorite tag">
-        <input type="submit">
+        <input type="submit" value="add">
     </form>
 </section>
+
+<script type="text/javascript">
+    var tag = document.getElementsByClassName('tag_li');
+    for (let i = 0; i < tag.length; i++) {
+        tag[i].addEventListener('click', function() {
+            fetch("view_profile",{method: "POST", headers: {
+                'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({
+            action: "remove_tag",
+            name: tag[i].innerText
+        })
+        })
+    })
+    }
+</script>
 
 {% endblock %}
