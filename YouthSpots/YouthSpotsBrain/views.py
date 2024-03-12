@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponse
-from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth
+from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth, Tags
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
@@ -11,7 +11,22 @@ def home(request):
     return render(request, "home.html")
 
 def view_profile(request):
-    return render(request, "view_profile.html")
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    if request.method == "POST":
+        if request.POST.get("name") != None:
+            profile = Profile.objects.get(user=request.user)
+            if Tags.objects.filter(name=request.POST.get("name")).exists():
+                tag = Tags.objects.get(name=request.POST.get("name"))
+                profile.favorite_tags.add(tag)
+                profile.save()
+            else:
+                tag = Tags(name=request.POST.get("name"))
+                tag.save()
+                profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
+                profile.save()
+    profile = Profile.objects.get(user=request.user)
+    return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
 
 def edit_profile(request):
     return render(request, "edit_profile.html")
@@ -79,7 +94,7 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 django_login(request, user)
-                return redirect("")
+                return redirect("/")
             else:
                 if UserAuth.objects.filter(username=username).exists():
                     user = UserAuth.objects.get(username=username)
