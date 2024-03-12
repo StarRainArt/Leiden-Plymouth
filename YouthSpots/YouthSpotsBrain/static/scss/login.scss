@@ -42,6 +42,12 @@ $Pure-white: #FFFFFF;
     border: none;
     border-radius: 25px;
     width: 30%;
+    cursor:pointer;
+    transition: opacity 0.3s, transform 0.3s;
+}
+.login_button:hover {
+    opacity: 0.8; 
+    transform: scale(1.05); 
 }
 .btn{
     background-color: #1E095A;
