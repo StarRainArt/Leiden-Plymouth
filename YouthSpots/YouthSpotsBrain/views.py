@@ -3,7 +3,7 @@ from YouthSpotsBrain.models import Meetups, Profile, Pins, UserAuth, Tags
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
-import json
+import json, re
 
 def home(request):
     if request.user.is_authenticated == False:
@@ -14,16 +14,22 @@ def view_profile(request):
     if request.user.is_authenticated == False:
         return redirect("login")
     if request.method == "POST":
-        if request.POST.get("name") != None:
-            profile = Profile.objects.get(user=request.user)
-            if Tags.objects.filter(name=request.POST.get("name")).exists():
-                tag = Tags.objects.get(name=request.POST.get("name"))
-                profile.favorite_tags.add(tag)
-                profile.save()
-            else:
-                tag = Tags(name=request.POST.get("name"))
-                tag.save()
-                profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
+        if request.POST.get("action") == "tags":
+            if request.POST.get("name") != None:
+                profile = Profile.objects.get(user=request.user)
+                if Tags.objects.filter(name=request.POST.get("name")).exists():
+                    tag = Tags.objects.get(name=request.POST.get("name"))
+                    profile.favorite_tags.add(tag)
+                    profile.save()
+                else:
+                    tag = Tags(name=request.POST.get("name"))
+                    tag.save()
+                    profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
+                    profile.save()
+        else:
+            if request.POST.get("action") == "bio":
+                profile = Profile.objects.get(user=request.user)
+                profile.biography = request.POST.get("biography")
                 profile.save()
     profile = Profile.objects.get(user=request.user)
     return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
