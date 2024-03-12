@@ -12,8 +12,10 @@ def home(request):
     if request.user.is_authenticated == False:
         return redirect("login")
     return render(request, "home.html")
+
 def profile(request):
     return render(request, "edit_profile.html")
+
 def maps(request):
     return render(request, "maps.html")
 
