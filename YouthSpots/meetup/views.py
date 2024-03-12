@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from meetup.models import MeetupData
-from YouthSpotsBrain.models import MeetupData
+from YouthSpotsBrain.models import MeetupData, Profile, Meetups
 import time
 from django.urls import reverse
 
@@ -15,7 +15,9 @@ def public_meetups(request):
     meetups = MeetupData.objects.filter(visibility="Public") # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
     return render(request, 'meetup_public.html', {'meetups': meetups})
 def my_meetups(request):
-    meetups = MeetupData.objects.filter() # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    profile = Profile.objects.get(user=request.user)
+    id = Meetups.objects.get(owner_id=request.owner_id)
+    meetups = MeetupData.objects.filter(profile.id == id ) # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
     return render(request, 'My_meetup.html', {'meetups': meetups})
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
