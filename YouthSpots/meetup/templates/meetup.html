@@ -8,6 +8,8 @@
     {% load static %} {% load compress %} {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
     type="text/x-scss"/>
+    <link rel="stylesheet" href="{%static 'scss/style.scss' %}"
+    type="text/x-scss"/>
     
     
   
@@ -54,34 +56,48 @@
           <div class="event-details">
             <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
           </div><br>
+<<<<<<< HEAD
+        <!-- we don't have a userstory of it so it not a priority
+      <div class="hero">
+            <div class="card">
+              <h2>Selected Images</h2>
+              <div id="image-preview-container">
+                <!- Image previews will be added here dynamically ->
+              </div>
+              <label class="uploadimg" for="input-file">Upload Image</label>
+              <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
+            </div>
+          </div>-->
+=======
+>>>>>>> 53f56f2c59cdbe3e2876639c5b90ba33b6d5a7f5
           <div>
-            <button class="save-button" id="button">Save</button><br>
+            <input type="button" value="Save" class="save-button" id="button" onclick="window.location.href='/'"><br>
+          </div>
           </div>
         </div>
       </form>
 
-    <!-- we don't have a userstory of it so it not a priority
       <div class="hero">
         <div class="card">
           <h2>Selected Images</h2>
           <div id="image-preview-container">
-            <!- Image previews will be added here dynamically ->
+            <!-- Image previews will be added here dynamically -->
           </div>
           <label class="uploadimg" for="input-file">Upload Image</label>
           <input class="inputimg" type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" multiple required>
         </div>
-      </div>-->
+      </div>
         
-      <!-- <footer>
-        <nav>
-          <a href=""><img src="../static/img/home_page.png"></a>
-          <a href=""><img src="../static/img/Upcoming_events.png"></a>
-          <a href=""><img src="../static/img/Create_event.png"></a>
-          <a href=""><img src= "../static/img/Event_history.png"></a>
-          <a href=""><img src="../static/img/Profile_pic.png"></a>
-        </nav>
-      </footer>-->
-    </center>
+    </section>
+    <footer>
+      <nav>
+          <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}"></a>
+          <a href="{% url 'pins' %}"><img src="{% static 'img/Pins.png' %}"></a>
+          <a href=""><img src="{% static 'img/MeetUp.png' %}"></a>
+          <a href=""><img src="{% static 'img/Profile_img.png' %}"></a>
+          <a href=""><img src="{% static 'img/Settings.png' %}"></a>
+      </nav>
+  </footer>
 
 
 
