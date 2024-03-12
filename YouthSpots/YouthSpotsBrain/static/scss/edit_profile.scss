@@ -1,3 +1,12 @@
+
+$Blue-green: #2596be;
+$Federal-blue: #1E095A;
+$Royal-purple: #8147A8;
+$Old-rose: #B46F77;
+$Eerie-black: #222222;
+$Pure-white: #FFFFFF;
+
+
 .profile_logo {
   display: block;
   margin: 0 auto;
@@ -13,7 +22,7 @@
   margin-top: 20px;
 
   .alter-account-text{
-  color: #fff;
+  color: $Pure-white;
 }
 }
 
@@ -25,8 +34,8 @@
   border: 1px solid black; 
   padding: 10px; 
   border-radius: 25px; 
-  background-color: #21065D;
-  color: #fff;
+  background-color: $Federal-blue;
+  color: $Pure-white;
   width: 300px;
   
   .edit_textbox_text {
@@ -56,8 +65,8 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 10px;
-    background-color: #21065D;
-    color: white;
+    background-color: $Federal-blue;
+    color: $Pure-white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -88,7 +97,7 @@
   border: 1px solid black; 
   padding: 10px; 
   border-radius: 25px; 
-  background-color: #21065D;
+  background-color: $Federal-blue;
   width: 300px;
   color: #fff;
   width: 200px;
@@ -98,7 +107,7 @@
   border: 1px solid black; 
   padding: 10px; 
   border-radius: 25px; 
-  background-color: #21065D;
+  background-color: $Federal-blue;
   color: red;
   width: 200px;
 }
@@ -111,7 +120,7 @@
   left: 50%;
   border-radius: 25px;
   transform: translate(-50%, -50%);
-  background-color: #21065D;
+  background-color: $Federal-blue;
   padding: 20px;
   border: 2px solid black;
   z-index: 1000;
@@ -120,7 +129,7 @@
     padding: 10px; 
     margin: 10px;
     border-radius: 25px; 
-    background-color: #21065D;
+    background-color: $Federal-blue;
     color: #fff;
     width: 50px;
 }

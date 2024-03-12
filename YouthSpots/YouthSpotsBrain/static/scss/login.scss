@@ -22,7 +22,7 @@ $Pure-white: #FFFFFF;
     justify-content: space-between;
     padding: 5px 15px;
     border-radius: 15pt;
-    background-color: #21065D;
+    background-color: $Federal-blue;
     position: absolute;
     left: 180px;
     top: 100px;
@@ -51,7 +51,7 @@ $Pure-white: #FFFFFF;
     display: flex;
     padding: 5px 13px;
     border-radius: 15pt;
-    background-color: #21065D;
+    background-color: $Federal-blue;
 }
 
 #username{
@@ -61,5 +61,5 @@ $Pure-white: #FFFFFF;
     display: flex;
     padding: 5px 13px;
     border-radius: 15pt;
-    background-color: #21065D;
+    background-color: $Federal-blue;
 }
