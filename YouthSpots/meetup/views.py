@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
-from meetup.models import MeetupData
-from YouthSpotsBrain.models import MeetupData, Profile, Meetups
+#from meetup.models import MeetupData
+from YouthSpotsBrain.models import Profile, Meetups
 import time
 from django.urls import reverse
 
@@ -12,12 +12,12 @@ from django.urls import reverse
 def meetup(request):
     return render(request, "meetup.html")
 def public_meetups(request):
-    meetups = MeetupData.objects.filter(visibility="Public") # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
 def my_meetups(request):
     profile = Profile.objects.get(user=request.user)
     id = Meetups.objects.get(owner_id=request.owner_id)
-    meetups = MeetupData.objects.filter(profile.id == id ) # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
+    meetups = Meetups.objects.filter(profile.id == id ) # filter(owner_id=id)Assuming Meetup is your model for storing meetup data
     return render(request, 'My_meetup.html', {'meetups': meetups})
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
@@ -35,10 +35,10 @@ def meetup_data_create(request):
                         
                   
               # Create a MeetupData instance
-        meetup_data = MeetupData.objects.create(
-            name_meetup=name_meetup,
-            time_start=time_start,
-            time_end=time_end,
+        meetup_data = Meetups.objects.create(
+            title=name_meetup,
+            start_timestamp=time_start,
+            end_timestamp=time_end,
             description=description,
            # type_meetup=type_meetup,
             visibility=visibility
@@ -55,9 +55,9 @@ def meetup_data_create(request):
     return render(request, 'meetup.html')
 #create_meetup_form.html is not const
 def select_meetup(request):
-    meetups = MeetupData.objects.all()
+    meetups = Meetups.objects.all()
     return render(request, 'select_meetup.html', {'meetups': meetups})
-#select_meetup.html is not const
+
 def edit_meetup(request):
     if request.method == 'POST':
         meetup_id = request.POST.get('meetup_id')
@@ -65,7 +65,7 @@ def edit_meetup(request):
 #edit_meetup.html is not const    
 
 def edit_meetup_details(request, meetup_id):
-    meetup = MeetupData.objects.get(id=meetup_id)
+    meetup = Meetups.objects.get(id=meetup_id)
     if request.method == 'POST':
         meetup.name_meetup = request.POST.get('name_meetup')
         meetup.time_start = request.POST.get('time_start')
@@ -85,7 +85,7 @@ def edit_meetup_details(request, meetup_id):
 def delete_meetup(meetup_id, request):
     try:
         # Retrieve the meetup object from the database based on the meetup_id
-        meetup = MeetupData.objects.get(id=meetup_id)
+        meetup = Meetups.objects.get(id=meetup_id)
         
         # Delete the meetup object from the database
         meetup.delete()
@@ -93,13 +93,10 @@ def delete_meetup(meetup_id, request):
         # Optionally, you can return a success message or perform other actions
         return render(request, 'meetup.html')
     
-    except MeetupData.DoesNotExist:
+    except Meetups.DoesNotExist:
         return "Meetup with specified ID does not exist."
     
     except Exception as e:
         # Handle any other exceptions that may occur
         return f"An error occurred: {str(e)}"
 
-#def meetup(request):
- #   type_mt = MeetupData.type_mt  # Retrieve type_mt from the MeetupData model
- #   return render(request, "meetup.html", {'type_mt': type_mt})
