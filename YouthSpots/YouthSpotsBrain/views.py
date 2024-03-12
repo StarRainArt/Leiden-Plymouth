@@ -23,7 +23,7 @@ def view_profile(request):
             else:
                 tag = Tags(name=request.POST.get("name"))
                 tag.save()
-                profile.favorite_tags.add(tag)
+                profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
                 profile.save()
     profile = Profile.objects.get(user=request.user)
     return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
