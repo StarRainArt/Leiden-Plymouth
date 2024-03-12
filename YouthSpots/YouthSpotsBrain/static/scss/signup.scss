@@ -1,0 +1,93 @@
+$Blue-green: #2596be;
+$Federal-blue: #1E095A;
+$Royal-purple: #8147A8;
+$Old-rose: #B46F77;
+$Eerie-black: #222222;
+$Pure-white: #FFFFFF;
+
+*{
+    font-family: "Popins";
+    font-size: 12px;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #6832AA;
+}
+
+.display_buttons{
+    .nav_login_button{
+        background-color: #1E095A;
+        color: #fff;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 25px;
+        margin: 5px;
+        text-decoration: none;
+    }
+    
+    .nav_signup_button{
+        background-color: #8C43AC;
+        color: #fff;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 25px;
+        margin: 5px;
+        text-decoration:none;
+         
+    }
+}
+
+.nav_login_button{
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 30%;
+}
+
+.nav_signup_button{
+    background-color: #8C43AC;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 30%;
+}
+.box_text{
+    margin-bottom: 20px; 
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #21065D;
+    color: #fff;
+    width: 95%;
+}
+
+.signup_enter{
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.signup_enter:hover {
+    opacity: 0.8; 
+    transform: scale(1.05); 
+}
+
+p{
+    color: #fff;
+}
