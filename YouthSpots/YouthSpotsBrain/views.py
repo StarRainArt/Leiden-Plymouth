@@ -79,12 +79,12 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 django_login(request, user)
-                return redirect("home")
+                return redirect("")
             else:
                 if UserAuth.objects.filter(username=username).exists():
                     user = UserAuth.objects.get(username=username)
                     if user.check_password(password):
-                        return render(request, "home.html")
+                        return redirect("")
                     else:
                         return render(request, "login.html", {"error": "Invalid password"})
                 else:

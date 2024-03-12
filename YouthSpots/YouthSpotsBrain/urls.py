@@ -15,7 +15,6 @@ urlpatterns = [
     path("view_profile/", views.view_profile, name="view_profile"),
     path("edit_profile/", views.edit_profile, name="edit_profile"),
     # path("meetups/", views.meetups, name="meetups"),
-    # path("profile/", views.profile, name="profile"),
     # path("settings/", views.settings, name="settings"),
     path("testpage/", views.home, name="test"),
 ]
