@@ -115,6 +115,11 @@
           popupString += `<button class="showMeetup" data-id="${pin.id}" onclick="document.getElementById('pin-' + ${pin.id}).scrollIntoView();">Show meetup</button>`;
           marker.bindPopup(popupString);
           marker.addTo(map);
+
+          if(pinSelected == pin.id) {
+            map.setView(L.latLng(pin.latitude, pin.longitude), 13);
+            marker.openPopup
+          }
         }
       });
 

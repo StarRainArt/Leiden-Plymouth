@@ -34,7 +34,7 @@
       let button = clone.querySelector(".pin");
       button.id = "pin-" + pin.id;
       button.addEventListener("click", function () {
-        window.location.href = `?pinSelected=${pin.id}`;
+        window.location.href = `/?pinSelected=${pin.id}`;
       });
       document.getElementById("pinList").appendChild(clone);
     });

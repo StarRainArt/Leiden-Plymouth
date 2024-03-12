@@ -108,7 +108,9 @@ body {
   display: inline-block;
   margin-right: 5px;
 }
-
+.leaflet-routing-container{
+  color: black;
+}
 .tag:last-child {
   margin-right: 0px;
 }
