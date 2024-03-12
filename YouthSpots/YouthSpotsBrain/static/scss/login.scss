@@ -1,3 +1,5 @@
+// Scss code for account styling for both login and signup//
+
 $Blue-green: #2596be;
 $Federal-blue: #1E095A;
 $Royal-purple: #8147A8;
@@ -5,61 +7,76 @@ $Old-rose: #B46F77;
 $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
-#login_button {
-    font-family: "Poppins";
-    width: 2;
-    height:30px;
+*{
+    font-family: "Popins";
+    font-size: 12px;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  body {
     display: flex;
-    padding: 5px 13px;
-    border-radius: 15pt;
-    background-color:$Royal-purple;
-}
-
-#sign_in_button{
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 5px 15px;
-    border-radius: 15pt;
-    background-color: $Federal-blue;
-    position: absolute;
-    left: 180px;
-    top: 100px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #6832AA 
+}
+.container {
+    text-align: center;
 }
 
-#login_button_2{
-    font-family: "Poppins";
-    width: 150px;
-    height:30px;
-    display: flex;
-    padding: 5px 13px;
-    border-radius: 15pt;
+.signup_button{
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 30%;
+}
+.login_button{
+    background-color: #8C43AC;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 30%;
+}
+.btn{
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    width: 100px;
+}
+.input-group {
+    margin-top: 20px;
+    color: #fff;
+}
+
+.input-box {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 25px;
     background-color: #21065D;
-    align-self: center;
+    color: #fff;
+    width: 95%;
+}
+.logoimg{
+    display: block;
+    margin: 0% auto ;
+    margin-bottom: 20px ;
+    padding-top: 0px;
+    width: 30vh;
+}
+.btn-group button:hover {
+    cursor: pointer; 
 }
 
-.login_form{
-    display: flex;
-    justify-content: space-around;
+.btn-group button:hover {
+    opacity: 0.6; 
 }
 
-#password{
-    font-family: "Poppins";
-    width: 150px;
-    height:30px;
-    display: flex;
-    padding: 5px 13px;
-    border-radius: 15pt;
-    background-color: $Federal-blue;
-}
 
-#username{
-    font-family: "Poppins";
-    width: 20vw;
-    height:4vh;
-    display: flex;
-    padding: 5px 13px;
-    border-radius: 15pt;
-    background-color: $Federal-blue;
-}
