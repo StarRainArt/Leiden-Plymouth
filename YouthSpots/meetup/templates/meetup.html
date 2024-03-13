@@ -25,87 +25,10 @@
         <h1>Create Event</h1>
       </div>
       <section class="center">
-        <form action="{% url 'create_meetup' %}" method="POST">
+        <form method="post">
           {% csrf_token %}
-          <div class="create-event-container">
-            <div class="event-details">
-              <input
-                class="eventname"
-                type="text"
-                id="eventname"
-                name="name_meetup"
-                placeholder="Event Name"
-                required
-                maxlength="40"
-              />
-            </div>
-            <br />
-            <div class="event-details">
-              <input
-                class="location"
-                type="text"
-                id="location"
-                name="location"
-                placeholder="Event Location"
-                required
-                maxlength="50"
-              />
-            </div>
-            <br />
-            <div class="event-details">
-              <label for="visibility">Meetup visibility:</label>
-              <select id="visibility" name="visibility" required>
-                <option value="private">private</option>
-                <option value="protected">protected</option>
-                <option value="Public">Public</option>
-              </select>
-            </div>
-            <br />
-            <div>
-              <h3>Start time</h3>
-              <input
-                class="dateandtime"
-                type="datetime-local"
-                id="dateandtime1"
-                name="time_start"
-                required
-              />
-            </div>
-            <br />
-            <div>
-              <h3>Closing time</h3>
-              <input
-                class="dateandtime"
-                type="datetime-local"
-                id="dateandtime2"
-                name="time_end"
-                required
-              />
-            </div>
-            <br />
-            <div class="event-details">
-              <textarea
-                class="description"
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Event Description"
-                required
-                maxlength="500"
-              ></textarea>
-            </div>
-            <br />
-            <div>
-              <input
-                type="submit"
-                value="Save"
-                class="save-button"
-                id="button"
-              /><br />
-            </div>
-            <input type="file" id="your-input-file-id" multiple />
-            <div id="your-container-id"></div>
-          </div>
+          {{ form.as_p }}
+          <button type="submit">Create</button>
         </form>
       </section>
       <footer>
@@ -120,7 +43,7 @@
         </nav>
       </footer>
 
-      <script>
+      <!-- <script>
         if (window.location.search) {
           window.onload = function () {
             // Get the latitude and longitude from the URL
@@ -183,7 +106,7 @@
             }
           });
         });
-      </script>
+      </script> -->
     </main>
   </body>
 </html>

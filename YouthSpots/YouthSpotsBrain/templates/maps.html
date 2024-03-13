@@ -14,13 +14,23 @@
 
   async function run(latitude, longitude) {
     let userLocation = L.latLng(latitude, longitude);
-
     // Create Map
     let map = L.map("map", { attributionControl: false });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxzoom: 19,
     }).addTo(map);
     map.setView(userLocation, 13);
+
+    // Create user marker
+    let userIcon = L.icon({
+      iconUrl: "../static/img/Pin_You.png",
+      iconSize: [40, 50],
+      shadowSize: [50, 64],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76],
+    });
+    let userMarker = L.marker(userLocation, { icon: userIcon }).addTo(map);
 
     // Create routing control
     let control = L.Routing.control({
@@ -68,12 +78,47 @@
       let fetchedPins = await (await fetch("/getPins")).json();
 
       fetchedPins.forEach((pin) => {
+        let places = L.icon({
+          iconUrl: "../static/img/Pin_Place.png",
+          iconSize: [40, 50],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+        let meetup = L.icon({
+          iconUrl: "../static/img/Pin_Meetup.png",
+          iconSize: [38, 95],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+        let user = L.icon({
+          iconUrl: "../static/img/Pin_You.png",
+          iconSize: [38, 95],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+
+        let icon;
+
+        if (pin.type === "user") {
+          icon = user;
+        } else if (pin.type === "meetup") {
+          icon = meetup;
+        } else {
+          // Default to 'pin' for other types
+          icon = places;
+        }
         if (pins[pin.id]) {
-          /*
-            UPDATE
-          */
           let marker = pins[pin.id].marker;
           pins[pin.id].info = pin;
+          if (marker.options.icon !== icon) {
+            marker.setIcon(icon);
+          }
 
           let pinString = `<div class="title">${pin.title}</div>`;
           pinString += `<div class="description">${pin.description}</div>`;
@@ -91,10 +136,10 @@
           marker.getPopup().update();
         } else {
           /*
-            CREATE
-          */
+              CREATE
+            */
           pins[pin.id] = {
-            marker: L.marker([pin.latitude, pin.longitude]),
+            marker: L.marker([pin.latitude, pin.longitude], { icon: icon }),
             info: pin,
           };
           let marker = pins[pin.id].marker;
@@ -109,7 +154,6 @@
           popupString += `</div>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
-          popupString += `<button class="showMeetup" data-id="${pin.id}" onclick="document.getElementById('pin-' + ${pin.id}).scrollIntoView();">Show meetup</button>`;
           marker.bindPopup(popupString);
           marker.addTo(map);
 
@@ -173,21 +217,21 @@
           // Create the form
           let container = L.DomUtil.create("div");
           let popupContent = `
-              <form id="popupForm">
-                <label for="title">Title:</label><br />
-                <input type="text" id="title" name="title" value="${pin.title}" /><br />
-                <label for="description">Description:</label><br />
-                <textarea id="description" name="description">${pin.description}</textarea><br />
-                <label for="tags">Tags:</label><br />
-                <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
-                <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
-                <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
-                <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
-                <label for="addMeetup">Add Meetup:</label><br />
-                <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
-                <input type="submit" value="Save" />
-              </form>
-            `;
+                <form id="popupForm">
+                  <label for="title">Title:</label><br />
+                  <input type="text" id="title" name="title" value="${pin.title}" /><br />
+                  <label for="description">Description:</label><br />
+                  <textarea id="description" name="description">${pin.description}</textarea><br />
+                  <label for="tags">Tags:</label><br />
+                  <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
+                  <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
+                  <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
+                  <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
+                  <label for="addMeetup">Add Meetup:</label><br />
+                  <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
+                  <input type="submit" value="Save" />
+                </form>
+              `;
           container.innerHTML = popupContent;
           e.popup.setContent(container);
 
@@ -303,20 +347,7 @@
       });
 
     updatePins();
-    // setInterval(async () => {
-    //   updatePins();
-    // }, 15000);
   }
-  let greenIcon = L.icon({
-    iconUrl: "leaf-green.png",
-    shadowUrl: "leaf-shadow.png",
-
-    iconSize: [38, 95],
-    shadowSize: [50, 64],
-    iconAnchor: [22, 94],
-    shadowAnchor: [4, 62],
-    popupAnchor: [-3, -76],
-  });
 
   // Start
   if (navigator.geolocation) {
@@ -325,7 +356,7 @@
     });
   } else {
     run(50.376289, -4.143841);
-  }
+  }  
   // let geocodersContainer = document.querySelector(".leaflet-routing-geocoders");
   // geocodersContainer.appendChild(button);
 

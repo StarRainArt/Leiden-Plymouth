@@ -1,10 +1,9 @@
-{% extends "base.html" %} {% block title %}{% endblock %} {% block javascript %}
-<!-- <script defer>
-{% extends "base.html" %} 
-
-{% block title %}Login - Social Sphere{% endblock %}
-
+{% extends "base.html" %} {% block title %}Login - Social Sphere{% endblock %}
 {% block javascript %}
+<!-- <script defer>
+
+
+
 <script defer>
     function SaveInfo() {
         var infoSave = {
@@ -33,28 +32,38 @@
 
 {% block content %}
 <div id="logo_con">
-    <img src="../static/img/logo.png" class="logoimg" />
+  <img src="../static/img/logo.png" class="logoimg" />
+</div>
+<div class="container">
+  <div class="btn-group">
+    <a href="/login"><button class="login_button">Login</button></a>
+    <a href="/signup"><button class="signup_button">Sign Up</button></a>
   </div>
-  <div class="container">
-    <div class="btn-group">
-      <a href="/login"><button class="login_button">Login</button></a>
-      <a href="/signup"><button class="signup_button">Sign Up</button></a>
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <div class="input-group">
+      <input
+        type="text"
+        class="input-box"
+        placeholder="Email"
+        name="username"
+      />
     </div>
-    <form action="{% url 'login' %}" method="post">
-      {% csrf_token %}
-      <div class="input-group">
-        <input type="text" class="input-box" placeholder="Email" name="username" />
-      </div>
-      <div class="input-group">
-        <input type="password" class="input-box" placeholder="Password" name="password" />
-      </div>
-      <div class="input-group remember-me">
-        <input type="checkbox" /> Remember me
-      </div>
-      <div class="input-group">
-        <button type="submit" class="btn">Login</button>
-      </div>
-    </form>
-  </div>
-  
+    <div class="input-group">
+      <input
+        type="password"
+        class="input-box"
+        placeholder="Password"
+        name="password"
+      />
+    </div>
+    <div class="input-group remember-me">
+      <input type="checkbox" /> Remember me
+    </div>
+    <div class="input-group">
+      <button type="submit" class="btn">Login</button>
+    </div>
+  </form>
+</div>
+
 {% endblock %}

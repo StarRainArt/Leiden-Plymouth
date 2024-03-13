@@ -9,6 +9,11 @@ visibility_type = {
     ("-", "Private"),
 }
 
+class PinType(models.TextChoices):
+    USER = 'user', 'User'
+    MEETUP = 'meetup', 'Meetup'
+    PLACE = 'place', 'Place'
+
 class Pins(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='There is no title', max_length=255)
@@ -17,9 +22,15 @@ class Pins(models.Model):
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
     tags = models.CharField(default='none', max_length=255)
+    pin_type = models.CharField(
+        max_length=10,
+        choices=PinType.choices,
+        default=PinType.PLACE,
+    )
 
     def __str__(self):
         return self.title
+
 
 class Tags(models.Model):
     id = models.AutoField(primary_key=True)
