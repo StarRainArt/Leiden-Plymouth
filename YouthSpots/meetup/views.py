@@ -6,10 +6,6 @@ import time, datetime
 from django.urls import reverse
 
 
-lat = None
-lng = None
-title = None
-
 
 # Create your views here.
 def meetup(request):
@@ -29,7 +25,8 @@ def meetup_edit(request):
     return render(request, "meetup_edit.html")
 
 def meetup_data_create(request):
-    global lat, lng, title
+    lat = None
+    lng = None
     
     url = request.build_absolute_uri()
   
