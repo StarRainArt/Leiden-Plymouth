@@ -106,17 +106,26 @@ def edit_meetup(request):
 def edit_meetup_details(request, meetup_id):
     meetup = Meetups.objects.get(id=meetup_id)
     if request.method == 'POST':
-        meetup.name_meetup = request.POST.get('name_meetup')
-        meetup.time_start = request.POST.get('time_start')
-        meetup.time_end = request.POST.get('time_end')
-        #meetup.type_meetup = request.POST.get('type_meetup')
-        #meetup.visibility = request.POST.get('visibility')
-        meetup.description = request.POST.get('description')
+        name_meetup = request.POST.get('name_meetup')
+        time_start = request.POST.get('time_start')
+        time_end = request.POST.get('time_end')
+        description = request.POST.get('description')
+        #type_meetup = request.POST.get('type_meetup')
+        visibility = request.POST.get('visibility')
+        #latitude = lat
+        #longitude = lng
+        
         # Update other fields as needed
+        meetup.title=name_meetup,
+        meetup.start_timestamp=time_start,
+        meetup.end_timestamp=time_end,
+        meetup.description=description,
+        #meetup.longitude=lng,
+        #meetup.latitude=lat,
         meetup.save()
-        return redirect('select_meetup')
+        return redirect('my_meetups')
 #select_meetup.html is not const
-    return render(request, 'edit_meetup.html', {'meetup': meetup})
+    return render(request, 'my_meetups.html', {'meetup': meetup})
 #edit_meetup.html is not const
 #don't forget to add a something to remind people
 

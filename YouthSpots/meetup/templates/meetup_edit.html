@@ -22,37 +22,37 @@
       </h1>
     </div>
     <center>
-        <form action="{% url 'create_meetup' %}" method="POST">
+      
+      <br>
+        <form action="{% url 'editing_meetup' %}" method="POST">
             {% csrf_token %}
             <div class="create-event-container">
               <div class="event-details"> 
-                <input class="eventname" type="text" id="eventname" name="name_meetup" placeholder="Event Name" required maxlength="40">
+                <input class="eventname" type="text" id="eventname" name="name_meetup"  default:"{{ meetup.title }}" required maxlength="40">
               </div><br>
               <div class="event-details"><!-- probaly should be replaced with map thing-->
                 <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
-              </div><!--<br>
+              </div><br>
                <div class="event-details">
-                <label for="type_meetup">Type of Meetup:</label>
-                <select id="type_meetup" name="type_meetup" multiple>
-                    {% for code, label in type_mt %}
-                        <option value="{{ code }}">{{ label }}</option>
-                    {% endfor %}
-                    
-                </select> -->
+                <label for="visibility">Meetup visibility:</label>
+                <select id="visibility" name="visibility" required default:"-">
+                         <option value="private">private</option>
+                         <option value="protected">protected</option>
+                         <option value="Public">Public</option>
+                </select> 
             </div><br>
               <div> <h3>Start time</h3>
-                <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_start" required>
+                <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start" default:"{{ meetup.start_timestamp }}" required>
               </div><br>
               
               <div><h3>Closing time</h3>
-                <input class="dateandtime" type="datetime-local" id="dateandtime" name="time_end" required>
+                <input class="dateandtime" type="datetime-local" id="dateandtime2" name="time_end" default:"{{ meetup.end_timestamp }}" required>
               </div><br>
               <div class="event-details">
-                <textarea class="description" type="text" id="description" name="description" placeholder="Event Description" required maxlength="500"></textarea>
-              </div><br>
+                <textarea class="description" type="text" id="description" name="description" default:"{{ meetup.description }}" required maxlength="500"></textarea>
+              </div><br>                                
               <div>
-                <button class="save-button" id="button">Save</button><br>
-              </div>
+                <input type="submit" value="Submit" class="save-button" id="button">
             </div>
           </form>
 
@@ -62,12 +62,15 @@
 
 
     <script>
-        // Get the current date and time
-        var currentDate = new Date();
-        var currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
+        
+      //let fetchedPins = await (await fetch("/getPins")).json();
+      // Get the current date and time
+      let currentDate = new Date();
+      let currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
 
-        // Set the minimum value for the input field
-        document.getElementById('dateandtime').min = currentDateTime;
+      // Set the minimum value for the input field
+      document.getElementById('dateandtime1').min = currentDateTime;
+      document.getElementById('dateandtime2').min = currentDateTime;
 
         // Image Upload
         let inputFile = document.getElementById("input-file");
