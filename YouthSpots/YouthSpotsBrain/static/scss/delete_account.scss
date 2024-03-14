@@ -1,0 +1,38 @@
+
+$Blue-green: #2596be;
+$Federal-blue: #1E095A;
+$Royal-purple: #8147A8;
+$Old-rose: #B46F77;
+$Eerie-black: #222222;
+$Pure-white: #FFFFFF;
+#password {
+    background-color: $Federal-blue;
+    padding: 9px;
+    width: 40%;
+    border: none;
+    border-radius: 3vh;
+    color: $Pure-white;
+}
+p {
+    width: 40%;
+    color: $Pure-white;
+    font-size: 1.5em;
+    text-align: center;
+    margin-left: 30%;
+}
+button {
+    background-color: $Federal-blue;
+    color: $Pure-white;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+}
+@media screen and (max-width: 600px){
+    #password {
+        width: 80%;
+    }
+    p {
+        width: 80%;;
+        margin-left: 10%;
+    }
+}

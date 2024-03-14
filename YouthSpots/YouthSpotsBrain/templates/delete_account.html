@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title%}Change Password - Social Sphere{% endblock %}
+{% block content %}
+{% load static %}{% load compress %}{% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/delete_account.scss' %}" type="text/x-scss"/>
+{% endcompress %}
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+
+            <input type="password" name="password" id="password" placeholder="Confirm password to delete your profile">
+            <p>Are you sure you want to delete your account? Type your password to confirm. Note: Once deleted we cannot recover your account.</p>
+            <button type="submit">Delete profile</button>
+        </form>
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
