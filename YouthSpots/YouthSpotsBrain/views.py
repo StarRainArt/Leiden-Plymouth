@@ -222,3 +222,5 @@ def logout(request):
 def pins(request):
     return render(request, "pins.html")
   
+def settings(request):
+    return render(request, "settings.html")
