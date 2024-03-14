@@ -83,6 +83,7 @@
         );
       },
     }).addTo(map);
+
     // Create a custom control for toggling walking details
     let toggleWalkingDetailsControl = L.Control.extend({
       onAdd: function (map) {
@@ -183,6 +184,7 @@
           popupString += `</div>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+          popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;
           marker.bindPopup(popupString);
           marker.addTo(map);
 
@@ -237,6 +239,7 @@
     map.on("popupopen", function (e) {
       let deleteButtons = e.popup._contentNode.querySelectorAll(".deletePin");
       let editButtons = e.popup._contentNode.querySelectorAll(".editPin");
+      let shareButtons = e.popup._contentNode.querySelectorAll(".sharePin");
       editButtons.forEach(function (button) {
         button.addEventListener("click", function () {
           // Get pin ID from the data attribute
@@ -299,6 +302,12 @@
             });
         });
       });
+      shareButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          let pinId = this.dataset.id;
+          navigator.clipboard.writeText(`http://localhost:8000/?pinSelected=${pinId}`);
+        })
+      })
     });
 
     // AddMarker
