@@ -137,14 +137,21 @@ def edit_meetup_details(request):
     form = MeetupsForm_Edit(request.POST,instance=meetup)
     
     if form.is_valid():
-        if form.cleaned_data['name_meetup'] is not None :
+        if form.cleaned_data['name_meetup'] is not None and form.cleaned_data['name_meetup'] != meetup.name_meetup :
            meetup.name_meetup=form.cleaned_data['name_meetup']
-        #if form.cleaned_data['time_start'] is not None :
-         #  meetup.time_start=str(form.cleaned_data['time_start']),
-        #if form.cleaned_data['time_end'] is not None:
-        #   meetup.time_end=str(form.cleaned_data['time_end']),
-        if form.cleaned_data['description'] is not None:
+        if form.cleaned_data['time_start'] is not None and form.cleaned_data['time_start']!=meetup.time_start:
+           meetup.time_start=form.cleaned_data['time_start'],
+        if form.cleaned_data['time_end'] is not None and form.cleaned_data['time_end']!=meetup.time_end:
+           meetup.time_end=form.cleaned_data['time_end'],
+        if form.cleaned_data['description'] is not None and form.cleaned_data['description'] != meetup.description  :
            meetup.description=form.cleaned_data['description'],
+        if form.cleaned_data['tags'] is not None and form.cleaned_data['tags'] != meetup.description  :
+           meetup.tags=form.cleaned_data['tags'],
+        if form.cleaned_data['invited'] is not None and form.cleaned_data['invited'] != meetup.description  :
+           meetup.invited.set(form.cleaned_data['invited']),
+        if form.cleaned_data['visibility'] is not None and form.cleaned_data['visibility'] != meetup.description  :
+           meetup.visibility=form.cleaned_data['visibility'],
+        
         meetup = form.save()
         return redirect('my_meetups')
     else:
@@ -152,11 +159,10 @@ def edit_meetup_details(request):
             'location': meetup.location,
             'name_meetup': meetup.name_meetup,
             'description': meetup.description,
-            #'time_start':str(meetup.time_start),
-            #'time_end': str(meetup.time_end),
+            'time_start':meetup.time_start,
+            'time_end': meetup.time_end,
             #'invited': meetup.invited,
-            #'tags': meetup.tags.all() if hasattr(meetup, 'tags') and hasattr(meetup.tags, 'all') else None,
-            'pin': meetup.pin,
+            #'tags' : meetup.tags.all() if hasattr(meetup, 'tags') and hasattr(meetup.tags, 'all') else None,
             #'visibility': meetup.visibility,
              })
 # #select_meetup.html is not const
