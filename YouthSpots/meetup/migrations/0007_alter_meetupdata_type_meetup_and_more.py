@@ -21,3 +21,4 @@ class Migration(migrations.Migration):
             field=models.CharField(choices=[('#', 'Protected'), ('+', 'Public'), ('-', 'Private')], default='-', max_length=10),
         ),
     ]
+

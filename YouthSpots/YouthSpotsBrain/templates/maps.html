@@ -1,8 +1,5 @@
-{% extends "base.html" %}
-
-{% block title%}Home - Social Sphere{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title%}Social Sphere - Home{% endblock %}
+{%block content %}
 <div id="map" style="height: 100%; width: 100%; margin: 0 0"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
@@ -15,15 +12,38 @@
   const urlParams = new URLSearchParams(window.location.search);
   const pinSelected = urlParams.get("pinSelected");
 
+  // Pins
+  let pins = {};
+
   async function run(latitude, longitude) {
     let userLocation = L.latLng(latitude, longitude);
-
     // Create Map
     let map = L.map("map", { attributionControl: false });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxzoom: 19,
     }).addTo(map);
     map.setView(userLocation, 13);
+
+    // Create user marker
+    let userIcon = L.icon({
+      iconUrl: "../static/img/Pin_You.png",
+      iconShadow: "../static/img/Pin_You.png",
+      iconSize: [40, 50],
+      shadowSize: [50, 64],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76],
+    });
+    if (pins.userMarker) {
+      // Update user marker position
+      pins.userMarker.marker.setLatLng(userLocation);
+    } else {
+      // Create new user marker
+      pins.userMarker = {
+        marker: L.marker(userLocation, { icon: userIcon }).addTo(map),
+        info: { type: "user", latitude: latitude, longitude: longitude },
+      };
+    }
 
     // Create routing control
     let control = L.Routing.control({
@@ -63,18 +83,69 @@
         );
       },
     }).addTo(map);
+    // Create a custom control for toggling walking details
+    let toggleWalkingDetailsControl = L.Control.extend({
+      onAdd: function (map) {
+        let container = L.DomUtil.create("div", "leaflet-routing-geocoders");
+        let button = L.DomUtil.create("button", "", container);
+        button.innerHTML = "Toggle Walking Details";
+        button.onclick = function () {
+          let geocodersContainer = document.querySelector(
+            ".leaflet-routing-alternatives-container"
+          );
+          if (geocodersContainer.style.display === "none") {
+            geocodersContainer.style.display = "block";
+          } else {
+            geocodersContainer.style.display = "none";
+          }
+        };
+        return container;
+      },
+    });
 
-    // Pins
-    let pins = {};
+    // Add the custom control to the map
+    map.addControl(new toggleWalkingDetailsControl());
 
     async function updatePins() {
       let fetchedPins = await (await fetch("/getPins")).json();
 
       fetchedPins.forEach((pin) => {
+        let places = L.icon({
+          iconUrl: "../static/img/Pin_Place.png",
+          iconSize: [40, 50],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+        let meetup = L.icon({
+          iconUrl: "../static/img/Pin_Meetup.png",
+          iconSize: [38, 95],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+        let user = L.icon({
+          iconUrl: "../static/img/Pin_You.png",
+          iconSize: [38, 95],
+          shadowSize: [50, 64],
+          iconAnchor: [22, 94],
+          shadowAnchor: [4, 62],
+          popupAnchor: [-3, -76],
+        });
+
+        let icon;
+
+        if (pin.type === "user") {
+          icon = user;
+        } else if (pin.type === "meetup") {
+          icon = meetup;
+        } else {
+          // Default to 'pin' for other types
+          icon = places;
+        }
         if (pins[pin.id]) {
-          /*
-            UPDATE
-          */
           let marker = pins[pin.id].marker;
           pins[pin.id].info = pin;
 
@@ -94,10 +165,10 @@
           marker.getPopup().update();
         } else {
           /*
-            CREATE
-          */
+              CREATE
+            */
           pins[pin.id] = {
-            marker: L.marker([pin.latitude, pin.longitude]),
+            marker: L.marker([pin.latitude, pin.longitude], { icon: icon }),
             info: pin,
           };
           let marker = pins[pin.id].marker;
@@ -112,9 +183,13 @@
           popupString += `</div>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
-          popupString += `<button class="showMeetup" data-id="${pin.id}" onclick="document.getElementById('pin-' + ${pin.id}).scrollIntoView();">Show meetup</button>`;
           marker.bindPopup(popupString);
           marker.addTo(map);
+
+          if (pinSelected == pin.id) {
+            map.setView(L.latLng(pin.latitude, pin.longitude), 13);
+            marker.openPopup;
+          }
         }
       });
 
@@ -171,21 +246,21 @@
           // Create the form
           let container = L.DomUtil.create("div");
           let popupContent = `
-              <form id="popupForm">
-                <label for="title">Title:</label><br />
-                <input type="text" id="title" name="title" value="${pin.title}" /><br />
-                <label for="description">Description:</label><br />
-                <textarea id="description" name="description">${pin.description}</textarea><br />
-                <label for="tags">Tags:</label><br />
-                <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
-                <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
-                <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
-                <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
-                <label for="addMeetup">Add Meetup:</label><br />
-                <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
-                <input type="submit" value="Save" />
-              </form>
-            `;
+                <form id="popupForm">
+                  <label for="title">Title:</label><br />
+                  <input type="text" id="title" name="title" value="${pin.title}" /><br />
+                  <label for="description">Description:</label><br />
+                  <textarea id="description" name="description">${pin.description}</textarea><br />
+                  <label for="tags">Tags:</label><br />
+                  <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
+                  <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
+                  <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
+                  <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
+                  <label for="addMeetup">Add Meetup:</label><br />
+                  <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
+                  <input type="submit" value="Save" />
+                </form>
+              `;
           container.innerHTML = popupContent;
           e.popup.setContent(container);
 
@@ -301,20 +376,7 @@
       });
 
     updatePins();
-    // setInterval(async () => {
-    //   updatePins();
-    // }, 15000);
   }
-  let greenIcon = L.icon({
-    iconUrl: "leaf-green.png",
-    shadowUrl: "leaf-shadow.png",
-
-    iconSize: [38, 95],
-    shadowSize: [50, 64],
-    iconAnchor: [22, 94],
-    shadowAnchor: [4, 62],
-    popupAnchor: [-3, -76],
-  });
 
   // Start
   if (navigator.geolocation) {

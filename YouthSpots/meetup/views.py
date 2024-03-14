@@ -1,99 +1,97 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, QueryDict
-#from meetup.models import MeetupData
-from YouthSpotsBrain.models import Profile, Meetups, Pins
-import time, datetime
-from django.urls import reverse
-
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from meetup.models import Meetups
+from YouthSpotsBrain.models import Profile
+from django import forms
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.shortcuts import render
+from .forms import MeetupsForm
 
 
 # Create your views here.
-def meetup(request):
-     return render(request, "meetup.html")
-    
 def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
+
 def my_meetups(request):
-    # Filter meetups based on the owner_id field
-    #meetups = Meetups.objects.filter(owner_id=request.user.profile) #filter it to owner
-    user_id = 1#request.user.id
-    meetups =Meetups.objects.filter(owner_id=user_id)
-    return render(request, 'My_meetup.html', {'meetups': meetups})
-    r
-def edit_meetup(request, meetup_id):
+    profile = Profile.objects.get(user=request.user)
+    User_id = Meetups.objects.get(owner=request.owner)
+    meetups = Meetups.objects.filter(profile.id ==  User_id ) 
+    return render(request, 'my_meetup.html', {'meetups': meetups})
+
+def meetup_edit(request):
+    return render(request, "meetup_edit.html")
+
+# class MeetupForm(forms.ModelForm):
+#     class Meta:
+#         model = Meetups
+#         fields = ['name_meetup', 'location', 'visibility', 'time_start', 'time_end', 'description']
+
+# def meetup_data_create(request):
+#     if request.method == 'POST':
+#         form = MeetupForm(request.POST)
+#         if form.is_valid():
+#             new_meetup = form.save(commit=False)
+#             new_meetup.owner = Profile.objects.get(user=request.user)
+#             new_meetup.save()
+#             return redirect('meetup_list')  # or wherever you want to redirect after successful form submission
+#     else:
+#         form = MeetupForm()
+#     return render(request, 'meetup.html', {'form': form})
+
+
+def meetup(request):
     if request.method == 'POST':
-        meetup_id = int(request.POST.get('meetup_id'))
-        return redirect('edit_meetup',meetup_id=meetup_id)
+        form = MeetupsForm(request.POST)
+        if form.is_valid():
+            meetup = form.save()
+    else:
+        form = MeetupsForm()
+    return render(request, 'meetup.html', {'form': form})
 
-def meetup_data_create(request):
-    lat = None
-    lng = None
-    
-    url = request.build_absolute_uri()
-  
-    # Split the URL into its components
-    split_url = url.split('&')
+# @login_required
+# def meetup_data_create(request):
+#     if request.method == 'POST':
+#         # Extract form data
+#         name_meetup = request.POST.get('name_meetup')
+#         location = request.POST.get('location')
+#         visibility = request.POST.get('visibility')
+#         time_start_str = request.POST.get('time_start')
+#         time_end_str = request.POST.get('time_end')
+#         description = request.POST.get('description')
 
-    if len(split_url) > 1:
-        query_string = split_url[1]
+#         # Validate form data
+#         if None in [name_meetup, location, visibility, time_start_str, time_end_str, description]:
+#             print("something")
+#             return HttpResponseBadRequest(render(request, 'meetup.html'))
 
-        # Parse the query string into a QueryDict
-        query_dict = QueryDict(query_string)
-#
-        # Get specific query parameters
-        lat = float(query_dict.get('lat'))
-        lng = float(query_dict.get('lng'))
-        
+#         # Parse time data
+#         try:
+#             time_start = datetime.strptime(time_start_str, "%Y-%m-%d %H:%M:%S")
+#             time_end = datetime.strptime(time_end_str, "%Y-%m-%d %H:%M:%S")
+#         except ValueError:
+#             print("Invalid time format")
+#             return HttpResponseBadRequest(render(request, 'meetup.html'))
 
+#         # Create a new Meetups instance and save it to the database
+#         try:
+#             profile = Profile.objects.get(user=request.user)
+#             new_meetup = Meetups.objects.create(
+#                 name_meetup=name_meetup,
+#                 location=location,
+#                 visibility=visibility,
+#                 time_start=time_start,
+#                 time_end=time_end,
+#                 description=description,
+#                 owner=profile
+#             )
+#             return HttpResponseRedirect('/')
+#         except Exception as e:
+#             print(f"An error occurred: {str(e)}")
+#             return HttpResponseBadRequest(render(request, 'meetup.html'))
 
-
-    # if request.method == 'POST' and len(split_url) > 1 :
-    if request.method == 'POST' :
-        
-          
-          name_meetup = request.POST.get('name_meetup')
-          time_start = request.POST.get('time_start')
-          time_end = request.POST.get('time_end')
-          description = request.POST.get('description')
-         #type_meetup = request.POST.get('type_meetup')
-          visibility = request.POST.get('visibility')
-          #latitude = lat
-          #longitude = lng
-
-         
-          user_id = Profile.objects.values_list('id', flat=True).first()
-          #profile = Profile.objects.get()
-          profile = Profile.objects.get(id=user_id)
-        
-        #or time_start <= time.localtime
-          if time_start >= time_end:
-            return HttpResponseBadRequest(render(request, 'meetup.html'))
-                        
-                 
-              # Create a MeetupData instance
-          Meetup = Meetups.objects.create(
-            title=name_meetup,
-            start_timestamp=time_start,
-            end_timestamp=time_end,
-            description=description,
-            owner_id=profile,
-            longitude=lng,
-            latitude=lat,
-            
-           # type_meetup=type_meetup,
-            visibility=visibility
-        )
-
-       
-
-    
-    
-      # Assuming 'meetup' is the name of your meetup URL pattern
-        
-
-    # Render a form for creating a meetup
-    return render(request, 'maps.html')
+    # return render(request, 'meetup.html')
 #create_meetup_form.html is not const
 def select_meetup(request):
     meetups = Meetups.objects.all()

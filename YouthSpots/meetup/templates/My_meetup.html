@@ -4,19 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    
     {% load static %} {% load compress %} {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
     type="text/x-scss"/>
-    
-    
-  
     {% endcompress %}
   </head>
-  {% comment %} ================= Page Content =================  {% endcomment %}
 <body>
   <main>
-  
     <center><br>
         <h1> My Meetups</h1>
         <ul>
@@ -35,14 +29,8 @@
                 <li>No meetups available.</li>
             {% endfor %}
         </ul> 
-
-   
     </center>
-
-
-
-      <script>
-        
+      <script>        
     </script>
   </main>
 </body>
