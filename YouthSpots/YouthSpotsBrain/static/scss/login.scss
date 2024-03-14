@@ -23,24 +23,6 @@ body {
     width: 100%;
 }
 
-.signup_button{
-    background-color: #1E095A;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    width: 30%;
-}
-.login_button{
-    background-color: #8C43AC;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    width: 30%;
-    cursor:pointer;
-    transition: opacity 0.3s, transform 0.3s;
-}
 .login_button:hover {
     opacity: 0.8; 
     transform: scale(1.05); 
@@ -80,6 +62,32 @@ body {
 .btn-group button:hover {
     opacity: 0.6; 
 }
+.btn-group {
+    display:flex;
+    justify-content: center;
+    gap:10px;
+}
 
 
-
+.signup_button {
+    background-color: #1E095A;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor:pointer;
+    transition: opacity 0.3s, transform 0.3s;
+    width:100px;
+ 
+}
+.login_button{
+    background-color: #8C43AC;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor:pointer;
+    transition: opacity 0.3s, transform 0.3s;
+    width:100px;
+    
+}
