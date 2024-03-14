@@ -221,3 +221,7 @@ def logout(request):
 def pins(request):
     return render(request, "pins.html")
   
+def settings(request):
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    return render(request, "settings.html")
