@@ -33,6 +33,51 @@ background-color: $Federal-blue;
 
 }
 
+#legenda {
+  background-color: $Federal-blue;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    img {
+      width: 20px;
+      height: 30px;;
+    }
+  }
+}
+
+@media screen and (max-width: 820px) {
+  #legenda {
+    bottom: 180px;
+    left: 10px;
+  }
+
+  .button {
+    padding: 10px 15px;
+  }
+}
+
+@media screen and (min-width: 820px) {
+  #legenda {
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .button {
+    padding: 20px 30px;
+  }
+}
+
 body {
   // position: relative;
   
@@ -56,7 +101,6 @@ body {
       bottom: 120px;
       
       .button {
-        padding: 20px 30px;
         margin: 0 10px;
         z-index: 2;
         display: flex;
@@ -74,7 +118,7 @@ body {
       background-color: $Federal-blue;
       
       .leaflet-routing-collapse-btn {
-        color: $Royal-purple;
+        color: white;
       }
 
       .leaflet-routing-add-waypoint {
@@ -231,4 +275,8 @@ body {
 
 .leaflet-routing-icon{
   background-image: url("../img/Icons.png") !important;
+}
+
+.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
+  background-image: url("../img/RoutingTabIcon.png") !important;
 }
