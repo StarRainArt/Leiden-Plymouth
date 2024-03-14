@@ -7,12 +7,14 @@
         <link rel="stylesheet" href="{%static 'scss/settings.scss' %}" type="text/x-scss"/>
     {% endcompress %}
 
-    <section id="top_settings">
-        <a class="setting_btn" href="{% url 'edit_profile' %}">Edit Profile</a>
-        <a class="setting_btn" href="{% url 'changepassword' %}">Change Password</a>
-        <a class="setting_btn" href="{% url 'logout' %}">Log Out</a>
-    </section>
-    <section id="bottom_settings">
-        <a class="setting_btn" id="delete_btn" href="">Delete Account</a>
+    <section id="settings_bg">
+        <section id="top_settings">
+            <a class="setting_btn" href="{% url 'edit_profile' %}">Edit Profile</a>
+            <a class="setting_btn" href="{% url 'changepassword' %}">Change Password</a>
+            <a class="setting_btn" href="{% url 'logout' %}">Log Out</a>
+        </section>
+        <section id="bottom_settings">
+            <a class="setting_btn" id="delete_btn" href="">Delete Account</a>
+        </section>
     </section>
 {% endblock %}
