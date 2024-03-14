@@ -26,8 +26,7 @@
       </div>
       <section class="center">
         <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
+          {% csrf_token %} {{ form.as_p }}
           <button type="submit">Create</button>
         </form>
       </section>
@@ -43,7 +42,7 @@
         </nav>
       </footer>
 
-      <!-- <script>
+      <script>
         if (window.location.search) {
           window.onload = function () {
             // Get the latitude and longitude from the URL
@@ -51,6 +50,7 @@
             const lat = urlParams.get("lat");
             const lng = urlParams.get("lng");
             const title = urlParams.get("title");
+            const pinId = urlParams.get("pin_id");
 
             // Define the API endpoint
             const geocodingApi = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
@@ -61,15 +61,41 @@
               .then((data) => {
                 if (data.address) {
                   // Set the location input value to the location name
-                  document.getElementById("location").value = data.display_name;
+                  document.getElementById("id_location").value =
+                    data.display_name;
                 }
               })
               .catch((error) => console.error(error));
 
             // Set the event name input value to the title
             if (title) {
-              document.getElementById("eventname").value =
+              document.getElementById("id_name_meetup").value =
                 "Event: " + decodeURIComponent(title);
+            }
+            if (pinId) {
+              // Define the API endpoint
+              const apiEndpoint = `/api/pin/${pinId}/`;
+
+              // Fetch the Pins object
+              fetch(apiEndpoint)
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  // Assuming your form has a hidden input for the pin field
+                  // and a text input to display the pin title
+                  document.getElementById("id_pin").value = data.id;
+                  document.getElementById("pin_title").value = data.title;
+                })
+                .catch((error) =>
+                  console.error(
+                    "There has been a problem with your fetch operation:",
+                    error
+                  )
+                );
             }
           };
         }
@@ -106,7 +132,7 @@
             }
           });
         });
-      </script> -->
+      </script>
     </main>
   </body>
 </html>
