@@ -26,6 +26,11 @@
             <p>End Time: {{ meetup.time_end }}</p>
             <p>Description: {{ meetup.description }}</p>
             <p>Pin id: {{ meetup.pin_id }}</p>
+             <form action="{% url 'select_meetup' %}" method="POST">
+              {% csrf_token %} 
+             <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
+            <input type="submit" value="edit" class="save-button" id="button">
+            </form> 
           </li>
           {% empty %}
           <li>No meetups found.</li>
