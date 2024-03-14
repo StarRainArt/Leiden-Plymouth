@@ -17,4 +17,5 @@ urlpatterns = [
     path("settings/", views.settings, name="settings"),
     path("testpage/", views.home, name="test"),
     path("change_password/", views.change_password, name="changepassword"),
+    path("delete_account/", views.delete_account, name="delete_account"),
 ]

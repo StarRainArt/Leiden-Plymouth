@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title%}Delete - Social Sphere{% endblock %}
+{% block content %}
+{% load static %}{% load compress %}{% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/delete_account.scss' %}" type="text/x-scss"/>
+{% endcompress %}
+    {% if user.is_authenticated %}
+    <div>
+        <form method="post">
+            {% csrf_token %}
+
+            <input type="password" name="password" id="password" placeholder="Confirm password to delete your profile">
+            <p>Type your password to confirm deletion. Once deleted, your account will be lost forever. </p>
+            <button type="submit">Delete profile</button>
+        </form>
+        {% if error %}
+            <script>
+                alert('{{error}}');
+            </script>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}

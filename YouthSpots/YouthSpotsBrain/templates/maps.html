@@ -9,6 +9,21 @@
   <button id="saveMarker" class="button">Save the marker</button>
 </div>
 
+<section id="legenda">
+  <div>
+    <img src="../static/img/Pin You.png">
+    <p> - Current Location</p>
+  </div>
+  <div>
+    <img src="../static/img/Pin Place.png">
+    <p> - Location</p>
+  </div>
+  <div>
+    <img src="../static/img/Pin Meetup.png">
+    <p> - Meetup</p>
+  </div>
+</section>
+
 {{ pins|json_script:"pins_json" }}
 
 <script>
