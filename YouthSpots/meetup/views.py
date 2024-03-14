@@ -152,10 +152,10 @@ def edit_meetup_details(request):
             'description': meetup.description,
             'time_start': meetup.time_start,
             'time_end': meetup.time_end,
-            'invited': meetup.invited,
-            'tags': meetup.tags.all(),
+            #'invited': meetup.invited,
+            #'tags': meetup.tags.all() if hasattr(meetup, 'tags') and hasattr(meetup.tags, 'all') else None,
             'pin': meetup.pin,
-            'visibility': meetup.visibility,
+            #'visibility': meetup.visibility,
              })
 # #select_meetup.html is not const
     return render(request, 'meetup_edit.html', {'form': form,'meetup': meetup})
