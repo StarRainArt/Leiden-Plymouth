@@ -16,28 +16,45 @@ main {
         position: absolute;
         top: 0;
         justify-content: space-between;
-        min-height: 80%;
-        background-color: $Federal-blue;
+        min-height: 85%;
 
         #top_settings {
             display: flex;
             flex-direction: column;
         }
-
-        #bottom_settings {
-            
-        }
     
         .setting_btn {
             color: white;
             text-decoration: none;
-            background-color: $Royal-purple;
-            padding: 20px 150px;
+            background-color: $Federal-blue;
+            padding: 20px;
             margin: 10px;
             border-radius: 20px;
             box-shadow: 0px 5px 10px -5px black;
         }
 
+        #delete_btn {
+            color: red;
+        }
     }
-    
+}
+
+@media screen and (max-width: 470px) {
+    #settings_bg {
+        width: 100%;
+    }
+
+    .setting_btn {
+        width: 97%;
+    }
+}
+
+@media screen and (min-width: 470px) {
+    #settings_bg {
+        width: 470px;
+    }
+
+    .setting_btn {
+        width: 470px;
+    }
 }
