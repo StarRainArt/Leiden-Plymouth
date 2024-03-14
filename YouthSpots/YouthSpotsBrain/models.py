@@ -17,12 +17,14 @@ class PinType(models.TextChoices):
 class Tags(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    color = models.CharField(max_length=255, default='blue')
     def __str__(self):
         return self.name
     def create_tag(self, name):
         self.name = name
         self.save()
         return self
+    
 class Pins(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='There is no title', max_length=255)
@@ -30,7 +32,8 @@ class Pins(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
+    # pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
+    tags = models.CharField(default='none', max_length=255)
     pin_type = models.CharField(
         max_length=10,
         choices=PinType.choices,

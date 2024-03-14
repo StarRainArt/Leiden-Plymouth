@@ -3,41 +3,71 @@
 {% block title%}Register - Social Sphere{% endblock %}
 
 {% block content %}
-<div id="logo_con">
+
+
+<div class="container">
+    <div id="logo_con">
     <img src="../static/img/logo.png" class="logoimg">
-</div>
+    </div>
    <div class ="display_buttons">
     <a class="nav_login_button" href="/login">Login</a>
     <a class="nav_signup_button" href="/signup">Sign up</a>
-    </div>
-        <form method="post">
+   </div>
+   
+   <form method="post" id="signupForm">
         {% csrf_token %}
         <div class= "button_container">
             <div class= "input_box_signup">
-            <input type="text" name="username" id="username" placeholder="Username" class="box_text">
+                <input type="text" name="username" id="username" placeholder="Username" class="box_text">
             </div>
 
             <div class= "input_box_signup">
-            <input type="email" name="email" id="email" placeholder="Email" class="box_text">
+                <input type="email" name="email" id="email" placeholder="Email" class="box_text">
             </div>
 
             <div class= "input_box_signup">
-            <input type="password" name="password" id="password" placeholder="Password" class="box_text">
+                <input type="password" name="password" id="password" placeholder="Password" class="box_text">
             </div>
 
             <div class= "input_box_signup">
-            <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password" class="box_text">
+                <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password" class="box_text">
             </div>
         </div>
+        
         <div id="age_checkbox">
-            <p>I am 18 years or older</p>
+            <label for="age">I am 18 years or older</label>
             <input type="checkbox" name="age" id="age" value="age">
         </div>
-        <button type="submit" class ="signup_enter">Sign up</button>
+        
+        <button type="submit" class="signup_enter" id="signupButton">Sign up</button>
     </form>
+    
+    <div id="myPopup" class="popup_popup">
+        <h2>Under 18</h2>
+        <p>Unfortunately, you are under 18 and cannot sign up.</p>
+        <button onclick="closePopup()" class="nopopup_popup">Close</button>
+    </div>
+</div>
 
+<script>
+    function showPopup() {
+        document.getElementById("myPopup").style.display = "block";
+    }
 
-    {% for error in errors %}
-        <p class="error">{{ error }}</p>
-    {% endfor %}
+    function closePopup() {
+        document.getElementById("myPopup").style.display = "none";
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        var ageCheckbox = document.getElementById("age");
+        if (!ageCheckbox.checked) {
+            event.preventDefault(); 
+            showPopup();
+        }
+    });
+</script>
+
+{% for error in errors %}
+    <p class="error">{{ error }}</p>
+{% endfor %}
 {% endblock %}

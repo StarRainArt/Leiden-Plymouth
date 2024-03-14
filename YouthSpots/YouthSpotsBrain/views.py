@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from geopy.distance import geodesic
 import json
 import re
+import random
 def home(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -22,20 +23,21 @@ def view_profile(request):
                     profile.favorite_tags.add(tag)
                     profile.save()
                 else:
-                    tag = Tags(name=request.POST.get("name"))
+                    colors = ["blue", "red", "green", "yellow", "orange", "purple", "pink", "brown", "lightblue", "lightgreen", "lightpurple", "lightpink"]
+                    tag = Tags(name=request.POST.get("name"), color=random.choice(colors))
                     tag.save()
                     profile.favorite_tags.add(Tags.objects.get(name=request.POST.get("name")))
                     profile.save()
-            elif request.POST.get("action") == "bio":
-                profile = Profile.objects.get(user=request.user)
-                profile.biography = request.POST.get("biography")
-                profile.save()
-            elif request.POST.get("task") == "remove":
-                print("test")
-                profile = Profile.objects.get(user=request.user)
-                tag = Tags.objects.get(name=request.POST.get("name"))
-                profile.favorite_tags.remove(tag)
-                profile.save()
+        elif request.POST.get("action") == "bio":
+            profile = Profile.objects.get(user=request.user)
+            profile.biography = request.POST.get("biography")
+            profile.save()
+        elif request.POST.get("action") == "tag_remove":
+            print("test")
+            profile = Profile.objects.get(user=request.user)
+            tag = Tags.objects.get(name=request.POST.get("name"))
+            profile.favorite_tags.remove(tag)
+            profile.save()
     profile = Profile.objects.get(user=request.user)
     return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
 
@@ -219,3 +221,7 @@ def logout(request):
 def pins(request):
     return render(request, "pins.html")
   
+def settings(request):
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    return render(request, "settings.html")

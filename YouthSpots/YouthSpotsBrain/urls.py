@@ -14,7 +14,7 @@ urlpatterns = [
     path("view_profile/", views.view_profile, name="view_profile"),
     path("edit_profile/", views.edit_profile, name="edit_profile"),
     # path("meetups/", views.meetups, name="meetups"),
-    # path("settings/", views.settings, name="settings"),
+    path("settings/", views.settings, name="settings"),
     path("testpage/", views.home, name="test"),
     path("change_password/", views.change_password, name="changepassword"),
     # path('meetups/pin/<int:pin_id>/', views.get_meetups_by_pin),

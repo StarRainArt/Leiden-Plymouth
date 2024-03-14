@@ -32,30 +32,23 @@
 
 {% block content %}
 <div id="logo_con">
-  <img src="../static/img/logo.png" class="logoimg" />
-</div>
+    
+
 <div class="container">
-  <div class="btn-group">
-    <a href="/login"><button class="login_button">Login</button></a>
-    <a href="/signup"><button class="signup_button">Sign Up</button></a>
-  </div>
-  <form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
+    <div id="logo_con">
+    <img src="../static/img/logo.png" class="logoimg" alt="Logo">
+    </div>
+    <div class="btn-group">
+        <a href="/login"><button class="login_button">Login</button></a>
+        <a href="/signup"><button class="signup_button">Sign Up</button></a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
     <div class="input-group">
-      <input
-        type="text"
-        class="input-box"
-        placeholder="Email"
-        name="username"
-      />
+        <input type="text" class="input-box" name="username" placeholder="username">
     </div>
     <div class="input-group">
-      <input
-        type="password"
-        class="input-box"
-        placeholder="Password"
-        name="password"
-      />
+        <input type="password" class="input-box" name="password" placeholder="Password">
     </div>
     <div class="input-group remember-me">
       <input type="checkbox" /> Remember me
@@ -63,7 +56,8 @@
     <div class="input-group">
       <button type="submit" class="btn">Login</button>
     </div>
-  </form>
+    </form>
+</div>
 </div>
 
 {% endblock %}
