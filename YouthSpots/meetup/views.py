@@ -137,21 +137,23 @@ def edit_meetup_details(request):
     form = MeetupsForm_Edit(request.POST,instance=meetup)
     
     if form.is_valid():
-     meetup.name_meetup=form.cleaned_data['name_meetup'],
-     meetup.location=form.cleaned_data['location'],
-     meetup.visibility=form.cleaned_data['visibility'],
-     meetup.time_start=form.cleaned_data['time_start'],
-     meetup.time_end=form.cleaned_data['time_end'],
-     meetup.description=form.cleaned_data['description'],
-     meetup = form.save()
-     return redirect('my_meetups')
+        if form.cleaned_data['name_meetup'] is not None :
+           meetup.name_meetup=form.cleaned_data['name_meetup']
+        #if form.cleaned_data['time_start'] is not None :
+         #  meetup.time_start=str(form.cleaned_data['time_start']),
+        #if form.cleaned_data['time_end'] is not None:
+        #   meetup.time_end=str(form.cleaned_data['time_end']),
+        if form.cleaned_data['description'] is not None:
+           meetup.description=form.cleaned_data['description'],
+        meetup = form.save()
+        return redirect('my_meetups')
     else:
          form = MeetupsForm_Edit(instance=meetup, initial={
             'location': meetup.location,
             'name_meetup': meetup.name_meetup,
             'description': meetup.description,
-            'time_start': meetup.time_start,
-            'time_end': meetup.time_end,
+            #'time_start':str(meetup.time_start),
+            #'time_end': str(meetup.time_end),
             #'invited': meetup.invited,
             #'tags': meetup.tags.all() if hasattr(meetup, 'tags') and hasattr(meetup.tags, 'all') else None,
             'pin': meetup.pin,
