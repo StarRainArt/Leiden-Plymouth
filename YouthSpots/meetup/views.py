@@ -14,11 +14,21 @@ def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
 
+@login_required
+# def my_meetups(request):
+#     # Get the current user's profile
+#     profile = Profile.objects.get(user=request.user)
+    
+#     # Filter meetups by the current user's profile
+#     meetups = Meetups.objects.filter(owner=profile)
+    
+#     # Render the template with the meetups
+#     return render(request, 'my_meetup.html', {'meetups': meetups})
 def my_meetups(request):
     profile = Profile.objects.get(user=request.user)
-    User_id = Meetups.objects.get(owner=request.owner)
-    meetups = Meetups.objects.filter(profile.id ==  User_id ) 
-    return render(request, 'my_meetup.html', {'meetups': meetups})
+    # User_id = Meetups.objects.get(owner=request.owner)
+    # meetups = Meetups.objects.filter(profile.id ==  User_id ) 
+    return render(request, 'my_meetup.html')
 
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
@@ -41,7 +51,31 @@ def meetup_edit(request):
 #     return render(request, 'meetup.html', {'form': form})
 
 
+# def meetup(request):
+#     if request.method == 'POST':
+#         form = MeetupsForm(request.POST)
+#         if form.is_valid():
+#             meetup = form.save(commit=False)
+#             pin = form.cleaned_data.get('pin')
+#             meetup.pin = pin
+#             meetup.save()
+#             return redirect('map')
+#             # Redirect or render a template as needed
+#     else:
+#         form = MeetupsForm()
+#     return render(request, 'meetup.html', {'form': form})
+
 def meetup(request):
+    pin_id = request.GET.get('pin_id')
+    if pin_id:
+        pin = get_object_or_404(Pins, id=pin_id)
+        initial_data = {'pin': pin}
+    else:
+        initial_data = {}
+
+    # Initialize form with initial data
+    form = MeetupsForm(initial=initial_data)
+
     if request.method == 'POST':
         form = MeetupsForm(request.POST)
         if form.is_valid():
@@ -54,9 +88,21 @@ def meetup(request):
                  description=form.description,
                  owner=form.profile)
             meetup = form.save()
-    else:
-        form = MeetupsForm()
+            # owner = form.cleaned_data.get('profile')
+
+            new_meetup = Meetups.objects.create(
+                name_meetup=form.cleaned_data['name_meetup'],
+                location=form.cleaned_data['location'],
+                visibility=form.cleaned_data['visibility'],
+                time_start=form.cleaned_data['time_start'],
+                time_end=form.cleaned_data['time_end'],
+                description=form.cleaned_data['description'],
+                # owner=owner
+            )
+            return redirect('my_meetups')
+
     return render(request, 'meetup.html', {'form': form})
+
 
 # @login_required
 # def meetup_data_create(request):

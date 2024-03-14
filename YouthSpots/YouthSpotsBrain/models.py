@@ -24,6 +24,7 @@ class Tags(models.Model):
         self.name = name
         self.save()
         return self
+    
 class Pins(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='There is no title', max_length=255)
@@ -31,8 +32,8 @@ class Pins(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    tags = models.CharField(max_length=255)
     # pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
+    tags = models.CharField(default='none', max_length=255)
     pin_type = models.CharField(
         max_length=10,
         choices=PinType.choices,
