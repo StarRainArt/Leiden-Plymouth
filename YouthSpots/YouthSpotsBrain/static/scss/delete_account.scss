@@ -11,6 +11,7 @@ $Pure-white: #FFFFFF;
     width: 40%;
     border: none;
     border-radius: 3vh;
+    font-size: 1.5em;
     color: $Pure-white;
 }
 p {
@@ -22,9 +23,10 @@ p {
 }
 button {
     background-color: $Federal-blue;
-    color: $Pure-white;
+    color: red;
     padding: 10px;
     border: none;
+    font-size: 1.5em;
     border-radius: 25px;
 }
 @media screen and (max-width: 600px){

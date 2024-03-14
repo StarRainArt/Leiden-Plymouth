@@ -9,7 +9,7 @@
             {% csrf_token %}
 
             <input type="password" name="password" id="password" placeholder="Confirm password to delete your profile">
-            <p>Are you sure you want to delete your account? Type your password to confirm. Note: Once deleted we cannot recover your account.</p>
+            <p>Type your password to confirm deletion. Once deleted, your account will be lost forever. </p>
             <button type="submit">Delete profile</button>
         </form>
         {% for error in errors %}
