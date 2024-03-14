@@ -5,10 +5,13 @@ $Old-rose: #b46f77;
 $Eerie-black: #222222;
 $Pure-white: #ffffff;
 
+$Shadow: 0px 5px 10px -5px black;
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .leaflet-popup-content-wrapper{
   background-color: $Federal-blue !important;
+  box-shadow: $Shadow;
   
 }
 
@@ -16,20 +19,29 @@ $Pure-white: #ffffff;
   color: $Pure-white;
   border-radius: 50px;
   background-color: $Royal-purple;
+  border: none;
+  margin-right: 5px;
+
+  box-shadow: $Shadow;
+}
+
+.deletePin{
+  color: $Pure-white;
+  border-radius: 65px;
+  background-color: $Royal-purple;
+  border: none;
+  margin-right: 5px;
+
+  box-shadow: $Shadow;
 }
 
 .showMeetup{
   color: $Pure-white;
   border-radius: 75px;
   background-color: $Royal-purple;
-  
-}
+  border: none;
 
-.deletePin{
-color: $Pure-white;
-border-radius: 65px;
-background-color: $Royal-purple;
-
+  box-shadow: $Shadow;
 }
 
 #legenda {
@@ -244,12 +256,13 @@ body {
 
 .title {
   font-family: "Poppins";
-  color: black;
+  color: white;
   font-weight: bold;
 }
 
 .description {
   margin-top: 5px;
+  color: white;
 }
 
 .tags {
@@ -259,7 +272,7 @@ body {
 .tag {
   border-radius: 10px;
   padding: 5px 10px;
-  background-color: orange;
+  background-color: $Blue-green;
   color: $Pure-white;
   display: inline-block;
   margin-right: 5px;
