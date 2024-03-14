@@ -9,6 +9,8 @@
 
     <section id="settings_bg">
         <section id="top_settings">
+            <img src="../static/img/logo.png" id="logopng">
+            <h1>Settings</h1>
             <a class="setting_btn" href="{% url 'edit_profile' %}">Edit Profile</a>
             <a class="setting_btn" href="{% url 'changepassword' %}">Change Password</a>
             <a class="setting_btn" href="{% url 'logout' %}" onClick="return confirm('Are you sure that you want to log out?')">Log Out</a>
