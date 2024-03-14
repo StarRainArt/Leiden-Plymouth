@@ -6,7 +6,8 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.shortcuts import render
-from .forms import MeetupsForm
+from .forms import MeetupsForm, MeetupsForm_Edit
+from django.urls import reverse
 
 
 # Create your views here.
@@ -71,7 +72,6 @@ def meetup(request):
                 time_end=form.cleaned_data['time_end'],
                 description=form.cleaned_data['description'],
                 owner=request.user.profile
-                owner=request.user.profile
             )
             return redirect('my_meetups')
 
@@ -122,49 +122,43 @@ def meetup(request):
     # return render(request, 'meetup.html')
 #create_meetup_form.html is not const
 def select_meetup(request):
+    meetup_id=int(request.POST.get('meetup_id'))
     meetups = Meetups.objects.all()
-    return redirect(request, 'meetup.html', {'meetups': meetups},meetup_id=Meetups.id)
+    meetup_used=Meetups.objects.filter(id=meetup_id).first
+    request.session['selected_meetup_id'] = meetup_id
+    return  redirect( reverse('edit_meetup_details') ) #request,{'meetups': meetups},
 
    
 
-def edit_meetup_details(request, meetup_id):
+def edit_meetup_details(request):
     #meetup = Meetups.objects.get(id=meetup_id)
-    form = MeetupsForm(request.POST)
+    meetup_id = request.session.get('selected_meetup_id')
     meetup = Meetups.objects.get(id=meetup_id)
+    form = MeetupsForm_Edit(request.POST,instance=meetup)
     
-    meetup.name_meetup=form.cleaned_data['name_meetup'],
-    meetup.location=form.cleaned_data['location'],
-    meetup.visibility=form.cleaned_data['visibility'],
-    meetup.time_start=form.cleaned_data['time_start'],
-    meetup.time_end=form.cleaned_data['time_end'],
-    meetup.description=form.cleaned_data['description'],
-    meetup = form.save()
-    
-
-#     if request.method == 'POST':
-#         name_meetup = request.POST.get('name_meetup')
-#         time_start = request.POST.get('time_start')
-#         time_end = request.POST.get('time_end')
-#         description = request.POST.get('description')
-#         #type_meetup = request.POST.get('type_meetup')
-#         visibility = request.POST.get('visibility')
-#         #latitude = lat
-#         #longitude = lng
-#         if None in [name_meetup, time_start, time_end, description, visibility]:
-#             return HttpResponseBadRequest("Required fields are missing.")
-#         try:# Update other fields as needed
-#             meetup.title=str(name_meetup),
-#             meetup.start_timestamp=int(time_start),
-#             meetup.end_timestamp=int(time_end),
-#             meetup.description=str(description),
-#             #meetup.longitude=lng,
-#             #meetup.latitude=lat,
-#             meetup.save()
-#         except ValueError as e:
-#             return HttpResponseBadRequest("Invalid data format.")
-#         return redirect('my_meetups')
+    if form.is_valid():
+     meetup.name_meetup=form.cleaned_data['name_meetup'],
+     meetup.location=form.cleaned_data['location'],
+     meetup.visibility=form.cleaned_data['visibility'],
+     meetup.time_start=form.cleaned_data['time_start'],
+     meetup.time_end=form.cleaned_data['time_end'],
+     meetup.description=form.cleaned_data['description'],
+     meetup = form.save()
+     return redirect('my_meetups')
+    else:
+         form = MeetupsForm_Edit(instance=meetup, initial={
+            'location': meetup.location,
+            'name_meetup': meetup.name_meetup,
+            'description': meetup.description,
+            'time_start': meetup.time_start,
+            'time_end': meetup.time_end,
+            'invited': meetup.invited,
+            'tags': meetup.tags.all(),
+            'pin': meetup.pin,
+            'visibility': meetup.visibility,
+             })
 # #select_meetup.html is not const
-#     return render(request, 'my_meetups.html', {'meetup': meetup})
+    return render(request, 'meetup_edit.html', {'form': form,'meetup': meetup})
 # #edit_meetup.html is not const
 #don't forget to add a something to remind people
 

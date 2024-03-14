@@ -17,39 +17,17 @@
       </h1>
     </div>
     <center>
-      
-      <br>
-        <form action="{% url 'edit_meetup_details' %}" method="POST">
-            {% csrf_token %}
-            <div class="create-event-container">
-              <div class="event-details"> 
-                <input class="eventname" type="text" id="eventname" name="name_meetup"  value="{{ meetup.title }}" required maxlength="40">
-              </div><br>
-              <div class="event-details"><!-- probaly should be replaced with map thing-->
-                <input class="location" type="text" id="location" name="location" placeholder="Event Location" required maxlength="50">    
-              </div><br>
-               <div class="event-details">
-                <label for="visibility">Meetup visibility:</label>
-                <select id="visibility" name="visibility" required>
-                  <option value="private" {% if meetup.visibility == 'private' %} selected {% endif %}>private</option>
-                  <option value="protected" {% if meetup.visibility == 'protected' %} selected {% endif %}>protected</option>
-                  <option value="Public" {% if meetup.visibility == 'Public' %} selected {% endif %}>Public</option>
-                </select> 
-            </div><br>
-              <div> <h3>Start time</h3>
-                <input class="dateandtime" type="datetime-local" id="dateandtime1" name="time_start"  value="{{ meetup.start_timestamp }}" required>
-              </div><br>
-              
-              <div><h3>Closing time</h3>
-                <input class="dateandtime" type="datetime-local" id="dateandtime2" name="time_end" value="{{ meetup.end_timestamp }}" required>
-              </div><br>
-              <div class="event-details">
-                <textarea class="description" type="text" id="description" name="description" value="{{ meetup.description }}" required maxlength="500"></textarea>
-              </div><br>                                
-              <div>
-                <input type="submit" value="Submit" class="save-button" id="button">
-            </div>
-          </form>
+    </form>
+      <br><h3>{{ meetup.name_meetup }}</h3>
+      <p>Location: {{ meetup.location }}</p>
+      <p>Start Time: {{ meetup.time_start }}</p>
+      <p>End Time: {{ meetup.time_end }}</p>
+      <p>Description: {{ meetup.description }}</p>
+      <p>Pin id: {{ meetup.pin_id }}</p>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Create</button>
+      </form>
 
    
     </center>
