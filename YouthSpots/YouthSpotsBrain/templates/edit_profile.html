@@ -4,58 +4,38 @@
 
 {% block content %}
 
-    {% load static %}{% load compress %}{% compress css %}
+{% load static %}{% load compress %}{% compress css %}
     <link rel="stylesheet" href="{%static 'scss/edit_profile.scss' %}" type="text/x-scss">
-    {% endcompress %}
+{% endcompress %}
 
-    <div class="alter-account">
-        <img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
-        <h1 class="alter-account-text">Edit Account </h1>
-        
-        <div class="profile-picture-container">
-            <label for="profile-picture" class="edit_textbox_text"></label><br>
-            <div class="profile-image-wrapper">
-                <img id="profile-image" src="{% static 'img/Blank Pfp.png' %}" alt="Profile picture" class="profile-image">
-            </div>
-            <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
-            <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
-        </div>
-        <br>
-        <div class="form alter-ac-form">
-            <div class="container_aa">
-                <div class="left_side">
-                    <div>
-                        <label for="username" class="edit_textbox_text">Username</label><br>
-                        <input type="text" name="username" id="username" class="edit_textbox"><br>
-                    </div>
-                    <div>
-                        <label for="email" class="edit_textbox_text">Email</label><br>
-                        <input type="email" name="email" id="email" class="edit_textbox"><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <br>
-            <section>
-            <div class="buttons-alter"><br><br>
-                <button type="submit" name="alter-account" class="save">Save</button>
-            </section>
-            </div>
-        </div>
-    </div>
+<img src="{% static 'img/logo.png' %}" class="profile_logo" alt="Logo">
+<h1 class="alter-account-text">Edit Account </h1>
+
+<div class="pfp-container">
+    <img id="pfp" src="{% static 'img/Blank Pfp.png' %}" alt="Profile picture" class="profile-image">
+    <input type="file" name="profile-picture" id="profile-picture" accept="image/*" style="display:none">
+    <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
 </div>
+<br>
+<form>
+    <label for="username" class="edit_textbox_text">Username</label>
+    <input type="text" name="username" id="username" class="edit_textbox">
+    <label for="email" class="edit_textbox_text">Email</label>
+    <input type="email" name="email" id="email" class="edit_textbox">
+    <input type="submit" name="save_acc_chngs" value="Save">
+</form>
 
-    <script>
-        document.getElementById('profile-picture').addEventListener('change', function () {
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var profileImage = document.getElementById('profile-image');
-                    profileImage.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
+<script>
+    document.getElementById('profile-picture').addEventListener('change', function () {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var profileImage = document.getElementById('profile-image');
+                profileImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
             }
         });
-    </script>
+</script>
 {% endblock %}
