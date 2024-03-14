@@ -18,6 +18,7 @@ body {
 }
 
 .display_buttons{
+    margin-bottom:30px;
     .nav_login_button{
         background-color: #1E095A;
         color: #fff;
@@ -26,6 +27,7 @@ body {
         border-radius: 25px;
         margin: 5px;
         text-decoration: none;
+        width:30%;
     }
     
     .nav_signup_button{
@@ -36,6 +38,7 @@ body {
         border-radius: 25px;
         margin: 5px;
         text-decoration:none;
+        width:30%;
          
     }
 }
@@ -76,6 +79,7 @@ body {
     width: 100px;
     cursor: pointer;
     transition: opacity 0.3s, transform 0.3s;
+    margin-bottom: 50px;
 }
 
 .signup_enter:hover {
@@ -85,4 +89,10 @@ body {
 
 p{
     color: #fff;
+}
+.logo_con{
+    width:500px;
+}
+.container {
+    width:500px;
 }
