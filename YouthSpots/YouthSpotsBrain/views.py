@@ -6,10 +6,6 @@ from geopy.distance import geodesic
 import json
 import re
 import random
-def home(request):
-    if request.user.is_authenticated == False:
-        return redirect("login")
-    return render(request, "home.html")
 
 def view_profile(request):
     if request.user.is_authenticated == False:
