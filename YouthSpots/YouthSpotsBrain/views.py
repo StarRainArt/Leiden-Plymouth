@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from YouthSpotsBrain.models import Profile, Pins, UserAuth, Tags
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
-from geopy.distance import geodesic
+# from geopy.distance import geodesic
 import json
 import re
 import random

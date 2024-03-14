@@ -31,7 +31,8 @@ class Pins(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
+    tags = models.CharField(max_length=255)
+    # pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
     pin_type = models.CharField(
         max_length=10,
         choices=PinType.choices,

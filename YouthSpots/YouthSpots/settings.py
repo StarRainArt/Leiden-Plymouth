@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'socialsphere',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'Messen031!',
         'HOST': 'localhost',
         'PORT': '3306',
     }
