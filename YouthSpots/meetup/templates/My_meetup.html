@@ -15,16 +15,16 @@
         <h1> My Meetups</h1>
         <ul>
             {% for meetup in meetups %}
-            <form action="{% url 'select_meetup' meetup.id %}" method="POST">
-              {% csrf_token %}
+            {% comment %} <form action="{% url 'select_meetup' meetup.id %}" method="POST">
+              {% csrf_token %} {% endcomment %}
                 <li>
-                  <strong>{{ meetup.title }}</strong><br>
-                  <span>Start Time: {{ meetup.start_timestamp }}</span><br>
-                  <span>End Time: {{ meetup.end_timestamp }}</span><br>
+                  <strong>{{ meetup.name_meetup }}</strong><br>
+                  <span>Start Time: {{ meetup.time_start }}</span><br>
+                  <span>End Time: {{ meetup.time_end }}</span><br>
                 </li>
-                <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
+                {% comment %} <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
                 <input type="submit" value="edit" class="save-button" id="button">
-              </form>
+              </form> {% endcomment %}
             {% empty %}
                 <li>No meetups available.</li>
             {% endfor %}

@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from .models import Meetups
-from YouthSpotsBrain.models import Profile
+from YouthSpotsBrain.models import Profile, Pins
 from django import forms
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -25,10 +25,10 @@ def public_meetups(request):
 #     # Render the template with the meetups
 #     return render(request, 'my_meetup.html', {'meetups': meetups})
 def my_meetups(request):
-    profile = Profile.objects.get(user=request.user)
-    # User_id = Meetups.objects.get(owner=request.owner)
-    # meetups = Meetups.objects.filter(profile.id ==  User_id ) 
-    return render(request, 'my_meetup.html')
+    profile = request.user.profile
+    User_id = request.user
+    meetups = Meetups.objects.filter(owner = profile) 
+    return render(request, 'my_meetup.html', {'meetups': meetups})
 
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
@@ -79,15 +79,14 @@ def meetup(request):
     if request.method == 'POST':
         form = MeetupsForm(request.POST)
         if form.is_valid():
-            new_meetup = Meetups.objects.create(
-                 name_meetup=form.name_meetup,
-                 location=form.location,
-                 visibility=form.visibility,
-                 time_start=form.time_start,
-                 time_end=form.time_end,
-                 description=form.description,
-                 owner=form.profile)
-            meetup = form.save()
+            #new_meetup = Meetups.objects.create(
+                 #name_meetup=form.name_meetup,
+                 #location=form.location,
+                 #visibility=form.visibility,
+                 #time_start=form.time_start,
+                 #time_end=form.time_end,
+                 #description=form.description,
+           #      meetup = form.save()
             # owner = form.cleaned_data.get('profile')
 
             new_meetup = Meetups.objects.create(
@@ -97,7 +96,7 @@ def meetup(request):
                 time_start=form.cleaned_data['time_start'],
                 time_end=form.cleaned_data['time_end'],
                 description=form.cleaned_data['description'],
-                # owner=owner
+                owner=request.user.profile
             )
             return redirect('my_meetups')
 
@@ -149,39 +148,49 @@ def meetup(request):
 #create_meetup_form.html is not const
 def select_meetup(request):
     meetups = Meetups.objects.all()
-    return render(request, 'select_meetup.html', {'meetups': meetups})
+    return redirect(request, 'meetup.html', {'meetups': meetups},meetup_id=Meetups.id)
 
    
 
 def edit_meetup_details(request, meetup_id):
     #meetup = Meetups.objects.get(id=meetup_id)
-    meetup = Meetups.objects.get(pk=meetup_id)
+    form = MeetupsForm(request.POST)
+    meetup = Meetups.objects.get(id=meetup_id)
     
-    if request.method == 'POST':
-        name_meetup = request.POST.get('name_meetup')
-        time_start = request.POST.get('time_start')
-        time_end = request.POST.get('time_end')
-        description = request.POST.get('description')
-        #type_meetup = request.POST.get('type_meetup')
-        visibility = request.POST.get('visibility')
-        #latitude = lat
-        #longitude = lng
-        if None in [name_meetup, time_start, time_end, description, visibility]:
-            return HttpResponseBadRequest("Required fields are missing.")
-        try:# Update other fields as needed
-            meetup.title=str(name_meetup),
-            meetup.start_timestamp=int(time_start),
-            meetup.end_timestamp=int(time_end),
-            meetup.description=str(description),
-            #meetup.longitude=lng,
-            #meetup.latitude=lat,
-            meetup.save()
-        except ValueError as e:
-            return HttpResponseBadRequest("Invalid data format.")
-        return redirect('my_meetups')
-#select_meetup.html is not const
-    return render(request, 'my_meetups.html', {'meetup': meetup})
-#edit_meetup.html is not const
+    meetup.name_meetup=form.cleaned_data['name_meetup'],
+    meetup.location=form.cleaned_data['location'],
+    meetup.visibility=form.cleaned_data['visibility'],
+    meetup.time_start=form.cleaned_data['time_start'],
+    meetup.time_end=form.cleaned_data['time_end'],
+    meetup.description=form.cleaned_data['description'],
+    meetup = form.save()
+    
+
+#     if request.method == 'POST':
+#         name_meetup = request.POST.get('name_meetup')
+#         time_start = request.POST.get('time_start')
+#         time_end = request.POST.get('time_end')
+#         description = request.POST.get('description')
+#         #type_meetup = request.POST.get('type_meetup')
+#         visibility = request.POST.get('visibility')
+#         #latitude = lat
+#         #longitude = lng
+#         if None in [name_meetup, time_start, time_end, description, visibility]:
+#             return HttpResponseBadRequest("Required fields are missing.")
+#         try:# Update other fields as needed
+#             meetup.title=str(name_meetup),
+#             meetup.start_timestamp=int(time_start),
+#             meetup.end_timestamp=int(time_end),
+#             meetup.description=str(description),
+#             #meetup.longitude=lng,
+#             #meetup.latitude=lat,
+#             meetup.save()
+#         except ValueError as e:
+#             return HttpResponseBadRequest("Invalid data format.")
+#         return redirect('my_meetups')
+# #select_meetup.html is not const
+#     return render(request, 'my_meetups.html', {'meetup': meetup})
+# #edit_meetup.html is not const
 #don't forget to add a something to remind people
 
 

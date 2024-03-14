@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('meetup', '0001_initial'),
+        ('meetup', '0003_alter_meetups_visibility'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='meetups',
             name='visibility',
-            field=models.CharField(choices=[('+', 'Public'), ('#', 'Protected'), ('-', 'Private')], default='Private', max_length=10),
+            field=models.CharField(choices=[('-', 'Private'), ('+', 'Public'), ('#', 'Protected')], default='Private', max_length=10),
         ),
     ]
