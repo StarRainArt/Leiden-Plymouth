@@ -17,6 +17,7 @@ class Pins(models.Model):
 class Tags(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    color = models.CharField(max_length=255, default='blue')
     def __str__(self):
         return self.name
     def create_tag(self, name):

@@ -9,47 +9,38 @@
 {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/view_profile.scss' %}" type="text/x-scss">
 {% endcompress %}
-<section id="biography_edit">
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="action" value="bio">
-        <textarea name="biography" id="biography" placeholder="Add a biography">
-            {{ biography }}
-        </textarea>
-        <input type="submit" value="edit">
-    </form>
-</section>
-<section id="favorite_tags">
-    <h2>Favorite Tags</h2>
-    <ul>
-        {% for tag in favorite_tags %}
-            <li class="tag_li">{{ tag }}</li>
-        {% endfor %}
-    </ul>
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="action" value="tags">
-        <input type="text" name="name" id="tag" placeholder="Add a favorite tag">
-        <input type="submit" value="add">
-    </form>
-</section>
-{% csrf_token %}
-<script type="text/javascript">
-    var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-    var tag = document.getElementsByClassName('tag_li');
-    for (let i = 0; i < tag.length; i++) {
-        let formData = new FormData();
-        formData.append('tag', tag[i].innerHTML);
-        formData.append('task', 'remove');
-        tag[i].addEventListener('click', function() {
-            fetch("/view_profile/",{method: "POST", headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrf_token
-            },
-        body: formData
-        })
-    })
-    }
-</script>
 
+<div id="tags_bio">
+    <div class="profile_info">
+        <p id="profile_username">{{user.username}}</p>
+        <p id="profile_email">{{user.email}}</p>
+    </div>
+    <section id="biography_edit">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="bio">
+            <textarea name="biography" id="biography" placeholder="Add a biography">{{biography}}</textarea>
+            <input type="submit" value="edit">
+        </form>
+    </section>
+    <section id="favorite_tags">
+        <h2>Favorite Tags</h2>
+        <section class="tags">
+            {% for tag in favorite_tags %}
+                <form method='POST'>
+                    {% csrf_token %}
+                    <input type="submit" value="{{tag.name}}"  style="background-color:{{tag.color}}" class="tag_from_btn">
+                    <input type="hidden" name="action" value="tag_remove">
+                    <input type="hidden" name="name" value="{{ tag }}">
+                </form>
+            {% endfor %}
+        </section>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="tags">
+            <input type="text" name="name" id="tag" placeholder="Add a favorite tag">
+            <input type="submit" value="add">
+        </form>
+    </section>
+</div>
 {% endblock %}
