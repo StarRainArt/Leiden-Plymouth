@@ -5,7 +5,7 @@ from YouthSpotsBrain.models import Profile, Pins, visibility_type
 class Meetups(models.Model):
     id = models.AutoField(primary_key=True)
     location = models.CharField(max_length=200)
-    name_meetup = models.CharField(default='There is no title', max_length=255)
+    name_meetup = models.CharField(max_length=255)
     description = models.TextField(default='There is no description')
     time_start = models.DateTimeField()
     time_end = models.DateTimeField()
