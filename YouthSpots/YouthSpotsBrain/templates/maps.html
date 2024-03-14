@@ -12,6 +12,9 @@
   const urlParams = new URLSearchParams(window.location.search);
   const pinSelected = urlParams.get("pinSelected");
 
+  // Pins
+  let pins = {};
+
   async function run(latitude, longitude) {
     let userLocation = L.latLng(latitude, longitude);
     // Create Map
@@ -24,13 +27,23 @@
     // Create user marker
     let userIcon = L.icon({
       iconUrl: "../static/img/Pin_You.png",
+      iconShadow: "../static/img/Pin_You.png",
       iconSize: [40, 50],
       shadowSize: [50, 64],
       iconAnchor: [22, 94],
       shadowAnchor: [4, 62],
       popupAnchor: [-3, -76],
     });
-    let userMarker = L.marker(userLocation, { icon: userIcon }).addTo(map);
+    if (pins.userMarker) {
+      // Update user marker position
+      pins.userMarker.marker.setLatLng(userLocation);
+    } else {
+      // Create new user marker
+      pins.userMarker = {
+        marker: L.marker(userLocation, { icon: userIcon }).addTo(map),
+        info: { type: "user", latitude: latitude, longitude: longitude },
+      };
+    }
 
     // Create routing control
     let control = L.Routing.control({
@@ -70,9 +83,28 @@
         );
       },
     }).addTo(map);
+    // Create a custom control for toggling walking details
+    let toggleWalkingDetailsControl = L.Control.extend({
+      onAdd: function (map) {
+        let container = L.DomUtil.create("div", "leaflet-routing-geocoders");
+        let button = L.DomUtil.create("button", "", container);
+        button.innerHTML = "Toggle Walking Details";
+        button.onclick = function () {
+          let geocodersContainer = document.querySelector(
+            ".leaflet-routing-alternatives-container"
+          );
+          if (geocodersContainer.style.display === "none") {
+            geocodersContainer.style.display = "block";
+          } else {
+            geocodersContainer.style.display = "none";
+          }
+        };
+        return container;
+      },
+    });
 
-    // Pins
-    let pins = {};
+    // Add the custom control to the map
+    map.addControl(new toggleWalkingDetailsControl());
 
     async function updatePins() {
       let fetchedPins = await (await fetch("/getPins")).json();
@@ -116,9 +148,6 @@
         if (pins[pin.id]) {
           let marker = pins[pin.id].marker;
           pins[pin.id].info = pin;
-          if (marker.options.icon !== icon) {
-            marker.setIcon(icon);
-          }
 
           let pinString = `<div class="title">${pin.title}</div>`;
           pinString += `<div class="description">${pin.description}</div>`;
@@ -356,24 +385,6 @@
     });
   } else {
     run(50.376289, -4.143841);
-  }  
-  // let geocodersContainer = document.querySelector(".leaflet-routing-geocoders");
-  // geocodersContainer.appendChild(button);
-
-  // let button = document.createElement("button");
-  // button.id = "toggleButton";
-  // button.innerHTML = "Toggle Alternatives";
-
-  // let routingContainer = document.querySelector(
-  //   ".leaflet-routing-alternatives-container"
-  // );
-
-  // button.addEventListener("click", function () {
-  //   if (routingContainer.style.display === "none") {
-  //     routingContainer.style.display = "block";
-  //   } else {
-  //     routingContainer.style.display = "none";
-  //   }
-  // });
+  }
 </script>
 {% endblock %}
