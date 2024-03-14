@@ -128,7 +128,12 @@ def select_meetup(request):
     request.session['selected_meetup_id'] = meetup_id
     return  redirect( reverse('edit_meetup_details') ) #request,{'meetups': meetups},
 
-   
+def delete_meetup(request):
+    meetup_id=int(request.POST.get('meetup_id'))
+    meetups = Meetups.objects.all()
+    meetup_used=Meetups.objects.filter(id=meetup_id).first
+    request.session['selected_meetup_id'] = meetup_id
+    return  redirect( reverse('delete_meetup_do') ) #request,{'meetups': meetups},
 
 def edit_meetup_details(request):
     #meetup = Meetups.objects.get(id=meetup_id)
@@ -171,16 +176,17 @@ def edit_meetup_details(request):
 #don't forget to add a something to remind people
 
 
-def delete_meetup(meetup_id, request):
+def delete_meetup_do(request):
     try:
         # Retrieve the meetup object from the database based on the meetup_id
+        meetup_id = request.session.get('selected_meetup_id')
         meetup = Meetups.objects.get(id=meetup_id)
         
         # Delete the meetup object from the database
         meetup.delete()
 
         # Optionally, you can return a success message or perform other actions
-        return render(request, 'meetup.html')
+        return redirect('my_meetups')
     
     except Meetups.DoesNotExist:
         return "Meetup with specified ID does not exist."
