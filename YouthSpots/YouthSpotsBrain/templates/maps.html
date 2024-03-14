@@ -182,6 +182,8 @@
             popupString += `<div class="tag">${tag}</div>`;
           });
           popupString += `</div>`;
+          popupString += `<b>Meetup:</b> {{ meetup.title }}<br>`;
+          popupString += `<b>Description:</b> {{ meetup.description }}<br>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;
@@ -393,7 +395,7 @@
       run(position.coords.latitude, position.coords.longitude);
     });
   } else {
-    run(50.376289, -4.143841);
+    run(10.376289, -4.143841);
   }
 </script>
 {% endblock %}

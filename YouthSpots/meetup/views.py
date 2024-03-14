@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from meetup.models import Meetups
-from YouthSpotsBrain.models import Profile
+from YouthSpotsBrain.models import Profile, Pins
 from django import forms
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import MeetupsForm
 
 
@@ -41,14 +41,47 @@ def meetup_edit(request):
 #     return render(request, 'meetup.html', {'form': form})
 
 
+# def meetup(request):
+#     if request.method == 'POST':
+#         form = MeetupsForm(request.POST)
+#         if form.is_valid():
+#             meetup = form.save(commit=False)
+#             pin = form.cleaned_data.get('pin')
+#             meetup.pin = pin
+#             meetup.save()
+#             return redirect('map')
+#             # Redirect or render a template as needed
+#     else:
+#         form = MeetupsForm()
+#     return render(request, 'meetup.html', {'form': form})
 def meetup(request):
+    pin_id = request.GET.get('pin_id')
+    if pin_id:
+        pin = get_object_or_404(Pins, id=pin_id)
+        initial_data = {'pin': pin}
+    else:
+        initial_data = {}
+
     if request.method == 'POST':
-        form = MeetupsForm(request.POST)
+        form = MeetupsForm(request.POST, initial=initial_data)
         if form.is_valid():
             meetup = form.save()
+            # Redirect or render a template as needed
     else:
-        form = MeetupsForm()
+        form = MeetupsForm(initial=initial_data)
+
     return render(request, 'meetup.html', {'form': form})
+def get_pin(request, pin_id):
+    pin = Pins.objects.filter(id=pin_id).first()
+    if pin:
+        return JsonResponse({
+            'id': pin.id,
+            'title': pin.title,
+            'description': pin.description,
+            # Include any other fields you need
+        })
+    else:
+        return JsonResponse({'error': 'Pin not found'}, status=404)
 
 # @login_required
 # def meetup_data_create(request):
