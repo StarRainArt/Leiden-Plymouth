@@ -10,7 +10,6 @@ $Pure-white: #FFFFFF;
 .profile_logo {
   display: block;
   margin: 0 auto;
-  margin-bottom: 20px; 
   width: 30vh;
 }
 
@@ -19,10 +18,10 @@ $Pure-white: #FFFFFF;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 20px;
 
   .alter-account-text{
   color: $Pure-white;
+  font-size: 20px;
 }
 }
 
@@ -46,7 +45,7 @@ $Pure-white: #FFFFFF;
 
 .profile-picture-container {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .profile-picture {
@@ -144,4 +143,8 @@ $Pure-white: #FFFFFF;
 
 h2{
   color: red;
+}
+.logo_container{
+  display: flex;
+  align-items: center;
 }
