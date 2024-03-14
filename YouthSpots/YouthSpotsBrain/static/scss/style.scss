@@ -24,16 +24,19 @@ body, html {
 }
 
 body {
-    background-color: $Royal-purple;
+    background-color: rgb(97, 48, 138);
     color: $Pure-white;
     margin: 0 !important;
 }
 
-main {
-    padding-bottom: 10vh;
-    position: relative;
-    min-height: 100%;
+h1 {
+    font-size: 28px;
 }
+// main {
+//     margin-bottom: 100px;
+//     position: relative;
+//     min-height: 100vh;
+// }
 
 footer {
     display: flex;

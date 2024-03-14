@@ -31,12 +31,18 @@
 
 
 {% block content %}
-<div id="logo_con">
-    
+
+{% load static %}{% load compress %} {% compress css %}
+    <link
+    rel="stylesheet"
+    href="{%static 'scss/login.scss' %}"
+    type="text/x-scss"
+    /> 
+{% endcompress %}
 
 <div class="container">
     <div id="logo_con">
-    <img src="../static/img/logo.png" class="logoimg" alt="Logo">
+        <img src="../static/img/logo.png" class="logoimg" alt="Logo">
     </div>
     <div class="btn-group">
         <a href="/login"><button class="login_button">Login</button></a>
@@ -44,20 +50,19 @@
     </div>
     <form method="post">
         {% csrf_token %}
-    <div class="input-group">
-        <input type="text" class="input-box" name="username" placeholder="username">
-    </div>
-    <div class="input-group">
-        <input type="password" class="input-box" name="password" placeholder="Password">
-    </div>
-    <div class="input-group remember-me">
-        <input type="checkbox"> Remember me
-    </div>
-    <div class="input-group">
-        <button class="btn">Login</button>
-    </div>
+        <div class="input-group">
+            <input type="text" class="input-box" name="username" placeholder="username">
+        </div>
+        <div class="input-group">
+            <input type="password" class="input-box" name="password" placeholder="Password">
+        </div>
+        <div class="input-group remember-me">
+            <input type="checkbox"> Remember me
+        </div>
+        <div class="input-group">
+            <button class="btn">Login</button>
+        </div>
     </form>
-</div>
 </div>
 
 {% endblock %}

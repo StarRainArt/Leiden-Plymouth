@@ -27,7 +27,7 @@
             {% csrf_token %}
             <input type="hidden" name="action" value="bio">
             <textarea name="biography" id="biography" placeholder="Add a biography">{{biography}}</textarea>
-            <input type="submit" value="edit">
+            <input type="submit" value="Save">
         </form>
     </section>
 
@@ -47,7 +47,7 @@
             {% csrf_token %}
             <input type="hidden" name="action" value="tags">
             <input type="text" name="name" id="tag" placeholder="Add a favorite tag">
-            <input type="submit" value="add" id="addTagBtn">
+            <input type="submit" value="Add" id="addTagBtn">
         </form>
     </section>
 </div>

@@ -18,10 +18,6 @@ $Shadow: 0px 5px 10px -5px black;
     width:250px;
   }
 
-  h1 {
-    font-size: 28px;
-  }
-
   .profile_info{
     width: 100%;
     display: flex;
@@ -39,6 +35,9 @@ $Shadow: 0px 5px 10px -5px black;
   #biography_edit{
     width: 100%;
     margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     form{
       // width: 100%;

@@ -3,6 +3,15 @@
 {% block title%}Home - Social Sphere{% endblock %}
 
 {% block content %}
+
+{% load static %}{% load compress %} {% compress css %}
+  <link
+  rel="stylesheet"
+  href="{%static 'scss/map.scss' %}"
+  type="text/x-scss"
+  />
+{% endcompress %}
+
 <div id="map" style="height: 100%; width: 100%; margin: 0 0"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
