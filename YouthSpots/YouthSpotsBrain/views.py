@@ -1,11 +1,13 @@
 from django.http import JsonResponse, HttpResponse
 from YouthSpotsBrain.models import Profile, Pins, UserAuth, Tags
+from meetup.models import Meetups
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from geopy.distance import geodesic
 import json
 import re
 import random
+
 def home(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -72,7 +74,13 @@ def savePin(request, pin_id=None):
             # Create a new pin
             pin = Pins(title=title, description=description, latitude=lat, longitude=lng, tags=tags)
             pin.save()
-            return JsonResponse({'status': 'Created'})
+        meetups = Meetups.objects.filter(pin=pin) # Adjust this query based on your actual relationship
+
+        # Include meetups in the response
+        return JsonResponse({
+            'status': 'Updated' if existing_pin else 'Created',
+            'meetups': [{'id': m.id, 'name': m.name_meetup, 'location': m.location, 'pin_id': m.pin_id} for m in meetups]
+        })
     elif request.method == 'DELETE':
         if pin_id is not None:
             try:

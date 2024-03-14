@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} Youth Spots {% endblock %}</title>
-    {% load static %} 
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     {% load compress %} {% compress css %}
     <link
       rel="stylesheet"
@@ -18,10 +18,10 @@
       type="text/x-scss"
     />
     <link
-    rel="stylesheet"
-    href="{%static 'scss/signup.scss' %}"
-    type="text/x-scss"
-  />
+      rel="stylesheet"
+      href="{%static 'scss/signup.scss' %}"
+      type="text/x-scss"
+    />
     <link
       rel="stylesheet"
       href="{%static 'scss/login.scss' %}"
@@ -64,17 +64,21 @@
     <!-- <script src="../static/js/map.js"></script> -->
   </head>
   <body>
-    <main>
-      {% block content %} {% endblock %}
-    </main>
+    <main>{% block content %} {% endblock %}</main>
     <footer>
       <nav>
-          <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}"></a>
-          <a href="{% url 'pins' %}"><img src="{% static 'img/Pins.png' %}"></a>
-          <a href=""><img src="{% static 'img/MeetUp.png' %}"></a>
-          <a href="{% url 'view_profile' %}"><img src="{% static 'img/Profile_img.png' %}"></a>
-          <a href="{% url 'settings' %}"><img src="{% static 'img/Settings.png' %}"></a>
+        <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}" /></a>
+        <a href="{% url 'pins' %}"><img src="{% static 'img/Pins.png' %}" /></a>
+        <a href="{% url 'my_meetups' %}"
+          ><img src="{% static 'img/MeetUp.png' %}"
+        /></a>
+        <a href="{% url 'view_profile' %}"
+          ><img src="{% static 'img/Profile_img.png' %}"
+        /></a>
+        <a href="{% url 'settings' %}"
+          ><img src="{% static 'img/Settings.png' %}"
+        /></a>
       </nav>
-  </footer>
+    </footer>
   </body>
 </html>

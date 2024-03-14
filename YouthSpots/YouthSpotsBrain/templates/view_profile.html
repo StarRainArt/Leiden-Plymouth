@@ -29,7 +29,7 @@
             {% for tag in favorite_tags %}
                 <form method='POST'>
                     {% csrf_token %}
-                    <input type="submit" value="{{tag.name}}"  style="background-color:{{tag.color}}" class="tag_from_btn">
+                    <input type="submit" value="{{tag.name}}" class="tag_from_btn">
                     <input type="hidden" name="action" value="tag_remove">
                     <input type="hidden" name="name" value="{{ tag }}">
                 </form>

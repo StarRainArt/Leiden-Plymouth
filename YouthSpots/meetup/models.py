@@ -9,7 +9,7 @@ class Meetups(models.Model):
     description = models.TextField(default='There is no description')
     time_start = models.DateTimeField()
     time_end = models.DateTimeField()
-    # owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     invited = models.ManyToManyField(Profile, related_name='invited')
     tags = models.CharField(default='none', max_length=255)
     created_timestamp = models.DateTimeField(default=timezone.now)
