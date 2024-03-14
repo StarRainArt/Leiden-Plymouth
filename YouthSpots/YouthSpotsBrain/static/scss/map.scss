@@ -27,12 +27,12 @@ body {
       justify-content: space-evenly;
       width: 80%;
       position: fixed;
-      bottom: 100px;
+      bottom: 120px;
       
       .button {
         padding: 20px 30px;
         margin: 0 60px;
-        z-index: 1000;
+        z-index: 2;
         display: flex;
         font-family: "Poppins";
         border: none;
@@ -43,45 +43,117 @@ body {
       }
     }
     .leaflet-routing-container {
-      box-shadow: 2px;
+      box-shadow: 0px 5px 10px -5px black;
+      border-radius: 20px;
+      background-color: $Federal-blue;
+      
+      .leaflet-routing-collapse-btn {
+        color: white;
+      }
 
       .leaflet-routing-add-waypoint {
-        width: 10%;
+        width: 15%;
         height: 100%;
         border-radius: 100px;
+        background-color: $Royal-purple;
+        padding: 6.5px 5px;
+        color: white;
       }
       .leaflet-routing-reverse-waypoints {
-        width: 10%;
+        width: 15%;
         height: 100%;
         border-radius: 100px;
+        background-color: $Royal-purple;
+        padding: 5px;
+        color: white;
       }
     }
     .leaflet-routing-geocoder {
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: "Poppins";
+      padding-left: 10px;
+      
       input {
-        width: 100%;
+        width: 90%;
         height: 40px;
         display: flex;
+        align-items: center;
         padding: 5px 13px;
-        border-radius: 15pt;
-        background-color: $Pure-white;
+        border-radius: 15px;
+        color: $Pure-white;
+        background-color: $Royal-purple;
         font-size: 0.9rem;
+        font-family: "Poppins";
+
+        &::placeholder {
+          color: white;
+        }
       }
+
       .leaflet-routing-remove-waypoint {
         display: flex;
         align-items: center;
         justify-content: center;
         color: $Eerie-black;
         transform: scale(1.5);
+        margin-left: 40px;
+        margin-bottom: 50px;
+
         &::after {
-          color: $Old-rose;
+          color: $Pure-white;
+          background-color: rgba(0, 0, 0, 0);
+          margin: 0;
         }
       }
     }
   }
 }
+
+.leaflet-routing-alt {
+  font-family: "Poppins";
+
+  h2 {
+    font-family: "Poppins";
+  }
+
+  td {
+    font-family: "Poppins";
+  }
+
+  tr:hover {
+    background-color: #3e2181 !important;
+  }
+}
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control {
+  background-color: $Federal-blue;
+  border-radius: 10px;
+  // margin: 0;
+  padding: 8px;
+  box-shadow: 0px 5px 10px -5px black;
+
+  .leaflet-control-zoom-in {
+    background-color: $Royal-purple;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .leaflet-control-zoom-out {
+    background-color: $Royal-purple;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .reverse-button {
   background-color: $Pure-white;
   padding: 10px;
@@ -100,7 +172,7 @@ body {
 }
 
 .title {
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins";
   color: black;
   font-weight: bold;
 }
@@ -130,4 +202,7 @@ body {
     background-color: $Pure-white;
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+.leaflet-routing-icon{
+  background-image: url("../img/Icons.png") !important;
+}

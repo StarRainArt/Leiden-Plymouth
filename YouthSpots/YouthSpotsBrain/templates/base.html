@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} Youth Spots {% endblock %}</title>
-    {% load static %} {% load compress %} {% compress css %}
+    {% load static %} 
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    {% load compress %} {% compress css %}
     <link
       rel="stylesheet"
       href="{%static 'scss/style.scss' %}"
@@ -68,7 +70,7 @@
     <footer>
       <nav>
           <a href="{% url 'map' %}"><img src="{% static 'img/Map.png' %}"></a>
-          <a href=""><img src="{% static 'img/Pins.png' %}"></a>
+          <a href="{% url 'pins' %}"><img src="{% static 'img/Pins.png' %}"></a>
           <a href=""><img src="{% static 'img/MeetUp.png' %}"></a>
           <a href="{% url 'view_profile' %}"><img src="{% static 'img/Profile_img.png' %}"></a>
           <a href=""><img src="{% static 'img/Settings.png' %}"></a>
