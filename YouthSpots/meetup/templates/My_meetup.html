@@ -21,14 +21,14 @@
         <h1> My Meetups</h1>
         <ul>
             {% for meetup in meetups %}
-            <form action="{% url 'edit_meetup' %}" method="POST">
+            <form action="{% url 'select_meetup' meetup.id %}" method="POST">
               {% csrf_token %}
                 <li>
                   <strong>{{ meetup.title }}</strong><br>
                   <span>Start Time: {{ meetup.start_timestamp }}</span><br>
                   <span>End Time: {{ meetup.end_timestamp }}</span><br>
                 </li>
-                <input type="hidden" name="meetup_id" value="{{ meetup.id}}" default:"{{ meetup.id}}">
+                <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
                 <input type="submit" value="edit" class="save-button" id="button">
               </form>
             {% empty %}

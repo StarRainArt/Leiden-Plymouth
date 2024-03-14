@@ -20,9 +20,11 @@ def my_meetups(request):
     user_id = 1#request.user.id
     meetups =Meetups.objects.filter(owner_id=user_id)
     return render(request, 'My_meetup.html', {'meetups': meetups})
-    
-def meetup_edit(request):
-    return render(request, "meetup_edit.html")
+    r
+def edit_meetup(request, meetup_id):
+    if request.method == 'POST':
+        meetup_id = int(request.POST.get('meetup_id'))
+        return redirect('edit_meetup',meetup_id=meetup_id)
 
 def meetup_data_create(request):
     lat = None
@@ -97,14 +99,12 @@ def select_meetup(request):
     meetups = Meetups.objects.all()
     return render(request, 'select_meetup.html', {'meetups': meetups})
 
-def edit_meetup(request):
-    if request.method == 'POST':
-        meetup_id = request.POST.get('meetup_id')
-        return redirect('edit_meetup', meetup_id=meetup_id)
-#edit_meetup.html is not const    
+   
 
 def edit_meetup_details(request, meetup_id):
-    meetup = Meetups.objects.get(id=meetup_id)
+    #meetup = Meetups.objects.get(id=meetup_id)
+    meetup = Meetups.objects.get(pk=meetup_id)
+    
     if request.method == 'POST':
         name_meetup = request.POST.get('name_meetup')
         time_start = request.POST.get('time_start')
@@ -114,15 +114,18 @@ def edit_meetup_details(request, meetup_id):
         visibility = request.POST.get('visibility')
         #latitude = lat
         #longitude = lng
-        
-        # Update other fields as needed
-        meetup.title=name_meetup,
-        meetup.start_timestamp=time_start,
-        meetup.end_timestamp=time_end,
-        meetup.description=description,
-        #meetup.longitude=lng,
-        #meetup.latitude=lat,
-        meetup.save()
+        if None in [name_meetup, time_start, time_end, description, visibility]:
+            return HttpResponseBadRequest("Required fields are missing.")
+        try:# Update other fields as needed
+            meetup.title=str(name_meetup),
+            meetup.start_timestamp=int(time_start),
+            meetup.end_timestamp=int(time_end),
+            meetup.description=str(description),
+            #meetup.longitude=lng,
+            #meetup.latitude=lat,
+            meetup.save()
+        except ValueError as e:
+            return HttpResponseBadRequest("Invalid data format.")
         return redirect('my_meetups')
 #select_meetup.html is not const
     return render(request, 'my_meetups.html', {'meetup': meetup})
