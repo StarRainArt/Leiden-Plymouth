@@ -7,8 +7,7 @@ $Eerie-black: #222222;
 $Pure-white: #FFFFFF;
 
 .profile_logo {
-  display: block;
-  margin: 0 auto;
+  display: flex;
   width: 30vh;
 }
 
@@ -17,11 +16,6 @@ $Pure-white: #FFFFFF;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-  .alter-account-text{
-  color: $Pure-white;
-  font-size: 20px;
-}
 }
 
 .left_side {
@@ -105,6 +99,7 @@ $Pure-white: #FFFFFF;
   width: 300px;
   color: #fff;
   width: 200px;
+  margin-bottom: 75px;
   }
   
   .del{
@@ -115,28 +110,6 @@ $Pure-white: #FFFFFF;
   color: red;
   width: 200px;
   margin-bottom:50px;
-}
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  border-radius: 25px;
-  transform: translate(-50%, -50%);
-  background-color: $Federal-blue;
-  padding: 20px;
-  border: 2px solid black;
-  z-index: 1000;
-  .Nopopup{
-    border: 1px solid black; 
-    padding: 10px; 
-    margin: 10px;
-    border-radius: 25px; 
-    background-color: $Federal-blue;
-    color: #fff;
-    width: 50px;
 }
 }
 

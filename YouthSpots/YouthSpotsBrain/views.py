@@ -8,11 +8,6 @@ import json
 import re
 import random
 
-def home(request):
-    if request.user.is_authenticated == False:
-        return redirect("login")
-    return render(request, "home.html")
-
 def view_profile(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -233,3 +228,17 @@ def settings(request):
     if request.user.is_authenticated == False:
         return redirect("login")
     return render(request, "settings.html")
+
+def delete_account(request):
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    if request.method == "POST":
+        if request.POST["password"] == "":
+            return render(request, "delete_account.html", {"error": "Password is required"})
+        if request.user.check_password(request.POST["password"]):
+            user = UserAuth.objects.get(username=request.user.username)
+            user.delete()
+            return redirect("login")
+        else:
+            return render(request, "delete_account.html", {"error": "Invalid password"})
+    return render(request, "delete_account.html")

@@ -1,0 +1,57 @@
+$Blue-green: #2596be;
+$Federal-blue: #1E095A;
+$Royal-purple: #8147A8;
+$Old-rose: #B46F77;
+$Eerie-black: #222222;
+$Pure-white: #FFFFFF;
+
+$Shadow: 0px 5px 10px -5px black;
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+    position: relative;
+    min-height: 100%;
+
+    #pinList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1vh;
+        
+        .pin {
+            background-color: #2d166b;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: $Shadow;
+            padding: 10px 0;
+
+            .title {
+                font-size: 22px;
+                font-weight: bold;
+            }
+            .description {
+                font-size: 18px;
+            }
+            .distance {
+                font-style: italic;
+            }
+        }
+
+        @media screen and (max-width: 470px) {
+            .pin {
+                width: 97%;
+            }
+        }
+
+        @media screen and (min-width: 470px) {
+            .pin {
+                width: 750px;
+            }
+        }
+    }
+}

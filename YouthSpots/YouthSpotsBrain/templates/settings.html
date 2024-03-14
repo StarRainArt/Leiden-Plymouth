@@ -7,14 +7,12 @@
         <link rel="stylesheet" href="{%static 'scss/settings.scss' %}" type="text/x-scss"/>
     {% endcompress %}
 
-    <section id="settings_bg">
-        <section id="top_settings">
-            <img src="../static/img/logo.png" id="logopng">
-            <h1>Settings</h1>
-            <a class="setting_btn" href="{% url 'edit_profile' %}">Edit Profile</a>
-            <a class="setting_btn" href="{% url 'changepassword' %}">Change Password</a>
-            <a class="setting_btn" href="{% url 'logout' %}" onClick="return confirm('Are you sure that you want to log out?')">Log Out</a>
-        </section>
-        <a class="setting_btn" id="delete_btn" href="" onClick="return confirm('Are you absolutely sure you want to delete your account? This decision can not be reversed!')">Delete Account</a>
+    <section id="top_settings">
+        <img src="../static/img/logo.png" id="logopng">
+        <h1>Settings</h1>
+        <a class="setting_btn" href="{% url 'edit_profile' %}">Edit Profile</a>
+        <a class="setting_btn" href="{% url 'changepassword' %}">Change Password</a>
+        <a class="setting_btn" href="{% url 'logout' %}">Log Out</a>
     </section>
+    <a class="setting_btn" id="delete_btn" href = "{% url 'delete_account' %}">Delete Account</a>
 {% endblock %}
