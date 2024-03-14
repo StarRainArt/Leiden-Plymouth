@@ -158,6 +158,8 @@
             pinString += `<div class="tag">${tag}</div>`;
           });
           pinString += `</div>`;
+          pinString += `<b>Meetup:</b> ${meetup.title}<br>`;
+          pinString += `<b>Description:</b> ${meetup.description}`;
           pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           pinString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
@@ -182,8 +184,8 @@
             popupString += `<div class="tag">${tag}</div>`;
           });
           popupString += `</div>`;
-          popupString += `<b>Meetup:</b> {{ meetup.title }}<br>`;
-          popupString += `<b>Description:</b> {{ meetup.description }}`;
+          popupString += `<b>Meetup:</b> ${meetup.title}<br>`;
+          popupString += `<b>Description:</b> ${meetup.description}`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;
@@ -307,9 +309,11 @@
       shareButtons.forEach(function (button) {
         button.addEventListener("click", function () {
           let pinId = this.dataset.id;
-          navigator.clipboard.writeText(`http://localhost:8000/?pinSelected=${pinId}`);
-        })
-      })
+          navigator.clipboard.writeText(
+            `http://localhost:8000/?pinSelected=${pinId}`
+          );
+        });
+      });
     });
 
     // AddMarker
