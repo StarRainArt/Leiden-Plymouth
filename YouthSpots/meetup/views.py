@@ -16,7 +16,7 @@ def public_meetups(request):
     return render(request, 'meetup_public.html', {'meetups': meetups})
 
 def private_meetups(request):
-    meetups = Meetups.objects.filter(visibility="Private" ) # and distance thing 101
+    meetups = Meetups.objects.filter(visibility="#" ) # and distance thing 101
     return render(request, 'meetup_private.html', {'meetups': meetups})
 
 @login_required

@@ -12,11 +12,12 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress%}
   <h1>Public Meetups</h1>
   <ul>
     {% for meetup in meetups %}
-
     <li>
-      <strong>{{ meetup.title }}</strong><br />
-      <span>Start Time: {{ meetup.start_timestamp }}</span><br />
-      <span>End Time: {{ meetup.start_timestamp }}</span><br />
+    <h3>{{ meetup.name_meetup }}</h3>
+        <p>Location: {{ meetup.location }}</p>
+        <p>Start Time: {{ meetup.time_start }}</p>
+        <p>End Time: {{ meetup.time_end }}</p>
+        <p>Description: {{ meetup.description }}</p>
     </li>
     {% empty %}
     <li>No meetups available.</li>
