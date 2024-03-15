@@ -159,19 +159,21 @@
           let marker = pins[pin.id].marker;
           pins[pin.id].info = pin;
 
-          let pinString = `<div class="title">${pin.title}</div>`;
-          pinString += `<div class="description">${pin.description}</div>`;
-          pinString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
-          tags.forEach((tag) => {
-            pinString += `<div class="tag">${tag}</div>`;
-          });
-          pinString += `</div>`;
-          pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
-          pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
-          pinString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
+          let popupString = `<div class="title">${pin.title}</div>`; // Corrected here
+          popupString += `<div class="description">${pin.description}</div>`;
+          if (pin.tags && pin.tags.length > 0) {
+            popupString += `<div class="tags">`;
+            let tags = pin.tags.split(", ");
+            tags.forEach((tag) => {
+              popupString += `<div class="tag">${tag}</div>`;
+            });
+            popupString += `</div>`;
+          }
+          popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
+          popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+          popupString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
 
-          marker.getPopup().setContent(pinString);
+          marker.getPopup().setContent(popupString);
           marker.getPopup().update();
         } else {
           /*
@@ -185,12 +187,14 @@
 
           let popupString = `<div class="title">${pin.title}</div>`;
           popupString += `<div class="description">${pin.description}</div>`;
-          popupString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
-          tags.forEach((tag) => {
-            popupString += `<div class="tag">${tag}</div>`;
-          });
-          popupString += `</div>`;
+          if (pin.tags && pin.tags.length > 0) {
+            popupString += `<div class="tags">`;
+            let tags = pin.tags.split(", ");
+            tags.forEach((tag) => {
+              popupString += `<div class="tag">${tag}</div>`;
+            });
+            popupString += `</div>`;
+          }
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;
