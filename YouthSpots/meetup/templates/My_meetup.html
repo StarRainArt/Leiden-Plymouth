@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    {% load static %} {% load compress %} {% compress css %}
-    <link
-      rel="stylesheet"
-      href="{%static 'scss/create-event-styles.scss' %}"
-      type="text/x-scss"
-    />
-    {% endcompress %}
-  </head>
-  <body>
-    <main>
-      <section style="text-align: center">
-        <br />
-        <h2>My Meetups</h2>
-        <ul>
-          {% for meetup in meetups %}
-          <li>
-            <h3>{{ meetup.name_meetup }}</h3>
-            <p>Location: {{ meetup.location }}</p>
-            <p>Start Time: {{ meetup.time_start }}</p>
-            <p>End Time: {{ meetup.time_end }}</p>
-            <p>Description: {{ meetup.description }}</p>
-            <p>Pin id: {{ meetup.pin_id }}</p>
-             <section><form action="{% url 'select_meetup' %}" method="POST">
-              {% csrf_token %} 
-             <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
-            <input type="submit" value="edit" class="save-button" id="button">
-            </form> <form action="{% url 'delete_meetup_do' %}" method="POST">
-              {% csrf_token %} 
-             <input type="hidden" name="meetup_id" value="{{ meetup.id }}">
-            <input type="submit" value="delete" class="save-button" id="button">
-            </form></section>
-          </li>
-          {% empty %}
-          <li>No meetups found.</li>
-          {% endfor %}
-        </ul>
-      </section>
-      <script></script>
-    </main>
-  </body>
-</html>
+{% extends "baseMeetup.html" %} {% block title %}My meetups - Social
+Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
+{%compress css %}
+<link
+  rel="stylesheet"
+  href="{%static 'scss/my_meetup.scss' %}"
+  type="text/x-scss"
+/>
+{% endcompress %}
+<section class="meetupList">
+  <br />
+  <h1>My Meetups</h1>
+  <a href="{% url 'public_meetups' %}">here are all public meetups</a>
+  <a href="{% url 'private_meetups' %}">here are all public meetups</a>
+  <ul>
+    {% for meetup in meetups %}
+    <li>
+      <h3 class="title">{{ meetup.name_meetup }}</h3>
+      <p class="location">Location: {{ meetup.location }}</p>
+      <p class="time">Start Time: {{ meetup.time_start }}</p>
+      <p class="time">End Time: {{ meetup.time_end }}</p>
+      <p class="description">Description: {{ meetup.description }}</p>
+      <p class="pinId">Pin id: {{ meetup.pin_id }}</p>
+      <article>
+        <form action="{% url 'select_meetup' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
+          <input type="submit" value="edit" class="save-button" id="button" />
+        </form>
+        <form
+          action="{% url 'delete_meetup_do' %}"
+          method="POST"
+          onsubmit="return confirm('Are you sure you want to delete this meetup?');"
+        >
+          {% csrf_token %}
+          <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
+          <input type="submit" value="delete" class="save-button" id="button" />
+        </form>
+      </article>
+    </li>
+    {% empty %}
+    <li>No meetups found.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

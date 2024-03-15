@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-
 visibility_type = {
     ("+", "Public"),
     ("#", "Protected"),
@@ -32,6 +31,7 @@ class Pins(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
+    meetups = models.ForeignKey('meetup.Meetups', on_delete=models.CASCADE, null=True)
     # pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
     tags = models.CharField(default='none', max_length=255)
     pin_type = models.CharField(

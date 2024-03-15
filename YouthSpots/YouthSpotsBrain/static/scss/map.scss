@@ -12,7 +12,44 @@ $Shadow: 0px 5px 10px -5px black;
 .leaflet-popup-content-wrapper{
   background-color: $Federal-blue !important;
   box-shadow: $Shadow;
-  
+
+  #popupForm  {
+    input {
+      background-color: $Royal-purple;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      box-shadow: $Shadow;
+      margin-bottom: 3px;
+
+      &::placeholder {
+        color: white;
+      }
+    }
+
+    textarea {
+      background-color: $Royal-purple;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      width: 100%;
+      box-shadow: $Shadow;
+      margin-bottom: 5px;
+      resize: none;
+    }
+
+    button {
+      background-color: $Royal-purple;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      box-shadow: $Shadow;
+    }
+
+    label {
+      color: white;
+    }
+  }  
 }
 
 .editPin{

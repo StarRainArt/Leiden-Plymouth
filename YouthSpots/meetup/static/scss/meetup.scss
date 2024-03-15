@@ -1,0 +1,57 @@
+$Blue-green: #2596be;
+$Federal-blue: #1e095a;
+$Royal-purple: #8147a8;
+$Old-rose: #b46f77;
+$Eerie-black: #222222;
+$Pure-white: #ffffff;
+
+$Shadow: 0px 5px 10px -5px black;
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+    position: relative;
+    min-height: 100%;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1vh;
+        p {
+            display: flex;
+            flex-direction: column;
+            label {
+                font-size: 20px;
+                font-weight: 700;
+                padding: 5px;
+                text-align: center;
+            }
+            input,
+            textarea,
+            select {
+                border-radius: 20px;
+                padding: 10px 15px;
+                box-sizing: border-box;
+                resize: none;
+                background-color: $Federal-blue;
+                color: $Pure-white;
+                border: 0px;
+                margin-bottom: 1vh;
+                box-shadow: $Shadow;
+                font-size: 16px;
+            }
+        }
+        button {
+            margin-bottom: 2vh;
+            background-color: $Royal-purple;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            box-shadow: $Shadow;
+            font-size: 16px;
+        }
+    }
+}

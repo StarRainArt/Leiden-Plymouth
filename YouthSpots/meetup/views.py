@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, HttpResponse
 from .models import Meetups
 from YouthSpotsBrain.models import Profile, Pins
 from django import forms
@@ -14,6 +14,10 @@ from django.urls import reverse
 def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="+") # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
+
+def private_meetups(request):
+    meetups = Meetups.objects.filter(visibility="Private" ) # and distance thing 101
+    return render(request, 'meetup_private.html', {'meetups': meetups})
 
 @login_required
 def my_meetups(request):
@@ -77,50 +81,6 @@ def meetup(request):
 
     return render(request, 'meetup.html', {'form': form})
 
-
-# @login_required
-# def meetup_data_create(request):
-#     if request.method == 'POST':
-#         # Extract form data
-#         name_meetup = request.POST.get('name_meetup')
-#         location = request.POST.get('location')
-#         visibility = request.POST.get('visibility')
-#         time_start_str = request.POST.get('time_start')
-#         time_end_str = request.POST.get('time_end')
-#         description = request.POST.get('description')
-
-#         # Validate form data
-#         if None in [name_meetup, location, visibility, time_start_str, time_end_str, description]:
-#             print("something")
-#             return HttpResponseBadRequest(render(request, 'meetup.html'))
-
-#         # Parse time data
-#         try:
-#             time_start = datetime.strptime(time_start_str, "%Y-%m-%d %H:%M:%S")
-#             time_end = datetime.strptime(time_end_str, "%Y-%m-%d %H:%M:%S")
-#         except ValueError:
-#             print("Invalid time format")
-#             return HttpResponseBadRequest(render(request, 'meetup.html'))
-
-#         # Create a new Meetups instance and save it to the database
-#         try:
-#             profile = Profile.objects.get(user=request.user)
-#             new_meetup = Meetups.objects.create(
-#                 name_meetup=name_meetup,
-#                 location=location,
-#                 visibility=visibility,
-#                 time_start=time_start,
-#                 time_end=time_end,
-#                 description=description,
-#                 owner=profile
-#             )
-#             return HttpResponseRedirect('/')
-#         except Exception as e:
-#             print(f"An error occurred: {str(e)}")
-#             return HttpResponseBadRequest(render(request, 'meetup.html'))
-
-    # return render(request, 'meetup.html')
-#create_meetup_form.html is not const
 def select_meetup(request):
     meetup_id=int(request.POST.get('meetup_id'))
     meetups = Meetups.objects.all()
@@ -189,9 +149,7 @@ def delete_meetup_do(request):
         return redirect('my_meetups')
     
     except Meetups.DoesNotExist:
-        return "Meetup with specified ID does not exist."
+        return HttpResponse("Meetup with specified ID does not exist.")
     
     except Exception as e:
-        # Handle any other exceptions that may occur
-        return f"An error occurred: {str(e)}"
-
+        return HttpResponse(f"An error occurred: {str(e)}")

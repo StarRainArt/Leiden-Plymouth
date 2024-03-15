@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 import json
 import re
 import random
-
 def view_profile(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -42,6 +41,7 @@ def edit_profile(request):
     return render(request, "edit_profile.html")
 
 def maps(request):
+    # meetup = Meetups.objects.get(id=meetups_id)
     return render(request, "maps.html")
 
 def getPins(request):
@@ -49,6 +49,7 @@ def getPins(request):
 
 
 def savePin(request, pin_id=None):
+    
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -76,41 +77,6 @@ def savePin(request, pin_id=None):
             'status': 'Updated' if existing_pin else 'Created',
             'meetups': [{'id': m.id, 'name': m.name_meetup, 'location': m.location, 'pin_id': m.pin_id} for m in meetups]
         })
-    elif request.method == 'DELETE':
-        if pin_id is not None:
-            try:
-                pin = Pins.objects.get(pk=pin_id)
-            except Pins.DoesNotExist:
-                return JsonResponse({'status': 'Not Found'}, status=404)
-            pin.delete()
-            return JsonResponse({'status': 'Deleted'})
-        else:
-            return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
-    else:
-        return JsonResponse({'status': 'Method Not Allowed'}, status=405)
-
-def showMeetup(request, pin_id=None):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        tags = request.POST.get('tags')
-        lat = request.POST.get('lat')
-        lng = request.POST.get('lng')
-
-        # Check if a pin with the same latitude and longitude already exists
-        existing_pin = Pins.objects.filter(latitude=lat, longitude=lng).first()
-        if existing_pin:
-            # Update the existing pin
-            existing_pin.title = title
-            existing_pin.description = description
-            existing_pin.tags = tags
-            existing_pin.save()
-            return JsonResponse({'status': 'Updated'})
-        else:
-            # Create a new pin
-            pin = Pins(title=title, description=description, latitude=lat, longitude=lng, tags=tags)
-            pin.save()
-            return JsonResponse({'status': 'Created'})
     elif request.method == 'DELETE':
         if pin_id is not None:
             try:

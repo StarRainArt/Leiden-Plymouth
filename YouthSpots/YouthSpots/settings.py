@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# LOGIN_URL = '/login/'
+LOGIN_URL = '/login/'
 
 # Application definition
 
@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'socialsphere',
         'USER': 'root',
-        'PASSWORD': 'Messen031!',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
