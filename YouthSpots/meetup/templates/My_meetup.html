@@ -36,7 +36,7 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
         <input type="submit" value="Edit" class="save-button" id="button" />
       </form>
       <form
-        action="{% url 'delete_meetup_do' %}"
+        action="{% url 'my_meetups' %}"
         method="POST"
         onsubmit="return confirm('Are you sure you want to delete this meetup?');"
       >
