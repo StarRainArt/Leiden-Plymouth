@@ -15,16 +15,4 @@
   {% csrf_token %} {{ form.as_p }}
   <button type="submit">Save</button>
 </form>
-
-
-<script>
-  //let fetchedPins = await (await fetch("/getPins")).json();
-  // // Get the current date and time
-  // let currentDate = new Date();
-  // let currentDateTime = currentDate.toISOString().slice(0, 16); // Remove seconds and milliseconds
-
-  // // Set the minimum value for the input field
-  // document.getElementById("dateandtime1").min = currentDateTime;
-  // document.getElementById("dateandtime2").min = currentDateTime;
-</script>
 {% endblock %}

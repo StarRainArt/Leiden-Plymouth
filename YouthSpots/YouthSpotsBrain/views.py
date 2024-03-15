@@ -3,10 +3,12 @@ from YouthSpotsBrain.models import Profile, Pins, UserAuth, Tags
 from meetup.models import Meetups
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+
 # from geopy.distance import geodesic
 import json
 import re
 import random
+
 def view_profile(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -38,7 +40,26 @@ def view_profile(request):
     return render(request, "view_profile.html", {"biography": profile.biography, "favorite_tags": profile.favorite_tags.all()})
 
 def edit_profile(request):
+    if request.method == 'POST':
+        # Retrieve the current user's profile
+        user = request.user
+        profile = user.profile
+
+        # Update username if a new one is provided
+        new_username = request.POST.get('username')
+        if new_username and new_username != user.username:
+            user.username = new_username
+
+        # Update email if a new one is provided
+        new_email = request.POST.get('email')
+        if new_email and new_email != user.email:
+            user.email = new_email
+        user.save()
+
+        return redirect('view_profile') # Redirect to the profile view after saving
+
     return render(request, "edit_profile.html")
+
 
 def maps(request):
     # meetup = Meetups.objects.get(id=meetups_id)
@@ -89,18 +110,6 @@ def savePin(request, pin_id=None):
             return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
     else:
         return JsonResponse({'status': 'Method Not Allowed'}, status=405)
-
-def retrieve_marker(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        lat = data.get('lat')
-        lng = data.get('lng')
-
-        # Save the marker to the database
-        pin = Pins(title="New Pin", description="New Description", latitude=lat, longitude=lng, tags="New Tag")
-        pin.save()
-
-        return JsonResponse({'status': 'success'})
 
 
 def login(request):

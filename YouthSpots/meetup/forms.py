@@ -8,12 +8,16 @@ class MeetupsForm(forms.ModelForm):
 
     class Meta:
         model = Meetups
-        fields = ['location', 'name_meetup', 'description', 'time_start', 'time_end', 'invited', 'tags', 'pin', 'visibility']
+        fields = ['location', 'name_meetup', 'description', 'time_start', 'time_end', 'tags', 'pin', 'visibility']
+        widgets = {
+            'time_start': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'time_end': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 class MeetupsForm_Edit(forms.ModelForm):
     class Meta:
         model = Meetups
-        fields = ['location', 'name_meetup', 'description', 'time_start', 'time_end', 'invited', 'tags', 'pin', 'visibility']
+        fields = ['location', 'name_meetup', 'description', 'time_start', 'time_end', 'tags', 'pin', 'visibility']
         widgets = {
             'time_start': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'time_end': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
@@ -23,7 +27,6 @@ class MeetupsForm_Edit(forms.ModelForm):
     name_meetup = forms.CharField(widget=forms.TextInput())
     description = forms.CharField(widget=forms.Textarea())
     
-    #invited = forms.CharField(widget=forms.TextInput())
     #tags = forms.CharField(widget=forms.TextInput())
     #visibility = forms.CharField(widget=forms.TextInput())
     

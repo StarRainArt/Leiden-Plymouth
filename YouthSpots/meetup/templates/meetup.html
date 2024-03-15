@@ -87,37 +87,5 @@
       }
     };
   }
-
-  // Get the current date and time
-  var currentDate = new Date();
-  var currentDateTime = currentDate.toISOString().slice(0, 16); // Remove seconds and milliseconds
-  // Set the minimum value for the input field
-  document.getElementById("dateandtime1").min = currentDateTime;
-  document.getElementById("dateandtime2").min = currentDateTime;
-
-  // Image Upload
-  let inputFile = document.getElementById("input-file");
-  let imagePreviewContainer = document.getElementById(
-    "image-preview-container"
-  );
-
-  document.addEventListener("DOMContentLoaded", function () {
-    var inputFile = document.getElementById("your-input-file-id"); // replace "your-input-file-id" with the actual id of your input file element
-    var imagePreviewContainer = document.getElementById("your-container-id"); // replace "your-container-id" with the actual id of your container element
-
-    inputFile.addEventListener("change", function () {
-      imagePreviewContainer.innerHTML = ""; // Clear previous previews
-      const files = inputFile.files;
-      const maxFiles = 6; // Maximum number of files allowed
-      for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
-        const file = files[i];
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        img.height = 100; // Adjust image height as needed
-        img.width = 100; // Adjust image width as needed
-        imagePreviewContainer.appendChild(img);
-      }
-    });
-  });
 </script>
 {% endblock %}

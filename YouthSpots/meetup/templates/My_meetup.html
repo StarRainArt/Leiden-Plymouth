@@ -7,10 +7,14 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
   type="text/x-scss"
 />
 {% endcompress %}
-<img src="../static/img/logo.png" id="logo">
+<img src="../static/img/logo.png" id="logo">  
 <h1>My Meetups</h1>
-<a href="{% url 'public_meetups' %}" class="meetupTitles">Your Public Meetups</a>
-<a href="{% url 'private_meetups' %}" class="meetupTitles">Your Private Meetups</a>
+<article>
+  <a href="{% url 'meetup' %}">Create here meetups</a>
+  <a href="{% url 'public_meetups' %}">Here are all public meetups</a>
+  <a href="{% url 'private_meetups' %}">Here are all private meetups</a>
+  <a href="{% url 'protected_meetups' %}">Here are all protected meetups</a>
+</article>
   <ul>
     {% for meetup in meetups %}
     <li>
