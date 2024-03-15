@@ -18,15 +18,10 @@
     </div>
     <center>
     </form>
-      <br><h3>{{ meetup.name_meetup }}</h3>
-      <p>Location: {{ meetup.location }}</p>
-      <p>Start Time: {{ meetup.time_start }}</p>
-      <p>End Time: {{ meetup.time_end }}</p>
-      <p>Description: {{ meetup.description }}</p>
-      <p>Pin id: {{ meetup.pin_id }}</p>
+      
       <form method="post">
         {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Create</button>
+        <button type="submit">Edit</button>
       </form>
 
    

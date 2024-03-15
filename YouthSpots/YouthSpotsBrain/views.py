@@ -90,40 +90,6 @@ def savePin(request, pin_id=None):
     else:
         return JsonResponse({'status': 'Method Not Allowed'}, status=405)
 
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        tags = request.POST.get('tags')
-        lat = request.POST.get('lat')
-        lng = request.POST.get('lng')
-
-        # Check if a pin with the same latitude and longitude already exists
-        existing_pin = Pins.objects.filter(latitude=lat, longitude=lng).first()
-        if existing_pin:
-            # Update the existing pin
-            existing_pin.title = title
-            existing_pin.description = description
-            existing_pin.tags = tags
-            existing_pin.save()
-            return JsonResponse({'status': 'Updated'})
-        else:
-            # Create a new pin
-            pin = Pins(title=title, description=description, latitude=lat, longitude=lng, tags=tags)
-            pin.save()
-            return JsonResponse({'status': 'Created'})
-    elif request.method == 'DELETE':
-        if pin_id is not None:
-            try:
-                pin = Pins.objects.get(pk=pin_id)
-            except Pins.DoesNotExist:
-                return JsonResponse({'status': 'Not Found'}, status=404)
-            pin.delete()
-            return JsonResponse({'status': 'Deleted'})
-        else:
-            return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
-    else:
-        return JsonResponse({'status': 'Method Not Allowed'}, status=405)
-
 def retrieve_marker(request):
     if request.method == 'POST':
         data = json.loads(request.body)
