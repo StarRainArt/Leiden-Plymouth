@@ -10,7 +10,6 @@
 </div>
 <section><h1>{{meetup.name_meetup}}</h1></section>
 <section id="legenda">
-  <h2>Legend</h2>
   <div>
     <img src="../static/img/Pin You.png" />
     <p>- Current Location</p>
@@ -19,13 +18,15 @@
     <img src="../static/img/Pin Place.png" />
     <p>- Location</p>
   </div>
+  <div>
+    <img src="../static/img/Pin Meetup.png" />
+    <p>- Meetup</p>
+  </div>
 </section>
 
 {{ pins|json_script:"pins_json" }}
 
 <script>
-  console.log("Leaflet version:", L.version);
-
   const urlParams = new URLSearchParams(window.location.search);
   const pinSelected = urlParams.get("pinSelected");
 
@@ -44,8 +45,7 @@
     // Create user marker
     let userIcon = L.icon({
       iconUrl: "../static/img/Pin_You.png",
-      iconShadow: "../static/img/Pin_You.png",
-      iconSize: [40, 40],
+      iconSize: [40, 50],
       shadowSize: [50, 64],
       iconAnchor: [22, 94],
       shadowAnchor: [4, 62],
@@ -106,7 +106,7 @@
       onAdd: function (map) {
         let container = L.DomUtil.create("div", "leaflet-routing-geocoders");
         let button = L.DomUtil.create("button", "", container);
-        button.innerHTML = "Toggle Directions";
+        button.innerHTML = "Toggle Walking Details";
         button.onclick = function () {
           let geocodersContainer = document.querySelector(
             ".leaflet-routing-alternatives-container"
@@ -130,7 +130,7 @@
       fetchedPins.forEach((pin) => {
         let places = L.icon({
           iconUrl: "../static/img/Pin_Place.png",
-          iconSize: [40, 40],
+          iconSize: [40, 50],
           shadowSize: [50, 64],
           iconAnchor: [22, 94],
           shadowAnchor: [4, 62],
@@ -138,14 +138,6 @@
         });
         let meetup = L.icon({
           iconUrl: "../static/img/Pin_Meetup.png",
-          iconSize: [38, 95],
-          shadowSize: [50, 64],
-          iconAnchor: [22, 94],
-          shadowAnchor: [4, 62],
-          popupAnchor: [-3, -76],
-        });
-        let user = L.icon({
-          iconUrl: "../static/img/Pin_You.png",
           iconSize: [38, 95],
           shadowSize: [50, 64],
           iconAnchor: [22, 94],
@@ -167,20 +159,21 @@
           let marker = pins[pin.id].marker;
           pins[pin.id].info = pin;
 
-          let pinString = `<div class="title">${pin.title}</div>`;
-          pinString += `<div class="description">${pin.description}</div>`;
-          pinString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
-          tags.forEach((tag) => {
-            pinString += `<div class="tag">${tag}</div>`;
-          });
-          pinString += `</div>`;
-          pinString += `<b>Meetup:</b> ${meetup.title}<br>`;
-          pinString += `<b>Description:</b>${meetup.description}<br>`;
-          pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
-          pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
-          pinString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
-          marker.getPopup().setContent(pinString);
+          let popupString = `<div class="title">${pin.title}</div>`; // Corrected here
+          popupString += `<div class="description">${pin.description}</div>`;
+          if (pin.tags && pin.tags.length > 0) {
+            popupString += `<div class="tags">`;
+            let tags = pin.tags.split(", ");
+            tags.forEach((tag) => {
+              popupString += `<div class="tag">${tag}</div>`;
+            });
+            popupString += `</div>`;
+          }
+          popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
+          popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
+          popupString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
+
+          marker.getPopup().setContent(popupString);
           marker.getPopup().update();
         } else {
           /*
@@ -194,14 +187,14 @@
 
           let popupString = `<div class="title">${pin.title}</div>`;
           popupString += `<div class="description">${pin.description}</div>`;
-          popupString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
-          tags.forEach((tag) => {
-            popupString += `<div class="tag">${tag}</div>`;
-          });
-          popupString += `</div>`;
-          popupString += `<b>Meetup:</b> ${meetup.title}<br>`;
-          popupString += `<b>Description:</b> ${meetup.description}<br>`;
+          if (pin.tags && pin.tags.length > 0) {
+            popupString += `<div class="tags">`;
+            let tags = pin.tags.split(", ");
+            tags.forEach((tag) => {
+              popupString += `<div class="tag">${tag}</div>`;
+            });
+            popupString += `</div>`;
+          }
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;

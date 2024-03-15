@@ -7,7 +7,7 @@ $Pure-white: #ffffff;
 
 $Shadow: 0px 5px 10px -5px black;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .leaflet-routing-geocoders > button {
   background-color: $Royal-purple;
@@ -21,15 +21,18 @@ $Shadow: 0px 5px 10px -5px black;
   box-shadow: $Shadow;
 }
 
-.leaflet-popup-content-wrapper{
+.leaflet-popup-content-wrapper {
   background-color: $Federal-blue !important;
   box-shadow: $Shadow;
 
   .leaflet-popup-content {
     color: white;
+    button {
+      margin-top: 10px;
+    }
   }
 
-  #popupForm  {
+  #popupForm {
     input {
       background-color: $Royal-purple;
       border: none;
@@ -65,10 +68,10 @@ $Shadow: 0px 5px 10px -5px black;
     label {
       color: white;
     }
-  }  
+  }
 }
 
-.editPin{
+.editPin {
   color: $Pure-white;
   border-radius: 50px;
   background-color: $Royal-purple;
@@ -77,7 +80,7 @@ $Shadow: 0px 5px 10px -5px black;
   box-shadow: $Shadow;
 }
 
-.deletePin{
+.deletePin {
   color: $Pure-white;
   border-radius: 65px;
   background-color: $Royal-purple;
@@ -97,7 +100,7 @@ $Shadow: 0px 5px 10px -5px black;
   box-shadow: $Shadow;
 }
 
-.showMeetup{
+.showMeetup {
   color: $Pure-white;
   border-radius: 75px;
   background-color: $Royal-purple;
@@ -124,7 +127,7 @@ $Shadow: 0px 5px 10px -5px black;
 
     img {
       width: 20px;
-      height: 30px;;
+      height: 30px;
     }
   }
 }

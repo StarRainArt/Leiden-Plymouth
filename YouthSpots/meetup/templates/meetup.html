@@ -1,23 +1,17 @@
-{% extends "baseMeetup.html" %}
+{% extends "baseMeetup.html" %} {% block title %}Profile - Social Sphere
+{%endblock %} {% block content %} {% load static %} {% load compress %}
+{%compress css %}
 
-{% block title %}Profile - Social Sphere{% endblock %}
-
-{% block content %}
-
-{% load static %} {% load compress %} {% compress css %}
-    <link
-    rel="stylesheet"
-    href="{%static 'scss/create-event-styles.scss' %}"
-    type="text/x-scss"
-/>
 <link
-    rel="stylesheet"
-    href="{%static 'scss/meetup.scss' %}"
-    type="text/x-scss"
+  rel="stylesheet"
+  href="{%static 'scss/meetup.scss' %}"
+  type="text/x-scss"
 />
 {% endcompress %}
-
-<img src="../static/img/logo.png" id="logo">
+<article class="headerSection">
+  <a href="{% url 'my_meetups'%}">Back</a>
+  <img src="../static/img/logo.png" id="logo" />
+</article>
 <h1>Create Event</h1>
 <form method="post">
   {% csrf_token %} {{ form.as_p }}

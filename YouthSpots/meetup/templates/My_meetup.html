@@ -7,42 +7,47 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
   type="text/x-scss"
 />
 {% endcompress %}
-<img src="../static/img/logo.png" id="logo">  
+<img src="../static/img/logo.png" id="logo" />
 <h1>My Meetups</h1>
 <article id="topBtns">
   <a href="{% url 'meetup' %}" class="meetupTitles">New Meetup</a>
-  <a href="{% url 'public_meetups' %}" class="meetupTitles">All Public Meetups</a>
-  <a href="{% url 'private_meetups' %}" class="meetupTitles">All Private Meetups</a>
-  <a href="{% url 'protected_meetups' %}" class="meetupTitles">All Protected Meetups</a>
+  <a href="{% url 'public_meetups' %}" class="meetupTitles"
+    >All Public Meetups</a
+  >
+  <a href="{% url 'private_meetups' %}" class="meetupTitles"
+    >All Private Meetups</a
+  >
+  <a href="{% url 'protected_meetups' %}" class="meetupTitles"
+    >All Protected Meetups</a
+  >
 </article>
-  <ul>
-    {% for meetup in meetups %}
-    <li>
-      <h3 class="title">{{ meetup.name_meetup }}</h3>
-      <p class="location">Location: {{ meetup.location }}</p>
-      <p class="time">Start Time: {{ meetup.time_start }}</p>
-      <p class="time">End Time: {{ meetup.time_end }}</p>
-      <p class="description">Description: {{ meetup.description }}</p>
-      <p class="pinId">Pin id: {{ meetup.pin_id }}</p>
-      <article>
-        <form action="{% url 'select_meetup' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
-          <input type="submit" value="edit" class="save-button" id="button" />
-        </form>
-        <form
-          action="{% url 'delete_meetup_do' %}"
-          method="POST"
-          onsubmit="return confirm('Are you sure you want to delete this meetup?');"
-        >
-          {% csrf_token %}
-          <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
-          <input type="submit" value="delete" class="save-button" id="button" />
-        </form>
-      </article>
-    </li>
-    {% empty %}
-    <li>No meetups found.</li>
-    {% endfor %}
-  </ul>
+<ul>
+  {% for meetup in meetups %}
+  <li>
+    <h3 class="title">{{ meetup.name_meetup }}</h3>
+    <p class="location">Location: {{ meetup.location }}</p>
+    <p class="time">Start Time: {{ meetup.time_start }}</p>
+    <p class="time">End Time: {{ meetup.time_end }}</p>
+    <p class="description">Description: {{ meetup.description }}</p>
+    <article>
+      <form action="{% url 'select_meetup' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
+        <input type="submit" value="Edit" class="save-button" id="button" />
+      </form>
+      <form
+        action="{% url 'delete_meetup_do' %}"
+        method="POST"
+        onsubmit="return confirm('Are you sure you want to delete this meetup?');"
+      >
+        {% csrf_token %}
+        <input type="hidden" name="meetup_id" value="{{ meetup.id }}" />
+        <input type="submit" value="Delete" class="save-button" id="button" />
+      </form>
+    </article>
+  </li>
+  {% empty %}
+  <li>No meetups found.</li>
+  {% endfor %}
+</ul>
 {% endblock %}
