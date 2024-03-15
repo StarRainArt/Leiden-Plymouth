@@ -12,7 +12,7 @@ from django.urls import reverse
 
 # Create your views here.
 def public_meetups(request):
-    meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
+    meetups = Meetups.objects.filter(visibility="+") # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
 
 @login_required
