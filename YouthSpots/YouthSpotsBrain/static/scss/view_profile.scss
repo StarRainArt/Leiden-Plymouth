@@ -7,6 +7,10 @@ $Pure-white: #FFFFFF;
 
 $Shadow: 0px 5px 10px -5px black;
 
+h2 {
+  font-size: 20px;
+}
+
 #tags_bio{
   display: flex;
   flex-direction: column;
@@ -30,6 +34,14 @@ $Shadow: 0px 5px 10px -5px black;
       text-align: left;
       width: 50%;
     }
+
+    p{
+      font-size: 16px;
+
+      b {
+        font-size: 20px;
+      }
+    }
   }
 
   #biography_edit{
@@ -47,7 +59,7 @@ $Shadow: 0px 5px 10px -5px black;
       width: 100%;
 
       #biography{
-        border-radius: 3vh;
+        border-radius: 20px;
         padding: 10px 15px;
         height: 12vh;
         box-sizing: border-box; 
@@ -57,6 +69,7 @@ $Shadow: 0px 5px 10px -5px black;
         border: 0px;
         margin-bottom: 1vh;
         box-shadow: $Shadow;
+        font-size: 16px;
       }
       input[type=submit] {
         margin-bottom: 2vh;
@@ -65,6 +78,7 @@ $Shadow: 0px 5px 10px -5px black;
         border-radius: 10px;
         color: white;
         box-shadow: $Shadow;
+        font-size: 16px;
       }
     }
   }
@@ -82,15 +96,16 @@ $Shadow: 0px 5px 10px -5px black;
       padding: 10px 14px;
       height: 12vh;
       background-color: $Federal-blue;
-      border-radius: 3vh;
+      border-radius: 20px;
       margin-bottom: 1vh;
       box-shadow: $Shadow;
 
       .tag_from_btn{
         padding: 2px 5px;
         color: $Pure-white;
-        border-radius: 1vh;
+        border-radius: 10px;
         border: 0px;
+        font-size: 16px;
       }
     }
 
@@ -102,6 +117,7 @@ $Shadow: 0px 5px 10px -5px black;
       border-radius: 10px;
       color: white;
       box-shadow: $Shadow;
+      font-size: 16px;
 
       &::placeholder {
         color: white;
@@ -115,6 +131,7 @@ $Shadow: 0px 5px 10px -5px black;
       border-radius: 10px;
       color: white;
       box-shadow: $Shadow;
+      font-size: 16px;
     }
   }
 }
