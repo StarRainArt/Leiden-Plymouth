@@ -108,28 +108,8 @@
       },
     }).addTo(map);
 
-    // Create a custom control for toggling walking details
-    let toggleWalkingDetailsControl = L.Control.extend({
-      onAdd: function (map) {
-        let container = L.DomUtil.create("div", "leaflet-routing-geocoders");
-        let button = L.DomUtil.create("button", "", container);
-        button.innerHTML = "Toggle Walking Details";
-        button.onclick = function () {
-          let geocodersContainer = document.querySelector(
-            ".leaflet-routing-alternatives-container"
-          );
-          if (geocodersContainer.style.display === "none") {
-            geocodersContainer.style.display = "block";
-          } else {
-            geocodersContainer.style.display = "none";
-          }
-        };
-        return container;
-      },
-    });
-
-    // Add the custom control to the map
-    map.addControl(new toggleWalkingDetailsControl());
+    // Pins
+    let pins = {};
 
     async function updatePins() {
       let fetchedPins = await (await fetch("/getPins")).json();
@@ -177,7 +157,7 @@
           let pinString = `<div class="title">${pin.title}</div>`;
           pinString += `<div class="description">${pin.description}</div>`;
           pinString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
+          let tags = pin.tags
           tags.forEach((tag) => {
             pinString += `<div class="tag">${tag}</div>`;
           });
@@ -203,7 +183,7 @@
           let popupString = `<div class="title">${pin.title}</div>`;
           popupString += `<div class="description">${pin.description}</div>`;
           popupString += `<div class="tags">`;
-          let tags = pin.tags.split(", ");
+          let tags = pin.tags;
           tags.forEach((tag) => {
             popupString += `<div class="tag">${tag}</div>`;
           });
@@ -273,7 +253,6 @@
           // Get pin ID from the data attribute
           let pinId = this.dataset.id;
           let pin = pins[pinId].info;
-
           // Create the form
           let container = L.DomUtil.create("div");
           let popupContent = `
@@ -283,8 +262,8 @@
                   <label for="description">Description:</label><br />
                   <textarea id="description" name="description">${pin.description}</textarea><br />
                   <label for="tags">Tags:</label><br />
-                  <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
-                  <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
+                  <input type="text" id="tags" name="tags" value="${pin.tags}" /><br /> 
+                                  <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
                   <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
                   <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
                   <label for="addMeetup">Add Meetup:</label><br />
@@ -379,7 +358,7 @@
             lng: marker.getLatLng().lng,
             title: "No Title",
             description: "No Description",
-            tags: "",
+            tags: [],
           };
           let csrftoken = Cookies.get("csrftoken");
           let formData = new FormData();

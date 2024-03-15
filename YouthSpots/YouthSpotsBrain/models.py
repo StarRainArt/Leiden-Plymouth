@@ -32,8 +32,7 @@ class Pins(models.Model):
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
     meetups = models.ForeignKey('meetup.Meetups', on_delete=models.CASCADE, null=True)
-    # pin_tags = models.ManyToManyField(Tags, related_name='pin_tags')
-    tags = models.CharField(default='none', max_length=255)
+    tags = models.ManyToManyField("Tags", related_name='tags', blank=True)
     pin_type = models.CharField(
         max_length=10,
         choices=PinType.choices,

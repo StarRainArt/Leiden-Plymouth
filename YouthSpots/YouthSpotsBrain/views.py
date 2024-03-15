@@ -45,11 +45,102 @@ def maps(request):
     return render(request, "maps.html")
 
 def getPins(request):
-    return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
+    query_set = Pins.objects.all()[:100]
+    data = []
+    for obj in query_set:
+        related_tags = [Tags.name for Tags in obj.tags.all()]
+        if related_tags is not None:
+            data.append({
+                "id": obj.id,
+                "title": obj.title,
+                "description": obj.description,
+                "latitude": obj.latitude,
+                "longitude": obj.longitude,
+                "tags": related_tags,
+                "created_timestamp": obj.created_timestamp,
+                "pin_type": obj.pin_type,
+                "meetups": obj.meetups
+            })
+    return JsonResponse(data=data, safe=False)
 
 
 def savePin(request, pin_id=None):
-    
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        if request.POST.get('tags') is not None:
+            tags = request.POST.get('tags').split(',')
+        else:
+            tags = []
+        lat = request.POST.get('lat')
+        lng = request.POST.get('lng')
+
+        # Check if a pin with the same latitude and longitude already exists
+        existing_pin = Pins.objects.filter(latitude=lat, longitude=lng).first()
+        existing_tags = []
+        if tags is not None:
+            for tag in tags:
+                if Tags.objects.filter(name=tag).exists():
+                    existing_tags.append(Tags.objects.get(name=tag))
+        existing_tags = list(set(existing_tags))
+        new_tags = []
+        for tag in tags:
+            if Tags.objects.filter(name=tag).exists() == False:
+                new_tags.append(tag)
+        if existing_pin:
+            # Update the existing pin
+            existing_pin.title = title
+            existing_pin.description = description
+            existing_pin.save()
+            if existing_tags:
+                for existing_tag in existing_tags:
+                    existing_pin.tags.add(existing_tag)
+                    existing_pin.save()
+            if new_tags is not None:
+                for new_tag in new_tags:
+                    colors = ["blue", "red", "green", "yellow", "orange", "purple", "pink", "brown", "lightblue", "lightgreen", "lightpurple", "lightpink"]
+                    new_tag = Tags(name=tags, color=random.choice(colors))
+                    new_tag.save()
+                    existing_pin.tags.add(new_tag)
+                    existing_pin.save()
+            pin_tags = existing_pin.tags.all()
+            for tag in pin_tags:
+                if tag not in existing_tags:
+                    tag = Tags.objects.filter(name=tag).first()
+                    existing_pin.tags.remove(tag)
+                    existing_pin.save()
+                   
+            return JsonResponse({'status': 'Updated'})
+        else:
+            # Create a new pin
+            pin = Pins(title=title, description=description, latitude=lat, longitude=lng)
+            pin.save()
+            if existing_tags is not None:
+                for tag in existing_tags:
+                    pin.tags.add(tag)
+                    pin.save()
+            if new_tags is not None:
+                for tag in new_tags:
+                    colors = ["blue", "red", "green", "yellow", "orange", "purple", "pink", "brown", "lightblue", "lightgreen", "lightpurple", "lightpink"]
+                    new_tag = Tags(name=tag, color=random.choice(colors))
+                    new_tag.save()
+                    pin.tags.add(new_tag)
+                    pin.save()
+            return JsonResponse({'status': 'Created'})
+    elif request.method == 'DELETE':
+        if pin_id is not None:
+            try:
+                pin = Pins.objects.get(pk=pin_id)
+            except Pins.DoesNotExist:
+                return JsonResponse({'status': 'Not Found'}, status=404)
+            pin.delete()
+            return JsonResponse({'status': 'Deleted'})
+        else:
+            return JsonResponse({'status': 'Bad Request: No pin id provided'}, status=400)
+    else:
+        return JsonResponse({'status': 'Method Not Allowed'}, status=405)
+
+def showMeetup(request, pin_id=None):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
