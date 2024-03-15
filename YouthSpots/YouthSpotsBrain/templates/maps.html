@@ -1,10 +1,28 @@
-{% extends "base.html" %} {% block title%}Social Sphere - Home{% endblock %}
-{%block content %}
+{% extends "base.html" %} {% block title%}Home - Social Sphere{% endblock %} {%
+block content %} {% load static %}{% load compress %} {% compress css %}
+<link rel="stylesheet" href="{%static 'scss/map.scss' %}" type="text/x-scss" />
+{% endcompress %}
+
 <div id="map" style="height: 100%; width: 100%; margin: 0 0"></div>
 <div class="button-wrapper">
   <button id="addMarker" class="button">Add Marker</button>
   <button id="saveMarker" class="button">Save the marker</button>
 </div>
+<section><h1>{{meetup.name_meetup}}</h1></section>
+<section id="legenda">
+  <div>
+    <img src="../static/img/Pin You.png" />
+    <p>- Current Location</p>
+  </div>
+  <div>
+    <img src="../static/img/Pin Place.png" />
+    <p>- Location</p>
+  </div>
+  <div>
+    <img src="../static/img/Pin Meetup.png" />
+    <p>- Meetup</p>
+  </div>
+</section>
 
 {{ pins|json_script:"pins_json" }}
 

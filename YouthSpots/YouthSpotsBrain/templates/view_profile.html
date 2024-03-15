@@ -9,20 +9,28 @@
 {% compress css %}
     <link rel="stylesheet" href="{%static 'scss/view_profile.scss' %}" type="text/x-scss">
 {% endcompress %}
-
 <div id="tags_bio">
-    <div class="profile_info">
-        <p id="profile_username">{{user.username}}</p>
-        <p id="profile_email">{{user.email}}</p>
-    </div>
+    <img src="../static/img/logo.png" id="logo">
+    <h1>Profile</h1>
+
+    <section class="profile_info">
+        <img src="../static/img/Blank Pfp.png" id="pfp">
+        <div>
+            <p id="profile_username"><b>{{user.username}}</b></p>
+            <p id="profile_email">{{user.email}}</p>
+        </div>
+    </section>
+
     <section id="biography_edit">
+        <h2>Biography</h2>
         <form method="post">
             {% csrf_token %}
             <input type="hidden" name="action" value="bio">
             <textarea name="biography" id="biography" placeholder="Add a biography">{{biography}}</textarea>
-            <input type="submit" value="edit">
+            <input type="submit" value="Save">
         </form>
     </section>
+
     <section id="favorite_tags">
         <h2>Favorite Tags</h2>
         <section class="tags">
@@ -39,7 +47,7 @@
             {% csrf_token %}
             <input type="hidden" name="action" value="tags">
             <input type="text" name="name" id="tag" placeholder="Add a favorite tag">
-            <input type="submit" value="add">
+            <input type="submit" value="Add" id="addTagBtn">
         </form>
     </section>
 </div>

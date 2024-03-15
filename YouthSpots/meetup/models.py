@@ -13,7 +13,7 @@ class Meetups(models.Model):
     invited = models.ManyToManyField(Profile, related_name='invited')
     tags = models.CharField(default='none', max_length=255)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    pin = models.ForeignKey(Pins, blank=True, null=True, on_delete=models.CASCADE)
+    pin = models.ForeignKey(Pins, blank=True, null=True, on_delete=models.CASCADE, related_name='meetups_pin')
     visibility = models.CharField(max_length=10, choices=visibility_type, default='Private')
     
     class Meta:

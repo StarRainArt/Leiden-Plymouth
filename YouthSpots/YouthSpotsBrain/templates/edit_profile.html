@@ -37,39 +37,15 @@
         </div>
             <br>
             <section>
-            <label for="current-password" class="edit_textbox_text">Current password</label><br>
-            <input type="password" name="current-password" id="current-password" class="edit_textbox"><br>
-            <label for="password" class="edit_textbox_text">New password</label><br>
-            <input type="password" name="password" id="password" class="edit_textbox"><br>
-            <label for="confirm-password" class="edit_textbox_text">Confirm new password</label><br>
-            <input type="password" name="confirm-password" id="confirm-password" class="edit_textbox">
             <div class="buttons-alter"><br><br>
                 <button type="submit" name="alter-account" class="save">Save</button>
-                <br>
-                <button type="submit" id="popupBtn" name="delete-account" class="del">Delete account</button>
             </section>
-            <div id="myPopup" class="popup">
-                <h2>Delete Account</h2>
-                <p>Are you sure you want to delete your account ?</p>
-                <button onclick="closePopup()" class="Nopopup">No</button>
-                <button onclick="" class="Nopopup">Yes</button>
-            </div>
             </div>
         </div>
     </div>
 </div>
 
     <script>
-        function showPopup() {
-            document.getElementById("myPopup").style.display = "block";
-        }
-    
-        function closePopup() {
-            document.getElementById("myPopup").style.display = "none";
-        }
-    
-        document.getElementById("popupBtn").addEventListener("click", showPopup);
-        
         document.getElementById('profile-picture').addEventListener('change', function () {
             var file = this.files[0];
             if (file) {

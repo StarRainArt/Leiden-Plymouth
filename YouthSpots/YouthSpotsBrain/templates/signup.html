@@ -4,6 +4,13 @@
 
 {% block content %}
 
+{% load static %}{% load compress %} {% compress css %}
+    <link
+    rel="stylesheet"
+    href="{%static 'scss/signup.scss' %}"
+    type="text/x-scss"
+    />
+{% endcompress %}
 
 <div class="container">
     <div id="logo_con">

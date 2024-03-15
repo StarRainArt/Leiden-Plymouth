@@ -1,19 +1,27 @@
 {% extends "base.html" %} {% block title%}Pins - Social Sphere{% endblock %}
 {%block content %}
 
-<div class="container">
-  <div id="pinList">
-    <template id="pinTemplate">
-      <button class="pin">
-        <div class="info">
-          <div class="title"></div>
-          <div class="description"></div>
-        </div>
+{% load static %}
+{% load compress %}
+{% compress css %}
+    <link rel="stylesheet" href="{%static 'scss/pins.scss' %}" type="text/x-scss">
+{% endcompress %}
+
+<img src="../static/img/logo.png" id="logo">
+<h1>Pins</h1>
+<div id="pinList">
+
+  <template id="pinTemplate">
+    <button class="pin">
+      <div class="info">
+        <div class="title"></div>
+        <div class="description"></div>
         <div class="distance"></div>
-      </button>
-    </template>
-  </div>
+      </div>
+    </button>
+  </template>
 </div>
+
 
 <script>
   async function run(latitude, longitude) {
@@ -30,7 +38,7 @@
       clone.querySelector(".distance").innerHTML =
         userLocation
           .distanceTo(L.latLng(pin.latitude, pin.longitude))
-          .toFixed(0) / 1000;
+          .toFixed(0) / 1000 + " KM";
       let button = clone.querySelector(".pin");
       button.id = "pin-" + pin.id;
       button.addEventListener("click", function () {
@@ -49,45 +57,4 @@
     run(50.376289, -4.143841);
   }
 </script>
-
-<style>
-  #pinList {
-    width: 100%;
-    padding: 10px;
-  }
-  .pin {
-    width: 100%;
-    background-color: rgb(30, 9, 90);
-    border-radius: 10px;
-    height: 80px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: none;
-    text-align: left;
-  }
-
-  .pin:hover {
-    background-color: rgb(22, 6, 66);
-  }
-
-  .info {
-    width: 75%;
-    height: 100%;
-  }
-
-  .title {
-    height: 50%;
-    color: white;
-  }
-
-  .description {
-    height: 50%;
-    color: white;
-  }
-
-  .distance {
-    width: 25%;
-    height: 100%;
-  }
-</style>
 {% endblock %}

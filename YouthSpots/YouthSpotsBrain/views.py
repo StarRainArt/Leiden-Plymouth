@@ -7,12 +7,6 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 import json
 import re
 import random
-
-def home(request):
-    if request.user.is_authenticated == False:
-        return redirect("login")
-    return render(request, "home.html")
-
 def view_profile(request):
     if request.user.is_authenticated == False:
         return redirect("login")
@@ -46,14 +40,16 @@ def view_profile(request):
 def edit_profile(request):
     return render(request, "edit_profile.html")
 
-def maps(request):
-    return render(request, "maps.html")
+def maps(request, meetups_id):
+    meetup = Meetups.objects.get(id=meetups_id)
+    return render(request, "maps.html", {'meetup': meetup})
 
 def getPins(request):
     return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
 
 
 def savePin(request, pin_id=None):
+    
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -94,7 +90,6 @@ def savePin(request, pin_id=None):
     else:
         return JsonResponse({'status': 'Method Not Allowed'}, status=405)
 
-def showMeetup(request, pin_id=None):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -233,3 +228,17 @@ def settings(request):
     if request.user.is_authenticated == False:
         return redirect("login")
     return render(request, "settings.html")
+
+def delete_account(request):
+    if request.user.is_authenticated == False:
+        return redirect("login")
+    if request.method == "POST":
+        if request.POST["password"] == "":
+            return render(request, "delete_account.html", {"error": "Password is required"})
+        if request.user.check_password(request.POST["password"]):
+            user = UserAuth.objects.get(username=request.user.username)
+            user.delete()
+            return redirect("login")
+        else:
+            return render(request, "delete_account.html", {"error": "Invalid password"})
+    return render(request, "delete_account.html")
