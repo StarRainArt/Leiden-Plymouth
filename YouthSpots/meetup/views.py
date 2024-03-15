@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseBadRequest, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse
 from .models import Meetups
 from YouthSpotsBrain.models import Profile, Pins
-from django import forms
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
 from django.shortcuts import render
 from .forms import MeetupsForm, MeetupsForm_Edit
 from django.urls import reverse
@@ -37,23 +35,6 @@ def my_meetups(request):
 
 def meetup_edit(request):
     return render(request, "meetup_edit.html")
-
-# class MeetupForm(forms.ModelForm):
-#     class Meta:
-#         model = Meetups
-#         fields = ['name_meetup', 'location', 'visibility', 'time_start', 'time_end', 'description']
-
-# def meetup_data_create(request):
-#     if request.method == 'POST':
-#         form = MeetupForm(request.POST)
-#         if form.is_valid():
-#             new_meetup = form.save(commit=False)
-#             new_meetup.owner = Profile.objects.get(user=request.user)
-#             new_meetup.save()
-#             return redirect('meetup_list')  # or wherever you want to redirect after successful form submission
-#     else:
-#         form = MeetupForm()
-#     return render(request, 'meetup.html', {'form': form})
 
 
 def meetup(request):
@@ -128,8 +109,6 @@ def edit_meetup_details(request):
             'description': meetup.description,
             'time_start':meetup.time_start,
             'time_end': meetup.time_end,
-            #'tags' : meetup.tags.all() if hasattr(meetup, 'tags') and hasattr(meetup.tags, 'all') else None,
-            #'visibility': meetup.visibility,
              })
 # #select_meetup.html is not const
     return render(request, 'meetup_edit.html', {'form': form,'meetup': meetup})

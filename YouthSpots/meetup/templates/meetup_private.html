@@ -1,4 +1,4 @@
-{% extends "baseMeetup.html" %} {% block title %}MeetUpProfile - Social
+{% extends "baseMeetup.html" %} {% block title %}MeetUp Private - Social
 Sphere{%endblock %} {% block content %} {% load static %} {% load compress%}
 {%compress css %}
 <link
@@ -7,21 +7,24 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress%}
   type="text/x-scss"
 />
 {% endcompress %}
-<section>
-  <br />
-  <h1>Public Meetups</h1>
-  <ul>
-    {% for meetup in meetups %}
-
-    <li>
-      <strong>{{ meetup.title }}</strong><br />
-      <span>Start Time: {{ meetup.start_timestamp }}</span><br />
-      <span>End Time: {{ meetup.start_timestamp }}</span><br />
-    </li>
-    {% empty %}
-    <li>No meetups available.</li>
-    {% endfor %}
-  </ul>
-</section>
+<br />
+<article class="headerSection">
+  <a href="{% url 'my_meetups'%}">Back</a>
+  <img src="../static/img/logo.png" id="logo" />
+</article>
+<h1>Private Meetups</h1>
+<ul>
+  {% for meetup in meetups %}
+  <li>
+    <h3>{{ meetup.name_meetup }}</h3>
+    <p>Location: {{ meetup.location }}</p>
+    <p>Start Time: {{ meetup.time_start }}</p>
+    <p>End Time: {{ meetup.time_end }}</p>
+    <p>Description: {{ meetup.description }}</p>
+  </li>
+  {% empty %}
+  <li>No meetups available.</li>
+  {% endfor %}
+</ul>
 
 {% endblock %}
