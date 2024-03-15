@@ -9,11 +9,11 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
 {% endcompress %}
 <img src="../static/img/logo.png" id="logo">  
 <h1>My Meetups</h1>
-<article>
-  <a href="{% url 'meetup' %}">Create here meetups</a>
-  <a href="{% url 'public_meetups' %}">Here are all public meetups</a>
-  <a href="{% url 'private_meetups' %}">Here are all private meetups</a>
-  <a href="{% url 'protected_meetups' %}">Here are all protected meetups</a>
+<article id="topBtns">
+  <a href="{% url 'meetup' %}" class="meetupTitles">New Meetup</a>
+  <a href="{% url 'public_meetups' %}" class="meetupTitles">Your Public Meetups</a>
+  <a href="{% url 'private_meetups' %}" class="meetupTitles">Your Private Meetups</a>
+  <a href="{% url 'protected_meetups' %}" class="meetupTitles">Your Protected Meetups</a>
 </article>
   <ul>
     {% for meetup in meetups %}
