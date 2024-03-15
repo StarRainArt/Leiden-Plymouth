@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, HttpResponse
 from .models import Meetups
 from YouthSpotsBrain.models import Profile, Pins
 from django import forms
@@ -14,6 +14,10 @@ from django.urls import reverse
 def public_meetups(request):
     meetups = Meetups.objects.filter(visibility="Public" ) # and distance thing 101
     return render(request, 'meetup_public.html', {'meetups': meetups})
+
+def private_meetups(request):
+    meetups = Meetups.objects.filter(visibility="Private" ) # and distance thing 101
+    return render(request, 'meetup_private.html', {'meetups': meetups})
 
 @login_required
 def my_meetups(request):
@@ -145,9 +149,7 @@ def delete_meetup_do(request):
         return redirect('my_meetups')
     
     except Meetups.DoesNotExist:
-        return "Meetup with specified ID does not exist."
+        return HttpResponse("Meetup with specified ID does not exist.")
     
     except Exception as e:
-        # Handle any other exceptions that may occur
-        return f"An error occurred: {str(e)}"
-
+        return HttpResponse(f"An error occurred: {str(e)}")

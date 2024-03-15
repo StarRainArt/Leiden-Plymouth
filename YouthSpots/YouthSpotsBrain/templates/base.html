@@ -7,11 +7,11 @@
     {% load static %}
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     {% load compress %} {% compress css %}
-      <link
-        rel="stylesheet"
-        href="{%static 'scss/style.scss' %}"
-        type="text/x-scss"
-      />
+    <link
+      rel="stylesheet"
+      href="{%static 'scss/style.scss' %}"
+      type="text/x-scss"
+    />
     {% endcompress %}
     <script
       src="https://kit.fontawesome.com/9ce9532b81.js"
@@ -28,6 +28,17 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"

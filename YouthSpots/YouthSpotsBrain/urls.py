@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path("", views.maps, name="map"),
-    path("meetups/<int:meetups_id>/", views.maps, name="map"),
+    # path("meetups/<int:meetups_id>/", views.maps, name="map"),
     path("getPins/", views.getPins),
     path("savePin/", views.savePin),
     path('savePin/<int:pin_id>/', views.savePin, name='deletePin'),

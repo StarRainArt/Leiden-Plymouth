@@ -1,63 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    {% load static %} {% load compress %} {% compress css %}
-    <link rel="stylesheet" href="{%static 'scss/create-event-styles.scss' %}"
-    type="text/x-scss"/>  
-    {% endcompress %}
-  </head>
-<body>
-  <main>
-    <div class="title">
-      <h1>
-        Editing my Meetup
-      </h1>
-    </div>
-    <center>
-    </form>
-      
-      <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Edit</button>
-      </form>
+{% extends "baseMeetup.html" %} {% block title %}My meetups - Social
+Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
+{%compress css %}
+<link
+  rel="stylesheet"
+  href="{%static 'scss/meetup.scss' %}"
+  type="text/x-scss"
+/>
+{% endcompress %}
+<div class="title">
+  <h1>Editing my Meetup</h1>
+</div>
+<section class="center">
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Edit</button>
+  </form>
+</section>
 
-   
-    </center>
+<script>
+  //let fetchedPins = await (await fetch("/getPins")).json();
+  // // Get the current date and time
+  // let currentDate = new Date();
+  // let currentDateTime = currentDate.toISOString().slice(0, 16); // Remove seconds and milliseconds
 
-
-
-    <script>
-        
-      //let fetchedPins = await (await fetch("/getPins")).json();
-      // Get the current date and time
-      let currentDate = new Date();
-      let currentDateTime = currentDate.toISOString().slice(0,16); // Remove seconds and milliseconds
-
-      // Set the minimum value for the input field
-      document.getElementById('dateandtime1').min = currentDateTime;
-      document.getElementById('dateandtime2').min = currentDateTime;
-
-        // Image Upload
-        let inputFile = document.getElementById("input-file");
-        let imagePreviewContainer = document.getElementById("image-preview-container");
-
-        inputFile.addEventListener("change", function() {
-          imagePreviewContainer.innerHTML = ""; // Clear previous previews
-          const files = inputFile.files;
-          const maxFiles = 6; // Maximum number of files allowed
-            for (let i = 0; i < Math.min(files.length, maxFiles); i++) {
-              const file = files[i];
-              const img = document.createElement("img");
-              img.src = URL.createObjectURL(file);
-              img.height = 100; // Adjust image height as needed
-              img.width = 100; // Adjust image width as needed
-              imagePreviewContainer.appendChild(img);
-            }
-          });
-    </script>
-  </main>
-</body>
-</html>
+  // // Set the minimum value for the input field
+  // document.getElementById("dateandtime1").min = currentDateTime;
+  // document.getElementById("dateandtime2").min = currentDateTime;
+</script>
+{% endblock %}

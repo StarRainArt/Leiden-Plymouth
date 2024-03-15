@@ -1,0 +1,74 @@
+$Blue-green: #2596be;
+$Federal-blue: #1e095a;
+$Royal-purple: #8147a8;
+$Old-rose: #b46f77;
+$Eerie-black: #222222;
+$Pure-white: #ffffff;
+
+$Shadow: 0px 5px 10px -5px black;
+
+.meetupList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+    position: relative;
+    min-height: 100%;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1vh;
+        li {
+            list-style: none;
+            padding: 20px 10px;
+            background-color: #2d166b;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: $Shadow;
+            width: 750px;
+            .title {
+                font-size: 22px;
+                font-weight: bold;
+            }
+            .description,
+            .location,
+            .pinId,
+            .time {
+                font-size: 14px;
+            }
+            .time {
+                font-style: italic;
+            }
+            article {
+                display: flex;
+                form {
+                    padding: 5px 20px 0 20px;
+                    input[type="submit"] {
+                        margin-bottom: 2vh;
+                        background-color: $Royal-purple;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        box-shadow: $Shadow;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+a {
+    margin-bottom: 2vh;
+    background-color: $Royal-purple;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    box-shadow: $Shadow;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 10px;
+}

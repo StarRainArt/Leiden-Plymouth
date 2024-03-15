@@ -40,9 +40,9 @@ def view_profile(request):
 def edit_profile(request):
     return render(request, "edit_profile.html")
 
-def maps(request, meetups_id):
-    meetup = Meetups.objects.get(id=meetups_id)
-    return render(request, "maps.html", {'meetup': meetup})
+def maps(request):
+    # meetup = Meetups.objects.get(id=meetups_id)
+    return render(request, "maps.html")
 
 def getPins(request):
     return JsonResponse(list(Pins.objects.values('id', 'title', 'description', 'latitude', 'longitude', 'tags', 'created_timestamp')[:100]), safe=False)
