@@ -4,33 +4,26 @@
 
 {% block content %}
 
-
-    {% load static %} {% load compress %} {% compress css %}
+{% load static %} {% load compress %} {% compress css %}
     <link
     rel="stylesheet"
     href="{%static 'scss/create-event-styles.scss' %}"
     type="text/x-scss"
-  />
-    <link
+/>
+<link
     rel="stylesheet"
     href="{%static 'scss/meetup.scss' %}"
     type="text/x-scss"
-  />
-    {% endcompress %}
-    <section>
+/>
+{% endcompress %}
 
-      <div class="title">
-        <h1>Create Event</h1>
-      </div>
-      <article class="center">
-        <form method="post">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit">Create</button>
-        </form>
-      </article>
-    </section>
-  </body>
-</html>
+<img src="../static/img/logo.png" id="logo">
+<h1>Create Event</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Create</button>
+</form>
+
 <script>
   if (window.location.search) {
     window.onload = function () {

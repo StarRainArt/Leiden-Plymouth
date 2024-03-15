@@ -11,9 +11,9 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
 <h1>My Meetups</h1>
 <article id="topBtns">
   <a href="{% url 'meetup' %}" class="meetupTitles">New Meetup</a>
-  <a href="{% url 'public_meetups' %}" class="meetupTitles">Your Public Meetups</a>
-  <a href="{% url 'private_meetups' %}" class="meetupTitles">Your Private Meetups</a>
-  <a href="{% url 'protected_meetups' %}" class="meetupTitles">Your Protected Meetups</a>
+  <a href="{% url 'public_meetups' %}" class="meetupTitles">All Public Meetups</a>
+  <a href="{% url 'private_meetups' %}" class="meetupTitles">All Private Meetups</a>
+  <a href="{% url 'protected_meetups' %}" class="meetupTitles">All Protected Meetups</a>
 </article>
   <ul>
     {% for meetup in meetups %}
