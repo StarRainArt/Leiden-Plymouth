@@ -109,8 +109,7 @@
     }).addTo(map);
 
     // Pins
-    let pins = {};
-
+    let pins = {};  
     async function updatePins() {
       let fetchedPins = await (await fetch("/getPins")).json();
 
@@ -256,21 +255,21 @@
           // Create the form
           let container = L.DomUtil.create("div");
           let popupContent = `
-                <form id="popupForm">
-                  <label for="title">Title:</label><br />
-                  <input type="text" id="title" name="title" value="${pin.title}" /><br />
-                  <label for="description">Description:</label><br />
-                  <textarea id="description" name="description">${pin.description}</textarea><br />
-                  <label for="tags">Tags:</label><br />
-                  <input type="text" id="tags" name="tags" value="${pin.tags}" /><br /> 
-                                  <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
-                  <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
-                  <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
-                  <label for="addMeetup">Add Meetup:</label><br />
-                  <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
-                  <input type="submit" value="Save" />
-                </form>
-              `;
+              <form id="popupForm">
+                <label for="title">Title:</label><br />
+                <input type="text" id="title" name="title" value="${pin.title}" /><br />
+                <label for="description">Description:</label><br />
+                <textarea id="description" name="description">${pin.description}</textarea><br />
+                <label for="tags">Tags:</label><br />
+                <input type="text" id="tags" name="tags" value="${pin.tags}" /><br />
+                <input type="hidden" id="lat" name="lat" value="${pin.latitude}" />
+                <input type="hidden" id="lng" name="lng" value="${pin.longitude}" />
+                <input type="hidden" id="pinId" name="pinId" value="${pinId}" />
+                <label for="addMeetup">Add Meetup:</label><br />
+                <button class="addMeetup" data-id="${pin.id}" onclick="window.location.href='/meetup?lat=' + ${pin.latitude} + '&lng=' + ${pin.longitude} + '&title=' + encodeURIComponent('${pin.title}')">Add meetup</button>
+                <input type="submit" value="Save" />
+              </form>
+            `;
           container.innerHTML = popupContent;
           e.popup.setContent(container);
 

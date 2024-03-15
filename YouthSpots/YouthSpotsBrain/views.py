@@ -49,18 +49,18 @@ def getPins(request):
     data = []
     for obj in query_set:
         related_tags = [Tags.name for Tags in obj.tags.all()]
-        if related_tags is not None:
-            data.append({
-                "id": obj.id,
-                "title": obj.title,
-                "description": obj.description,
-                "latitude": obj.latitude,
-                "longitude": obj.longitude,
-                "tags": related_tags,
-                "created_timestamp": obj.created_timestamp,
-                "pin_type": obj.pin_type,
-                "meetups": obj.meetups
-            })
+        
+        data.append({
+            "id": obj.id,
+            "title": obj.title,
+            "description": obj.description,
+            "latitude": obj.latitude,
+            "longitude": obj.longitude,
+            "tags": related_tags,
+            "created_timestamp": obj.created_timestamp,
+            "pin_type": obj.pin_type,
+            "meetups": obj.meetups
+        })
     return JsonResponse(data=data, safe=False)
 
 
