@@ -20,9 +20,9 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="username" class="edit_textbox_text">Username</label>
-    <input type="text" name="username" id="username" class="edit_textbox">
+    <input type="text" name="username" id="username" class="edit_textbox" value={{user.username}}>
     <label for="email" class="edit_textbox_text">Email</label>
-    <input type="email" name="email" id="email" class="edit_textbox">
+    <input type="email" name="email" id="email" class="edit_textbox" value={{user.email}}>
     <input type="submit" name="save_acc_chngs" value="Save">
 </form>
 
