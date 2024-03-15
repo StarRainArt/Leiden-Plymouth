@@ -9,7 +9,7 @@ class Pins(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
     created_timestamp = models.DateTimeField(default=timezone.now)
-    tags = models.CharField(default='none', max_length=255)
+    tags = models.ManyToManyField("Tags", related_name='tags', blank=True)
 
     def __str__(self):
         return self.title
