@@ -42,13 +42,13 @@ main {
             }
         }
 
-        @media screen and (max-width: 470px) {
+        @media screen and (max-width: 750px) {
             .pin {
                 width: 97%;
             }
         }
 
-        @media screen and (min-width: 470px) {
+        @media screen and (min-width: 750px) {
             .pin {
                 width: 750px;
             }

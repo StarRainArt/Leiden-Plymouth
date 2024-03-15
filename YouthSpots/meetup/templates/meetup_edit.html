@@ -1,21 +1,21 @@
-{% extends "baseMeetup.html" %} {% block title %}My meetups - Social
-Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
-{%compress css %}
+{% extends "baseMeetup.html" %} {% block title %}My meetups - Social Sphere{%endblock %} 
+
+{% block content %}
+
+{% load static %} {% load compress %}{%compress css %}
 <link
   rel="stylesheet"
   href="{%static 'scss/meetup.scss' %}"
   type="text/x-scss"
 />
 {% endcompress %}
-<div class="title">
-  <h1>Editing my Meetup</h1>
-</div>
-<section class="center">
-  <form method="post">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">Edit</button>
-  </form>
-</section>
+<img src="../static/img/logo.png" id="logo">
+<h1>Editing my Meetup</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+
 
 <script>
   //let fetchedPins = await (await fetch("/getPins")).json();

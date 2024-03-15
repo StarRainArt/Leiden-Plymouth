@@ -8,22 +8,15 @@ $Royal-purple: #8147a8;
 $Old-rose: #b46f77;
 $Eerie-black: #222222;
 $Pure-white: #ffffff;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
 
-body {
-  min-height: 100vh;
-  width: 100%;
-  background: #6832aa;
-  justify-content: center;
+$Shadow: 0px 5px 10px -5px black;
+/* =============================== Create Event Page =============================== */
+
+main {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
-
-/* =============================== Create Event Page =============================== */
 
 .create-event-label {
   color: #ffffff;

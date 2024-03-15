@@ -7,13 +7,30 @@ $Pure-white: #ffffff;
 
 $Shadow: 0px 5px 10px -5px black;
 
-.meetupList {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 100px;
     position: relative;
     min-height: 100%;
+    width: 100%;
+
+    #logo {
+        width: 250px;
+    }
+
+    .meetupTitles {
+        margin-bottom: 2vh;
+        background-color: $Royal-purple;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        box-shadow: $Shadow;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 10px;
+    }
 
     ul {
         display: flex;
@@ -21,15 +38,29 @@ $Shadow: 0px 5px 10px -5px black;
         align-items: center;
         width: 100%;
         gap: 1vh;
+        padding: 0;
+
+        @media screen and (min-width: 750px) {
+            li {
+                width: 750px;
+            }
+        }
+
+        @media screen and (max-width: 750px) {
+            li {
+                width: 97%;
+            }
+        }
+
         li {
             list-style: none;
-            padding: 20px 10px;
+            padding: 15px 30px;
             background-color: #2d166b;
             color: white;
             border: none;
             border-radius: 15px;
             box-shadow: $Shadow;
-            width: 750px;
+
             .title {
                 font-size: 22px;
                 font-weight: bold;
@@ -45,9 +76,9 @@ $Shadow: 0px 5px 10px -5px black;
             }
             article {
                 display: flex;
+                gap: 1vw;
                 form {
-                    padding: 5px 20px 0 20px;
-                    input[type="submit"] {
+                    input[type=submit] {
                         margin-bottom: 2vh;
                         background-color: $Royal-purple;
                         border: none;
@@ -60,15 +91,4 @@ $Shadow: 0px 5px 10px -5px black;
             }
         }
     }
-}
-a {
-    margin-bottom: 2vh;
-    background-color: $Royal-purple;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    box-shadow: $Shadow;
-    font-size: 16px;
-    text-decoration: none;
-    padding: 10px;
 }

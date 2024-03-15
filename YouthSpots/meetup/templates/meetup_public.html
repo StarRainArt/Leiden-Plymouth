@@ -1,12 +1,15 @@
-{% extends "baseMeetup.html" %} {% block title %}MeetUpProfile - Social
-Sphere{%endblock %} {% block content %} {% load static %} {% load compress%}
-{%compress css %}
+{% extends "baseMeetup.html" %} {% block title %}MeetUpProfile - Social Sphere{%endblock %}
+
+{% block content %} 
+
+{% load static %}{% load compress%}{%compress css %}
 <link
   rel="stylesheet"
   href="{%static 'scss/my_meetup.scss' %}"
   type="text/x-scss"
 />
 {% endcompress %}
+
 <section>
   <br />
   <h1>Public Meetups</h1>

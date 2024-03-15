@@ -19,13 +19,6 @@
     <img src="../static/img/Pin Place.png" />
     <p>- Location</p>
   </div>
-<<<<<<< Updated upstream
-  <div>
-    <img src="../static/img/Pin Meetup.png" />
-    <p>- Meetup</p>
-  </div>
-=======
->>>>>>> Stashed changes
 </section>
 
 {{ pins|json_script:"pins_json" }}
@@ -52,7 +45,7 @@
     let userIcon = L.icon({
       iconUrl: "../static/img/Pin_You.png",
       iconShadow: "../static/img/Pin_You.png",
-      iconSize: [40, 50],
+      iconSize: [40, 40],
       shadowSize: [50, 64],
       iconAnchor: [22, 94],
       shadowAnchor: [4, 62],
@@ -113,7 +106,7 @@
       onAdd: function (map) {
         let container = L.DomUtil.create("div", "leaflet-routing-geocoders");
         let button = L.DomUtil.create("button", "", container);
-        button.innerHTML = "Toggle Walking Details";
+        button.innerHTML = "Toggle Directions";
         button.onclick = function () {
           let geocodersContainer = document.querySelector(
             ".leaflet-routing-alternatives-container"
@@ -137,7 +130,7 @@
       fetchedPins.forEach((pin) => {
         let places = L.icon({
           iconUrl: "../static/img/Pin_Place.png",
-          iconSize: [40, 50],
+          iconSize: [40, 40],
           shadowSize: [50, 64],
           iconAnchor: [22, 94],
           shadowAnchor: [4, 62],
@@ -183,11 +176,10 @@
           });
           pinString += `</div>`;
           pinString += `<b>Meetup:</b> ${meetup.title}<br>`;
-          pinString += `<b>Description:</b> ${meetup.description}`;
+          pinString += `<b>Description:</b>${meetup.description}<br>`;
           pinString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           pinString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           pinString += `<button class="showMeetup" data-id="${pin.id}">Show meetup</button>`;
-
           marker.getPopup().setContent(pinString);
           marker.getPopup().update();
         } else {
@@ -209,7 +201,7 @@
           });
           popupString += `</div>`;
           popupString += `<b>Meetup:</b> ${meetup.title}<br>`;
-          popupString += `<b>Description:</b> ${meetup.description}`;
+          popupString += `<b>Description:</b> ${meetup.description}<br>`;
           popupString += `<button class="editPin" data-id="${pin.id}">Edit</button>`;
           popupString += `<button class="deletePin" data-id="${pin.id}">Delete</button>`;
           popupString += `<button class="sharePin" data-id="${pin.id}">Copy Share Link</button>`;

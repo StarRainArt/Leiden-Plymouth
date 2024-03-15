@@ -9,9 +9,25 @@ $Shadow: 0px 5px 10px -5px black;
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+.leaflet-routing-geocoders > button {
+  background-color: $Royal-purple;
+  color: white;
+  font-family: "Poppins";
+  border-radius: 10px;
+  border: none;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 5px 10px;
+  box-shadow: $Shadow;
+}
+
 .leaflet-popup-content-wrapper{
   background-color: $Federal-blue !important;
   box-shadow: $Shadow;
+
+  .leaflet-popup-content {
+    color: white;
+  }
 
   #popupForm  {
     input {
@@ -58,13 +74,22 @@ $Shadow: 0px 5px 10px -5px black;
   background-color: $Royal-purple;
   border: none;
   margin-right: 5px;
-
   box-shadow: $Shadow;
 }
 
 .deletePin{
   color: $Pure-white;
   border-radius: 65px;
+  background-color: $Royal-purple;
+  border: none;
+  margin-right: 5px;
+
+  box-shadow: $Shadow;
+}
+
+.sharePin {
+  color: $Pure-white;
+  border-radius: 50px;
   background-color: $Royal-purple;
   border: none;
   margin-right: 5px;
