@@ -17,7 +17,8 @@
     <button type="button" onclick="document.getElementById('profile-picture').click()">Upload picture</button>
 </div>
 <br>
-<form>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     <label for="username" class="edit_textbox_text">Username</label>
     <input type="text" name="username" id="username" class="edit_textbox">
     <label for="email" class="edit_textbox_text">Email</label>

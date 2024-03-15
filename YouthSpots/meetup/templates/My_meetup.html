@@ -10,8 +10,12 @@ Sphere{%endblock %} {% block content %} {% load static %} {% load compress %}
 <section class="meetupList">
   <br />
   <h1>My Meetups</h1>
-  <a href="{% url 'public_meetups' %}">here are all public meetups</a>
-  <a href="{% url 'private_meetups' %}">here are all public meetups</a>
+  <article>
+    <a href="{% url 'meetup' %}">Create here meetups</a>
+    <a href="{% url 'public_meetups' %}">Here are all public meetups</a>
+    <a href="{% url 'private_meetups' %}">Here are all private meetups</a>
+    <a href="{% url 'protected_meetups' %}">Here are all protected meetups</a>
+  </article>
   <ul>
     {% for meetup in meetups %}
     <li>
